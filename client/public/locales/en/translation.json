@@ -1,0 +1,257 @@
+{
+  "header": {
+    "title": "Pedro Metidieri",
+    "subtitle": "Full Stack Developer | React · Node · Next.js",
+    "home": "Home",
+    "about": "About me",
+    "projects": "Projects",
+    "blog": "Blog",
+    "services": "Services",
+    "hire": "Hire now",
+    "lightMode": "Light mode",
+    "darkMode": "Dark mode"
+  },
+  "home": {
+    "seo": {
+      "title": "Pedro Metidieri | Full Stack Developer & Consultant",
+      "description": "Build fast, scalable web and mobile apps. Specialized in React, Node.js, Next.js, AI and cloud. Custom projects and technical advice."
+    },
+    "hero": {
+      "title1": "Full Stack Developer",
+      "title2": "Builder of scalable solutions",
+      "title3": "Specialist in React & AI",
+      "subtitle": "I build fast, scalable web and mobile applications with a focus on the user. React · Node.js · Next.js · AI · Cloud",
+      "hire": "Hire now",
+      "seeProjects": "View projects",
+      "alt": "Pedro Metidieri"
+    },
+    "about": {
+      "title": "Hi, I'm Pedro Metidieri",
+      "p1": "Full stack developer with +1 year of experience building digital products for startups and companies. I love turning ideas into clean, performant and maintainable code.",
+      "p2": "Currently available for freelance projects or long-term collaborations."
+    },
+    "skills": {
+      "frontend": {
+        "label": "Frontend",
+        "items": "React, Next.js, Tailwind, TypeScript"
+      },
+      "backend": {
+        "label": "Backend",
+        "items": "Node.js, Express, NestJS, Python"
+      },
+      "databases": {
+        "label": "Databases",
+        "items": "PostgreSQL, MongoDB, Supabase, Firebase"
+      },
+      "aimodern": {
+        "label": "AI & Modern",
+        "items": "OpenAI, Grok, Vercel AI SDK"
+      }
+    },
+    "projects": {
+      "title": "Featured Projects",
+      "subtitle": "Some of my most recent and challenging works",
+      "seeAll": "View all projects",
+      "ecommerce": {
+        "title": "Scalable E-commerce with Next.js",
+        "description": "Full stack platform with authentication, Stripe payments and SEO optimization."
+      },
+      "dashboard": {
+        "title": "Admin Dashboard with AI Integration",
+        "description": "Real-time dashboard with visualizations and chatbots."
+      },
+      "appmovil": {
+        "title": "Hybrid Mobile App with React Native",
+        "description": "Delivery app with maps, push notifications and serverless backend."
+      }
+    },
+    "blog": {
+      "title": "Latest Articles",
+      "subtitle": "Fresh content on web development, performance and 2026 trends",
+      "readMore": "Read more articles",
+      "posts": {
+        "react19": {
+          "title": "Advanced Optimizations in React 19 (2026)",
+          "excerpt": "New features like use() and automatic compilation that change everything.",
+          "date": "February 15, 2026"
+        },
+        "next15": {
+          "title": "Migrating to Server Components in Next.js 15",
+          "excerpt": "Practical guide to improve performance and reduce bundle size.",
+          "date": "January 28, 2026"
+        },
+        "iaweb": {
+          "title": "Integrating AI in Web Apps: Best Practices",
+          "excerpt": "How to use Grok, Gemini and OpenAI without breaking user experience.",
+          "date": "January 10, 2026"
+        }
+      }
+    },
+    "cta": {
+      "title": "Have a project in mind?",
+      "subtitle": "Let's talk. I offer commitment-free quotes and reply within 24 hours.",
+      "button": "Send message"
+    }
+  },
+  "footer": {
+    "title": "Pedro Metidieri",
+    "description": "Full Stack Developer specialized in React, Node.js, Next.js and scalable solutions. I turn ideas into powerful and fast digital products.",
+    "links": {
+      "title": "Quick Links",
+      "home": "Home",
+      "about": "About me",
+      "projects": "Projects",
+      "blog": "Blog",
+      "services": "Services",
+      "contact": "Contact"
+    },
+    "services": {
+      "title": "Services",
+      "web": "Web Development",
+      "apps": "Mobile Apps",
+      "seo": "Optimization & SEO",
+      "ia": "AI Integration",
+      "consulting": "Technical Consulting"
+    },
+    "cta": {
+      "title": "Ready to get started?",
+      "subtitle": "Schedule a free call or send me your idea. I reply within 24 hours.",
+      "button": "Contact now"
+    },
+    "copyright": {
+      "name": "Pedro Metidieri",
+      "madeWith": "Made with",
+      "andCode": "and lots of code"
+    },
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use",
+    "logoAlt": "Pedro Metidieri"
+  },
+  "about": {
+    "seo": {
+      "title": "About me - Pedro Metidieri | Full Stack Developer",
+      "description": "Learn more about my experience, skills and philosophy as a full stack developer."
+    },
+    "title": "About me",
+    "subtitle": "My story and how I can help you",
+    "photoAlt": "Photo of Pedro Metidieri",
+    "bio": {
+      "p1": "I'm a full stack developer passionate about creating digital solutions that truly make a difference.",
+      "p2": "With over a year of experience working with startups and companies, I've learned that the key is to understand the problem before writing a single line of code.",
+      "p3": "My approach always combines modern technology with user-centered design."
+    },
+    "cta": "Want to know more?",
+    "experience": {
+      "title": "Experience",
+      "job1": {
+        "title": "Full Stack Freelance Developer",
+        "company": "Independent Projects",
+        "description": "Development of web and mobile applications for clients from different sectors."
+      },
+      "job2": {
+        "title": "Frontend Developer",
+        "company": "Digital Agency",
+        "description": "Creation of modern and optimized interfaces with React and Next.js."
+      }
+    },
+    "final": {
+      "title": "Want to work together?",
+      "subtitle": "I'm available for new projects and collaborations.",
+      "button": "Let's talk"
+    }
+  },
+  "services": {
+    "seo": {
+      "title": "Services - Pedro Metidieri | Full Stack Developer",
+      "description": "Web development, mobile apps, AI integration, optimization and technical consulting. Custom high-quality projects."
+    },
+    "hero": {
+      "title": "Services I Offer",
+      "subtitle": "Complete and personalized digital solutions to grow your business"
+    },
+    "includes": "What's included",
+    "process": {
+      "title": "How I work with you",
+      "step1": {
+        "title": "1. Discovery",
+        "description": "We talk in detail about your project, goals, target audience and technical requirements."
+      },
+      "step2": {
+        "title": "2. Proposal & Planning",
+        "description": "I present you a detailed plan, timeline, budget and initial design."
+      },
+      "step3": {
+        "title": "3. Development & Iterations",
+        "description": "I develop the project with regular reviews so you're always up to date with progress."
+      },
+      "step4": {
+        "title": "4. Delivery & Support",
+        "description": "We launch the project and I offer post-launch support and maintenance."
+      }
+    },
+    "final": {
+      "title": "Ready to take the next step?",
+      "subtitle": "Let's talk about your project and I'll give you a no-commitment quote within 24 hours.",
+      "button": "Request a quote"
+    },
+    "web": {
+      "title": "Web Development",
+      "description": "Modern, fast and scalable web applications using the latest technologies.",
+      "includes": [
+        "Responsive design and professional UI/UX",
+        "Development with React and Next.js",
+        "Performance and SEO optimization",
+        "Payments and API integration"
+      ]
+    },
+    "mobile": {
+      "title": "Mobile Apps",
+      "description": "Native and hybrid applications for iOS and Android with excellent user experience.",
+      "includes": [
+        "Development with React Native",
+        "Push notifications and maps",
+        "Backend integration",
+        "Publication on App Store and Google Play"
+      ]
+    },
+    "ai": {
+      "title": "AI Integration",
+      "description": "Add artificial intelligence to your product to make it smarter and more competitive.",
+      "includes": [
+        "Chatbots and virtual assistants",
+        "Predictive data analysis",
+        "Intelligent automations",
+        "Integration with AI APIs (OpenAI, Grok...)"
+      ]
+    },
+    "cloud": {
+      "title": "Cloud & DevOps",
+      "description": "Secure, scalable and optimized cloud deployment.",
+      "includes": [
+        "Complete cloud migration",
+        "CI/CD and automation",
+        "Cost optimization",
+        "Advanced monitoring and security"
+      ]
+    },
+    "optimization": {
+      "title": "Optimization & SEO",
+      "description": "Dramatic improvement in performance and visibility of your website or application.",
+      "includes": [
+        "Complete technical audit",
+        "Speed optimization (Core Web Vitals)",
+        "Technical and on-page SEO",
+        "Google ranking improvement"
+      ]
+    },
+    "consulting": {
+      "title": "Technical Consulting",
+      "description": "Expert advice to optimize your code, architecture and development processes.",
+      "includes": [
+        "Complete code and architecture audit",
+        "Performance and scalability optimization",
+        "Strategic technology recommendations"
+      ]
+    }
+  }
+}

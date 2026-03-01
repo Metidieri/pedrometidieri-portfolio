@@ -1,3 +1,0 @@
-Temática: Espacio y planetas. Homepage con fondo estrellado, cases como "planetas misteriosos" que se "exploran" al abrir. Skins con temas cósmicos (e.g., armas con patrones galácticos).
-Paleta: Fondo: #000033; Primario: #00BFFF; Secundario: #FF69B4; Acento: #FFFF00; Texto: #FFFFFF (blanco).
-Diferenciación: Añade elementos únicos como "misiones espaciales" (quests diarias para free drops), "galaxias" como categorías de skins, y un "teleport" para trades rápidos.
