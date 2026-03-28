@@ -35,7 +35,7 @@ export const projects = [
     result: 'Una landing funcional y rápida que sirve como primer punto de contacto profesional.',
     tech: ['React', 'Vite', 'Tailwind CSS'],
     image: '/src/assets/mtdr-landing.png',
-    link: 'https://mtdr-landing.vercel.app/',
+    link: 'https://mtdr.es/',
     category: 'web',
     external: true,
   },
