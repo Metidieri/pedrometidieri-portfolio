@@ -16,7 +16,7 @@ export const projects = [
     result:
       'El restaurante eliminó las cartas físicas, redujo tiempos de actualización del menú y mejoró la experiencia del cliente con un diseño moderno y responsive.',
     tech: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'FontAwesome'],
-    image: '/projects/elaperitivo-index.png'
+    image: '/projects/elaperitivo-index.png',
     link: 'https://www.elaperitivotalarrubias.com/',
     category: 'web',
     external: true,
