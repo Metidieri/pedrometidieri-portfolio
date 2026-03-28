@@ -11,7 +11,7 @@ i18n
   .init({
     fallbackLng: 'es',
     supportedLngs: ['es', 'en'],
-    debug: true, // cambia a false en producción
+    debug: false, // cambia a false en producción
     interpolation: {
       escapeValue: false,
     },

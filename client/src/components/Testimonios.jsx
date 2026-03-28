@@ -1,47 +1,18 @@
 // src/components/Testimonios.jsx
 import { memo } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Star } from 'lucide-react';
+import { testimonials } from '../data/testimonials';
 
-const testimonials = [
-  {
-    name: 'Juan Pérez',
-    role: 'Fundador de StartupTech',
-    quote: 'Pedro entregó nuestra plataforma de e-commerce en tiempo récord y con un rendimiento brutal. La optimización SEO que hizo nos duplicó las visitas orgánicas en 3 meses.',
-    avatar: '/avatars/avatar1.png',
-    rating: 5,
-  },
-  {
-    name: 'Ana Gómez',
-    role: 'Product Manager en ScaleUp',
-    quote: 'Trabajar con Pedro fue un placer. Entendió perfectamente nuestra necesidad de integrar IA y nos ahorró meses de desarrollo. Código limpio y documentación impecable.',
-    avatar: '/avatars/avatar2.png',
-    rating: 5,
-  },
-  {
-    name: 'Carlos Ruiz',
-    role: 'CTO de AppMóvil',
-    quote: 'La app híbrida que desarrolló con React Native superó todas las expectativas. Notificaciones push, mapas y rendimiento nativo sin problemas. 100% recomendable.',
-    avatar: '/avatars/avatar3.png',
-    rating: 5,
-  },
-  {
-    name: 'Equipo Anónimo',
-    role: 'Agencia de Marketing',
-    quote: 'Auditoría y migración a Next.js que nos salvó el proyecto. Redujimos el tiempo de carga de 8s a 1.2s. Profesionalidad máxima.',
-    avatar: '/avatars/avatar4.png',
-    rating: 5,
-  },
-];
-
-const TestimonioCard = memo(({ testimonial }) => (
+const TestimonioCard = memo(({ testimonial, t }) => (
   <div className="group h-full bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-600 hover:shadow-xl hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20 transition-all duration-300 flex flex-col">
     {/* Estrellas */}
-    <div className="flex mb-4" aria-label={`${testimonial.rating} estrellas`}>
+    <div className="flex mb-4" aria-label={t('testimonios.starsAriaLabel', { count: testimonial.rating })}>
       {Array.from({ length: testimonial.rating }).map((_, idx) => (
         <Star key={idx} className="h-5 w-5 text-yellow-400 fill-current" />
       ))}
@@ -58,7 +29,7 @@ const TestimonioCard = memo(({ testimonial }) => (
         {testimonial.avatar ? (
           <img
             src={testimonial.avatar}
-            alt={`Foto de ${testimonial.name}`}
+            alt={t('testimonios.avatarAlt', { name: testimonial.name })}
             className="w-full h-full object-cover"
             loading="lazy"
           />
@@ -75,14 +46,19 @@ const TestimonioCard = memo(({ testimonial }) => (
 ));
 
 export default function Testimonios() {
+  const { t } = useTranslation();
+
   return (
     <section
       className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300"
       aria-labelledby="testimonios-title"
     >
       <div className="container mx-auto px-4">
-        <h2 id="testimonios-title" className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          Lo que dicen mis clientes
+        <h2
+          id="testimonios-title"
+          className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white"
+        >
+          {t('testimonios.title')}
         </h2>
 
         <Swiper
@@ -103,11 +79,11 @@ export default function Testimonios() {
           navigation={true}
           loop={true}
           className="!pb-12"
-          aria-label="Carrusel de testimonios de clientes"
+          aria-label={t('testimonios.carouselAriaLabel')}
         >
           {testimonials.map((testimonial, i) => (
             <SwiperSlide key={i}>
-              <TestimonioCard testimonial={testimonial} />
+              <TestimonioCard testimonial={testimonial} t={t} />
             </SwiperSlide>
           ))}
         </Swiper>

@@ -1,37 +1,33 @@
 // src/components/BackToTop.jsx
 import { useState, useEffect } from 'react';
 import { ArrowUp } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 export default function BackToTop() {
   const [isVisible, setIsVisible] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const toggleVisibility = () => {
-      if (window.pageYOffset > 300) {
-        setIsVisible(true);
-      } else {
-        setIsVisible(false);
-      }
+      setIsVisible(window.pageYOffset > 300);
     };
 
-    window.addEventListener('scroll', toggleVisibility);
+    window.addEventListener('scroll', toggleVisibility, { passive: true });
     return () => window.removeEventListener('scroll', toggleVisibility);
   }, []);
 
   const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: 'smooth',
-    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
   return (
     <button
       onClick={scrollToTop}
-      className={`cursor-pointer fixed bottom-6 left-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 transition-all duration-300 ${
+      style={{ transitionProperty: 'opacity, transform, box-shadow', transitionDuration: '300ms', transitionTimingFunction: 'ease' }}
+      className={`cursor-pointer fixed bottom-6 left-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 hover:scale-110 hover:shadow-xl active:scale-95 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
       }`}
-      aria-label="Volver arriba"
+      aria-label={t('common.backToTop')}
     >
       <ArrowUp className="h-6 w-6" />
     </button>

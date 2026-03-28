@@ -26,10 +26,6 @@ Blog real con Markdown o CMS
 Usa .mdx + remark + rehype para posts en /blog/[slug]
 O instala Strapi/Sanity/Contentful (más adelante)
 
-PWA (Progressive Web App)
-Añade manifest.json y service worker
-Tu sitio se puede instalar como app en móvil
-
 Sección "Últimos proyectos" con filtros y modal
 Filtros por tecnología (React, Next.js, IA, etc.)
 Modal al clicar en proyecto (detalles, tech stack, enlaces demo/GitHub)
@@ -45,10 +41,6 @@ Mejoras técnicas y de crecimiento (5–10 días)
 Analytics y seguimiento
 Google Analytics 4 o Vercel Analytics (gratis)
 Ve cuánta gente entra, qué páginas ven, de dónde vienen
-
-PWA (instalable como app)
-Añade manifest.json y service worker
-La web se puede añadir al home screen del móvil
 
 Optimización final
 Imágenes comprimidas (usa TinyPNG o Squoosh)

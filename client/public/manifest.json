@@ -1,0 +1,22 @@
+{
+  "name": "Pedro Metidieri | Full Stack Developer",
+  "short_name": "Pedro Metidieri",
+  "description": "Desarrollador Full Stack especializado en React, Node.js y Next.js",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#4f46e5",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    }
+  ]
+}

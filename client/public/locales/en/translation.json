@@ -1,4 +1,8 @@
 {
+  "common": {
+    "backToTop": "Back to top",
+    "downloadCv": "Download CV"
+  },
   "header": {
     "title": "Pedro Metidieri",
     "subtitle": "Full Stack Developer | React · Node · Next.js",
@@ -7,10 +11,12 @@
     "projects": "Projects",
     "blog": "Blog",
     "services": "Services",
-    "hire": "Hire now",
+    "hire": "Contact",
     "lightMode": "Light mode",
     "darkMode": "Dark mode"
   },
+  "skipToContent": "Skip to main content",
+  "loading": "Loading page",
   "home": {
     "seo": {
       "title": "Pedro Metidieri | Full Stack Developer & Consultant",
@@ -21,9 +27,11 @@
       "title2": "Builder of scalable solutions",
       "title3": "Specialist in React & AI",
       "subtitle": "I build fast, scalable web and mobile applications with a focus on the user. React · Node.js · Next.js · AI · Cloud",
-      "hire": "Hire now",
+      "hire": "Let's talk",
       "seeProjects": "View projects",
-      "alt": "Pedro Metidieri"
+      "alt": "Pedro Metidieri",
+      "available": "Available for projects",
+      "imageAlt": "Pedro Metidieri - Full Stack Developer"
     },
     "about": {
       "title": "Hi, I'm Pedro Metidieri",
@@ -90,7 +98,13 @@
     "cta": {
       "title": "Have a project in mind?",
       "subtitle": "Let's talk. I offer commitment-free quotes and reply within 24 hours.",
-      "button": "Send message"
+      "button": "Let's talk"
+    },
+    "midCta": {
+      "title": "Have a project in mind?",
+      "subtitle": "Tell me your idea. I reply within 24 hours, no commitment needed.",
+      "contact": "Contact now",
+      "services": "View services"
     }
   },
   "footer": {
@@ -116,12 +130,14 @@
     "cta": {
       "title": "Ready to get started?",
       "subtitle": "Schedule a free call or send me your idea. I reply within 24 hours.",
-      "button": "Contact now"
+      "button": "Contact"
     },
     "copyright": {
       "name": "Pedro Metidieri",
+      "rights": "All rights reserved.",
       "madeWith": "Made with",
-      "andCode": "and lots of code"
+      "andCode": "and lots of code",
+      "heartAriaLabel": "love"
     },
     "privacy": "Privacy Policy",
     "terms": "Terms of Use",
@@ -149,9 +165,14 @@
         "description": "Development of web and mobile applications for clients from different sectors."
       },
       "job2": {
+        "title": "Full Stack Developer",
+        "company": "UNIVERSITY OF EXTREMADURA",
+        "description": "Full stack development, database modeling, backend in Flask and frontend in Next.js (React)."
+      },
+      "job3": {
         "title": "Frontend Developer",
-        "company": "Digital Agency",
-        "description": "Creation of modern and optimized interfaces with React and Next.js."
+        "company": "AGING2FUTURE",
+        "description": "Frontend development with HTML, CSS (Bootstrap) and JavaScript in a healthcare project."
       }
     },
     "final": {
@@ -170,6 +191,7 @@
       "subtitle": "Complete and personalized digital solutions to grow your business"
     },
     "includes": "What's included",
+    "from": "From",
     "process": {
       "title": "How I work with you",
       "step1": {
@@ -253,5 +275,137 @@
         "Strategic technology recommendations"
       ]
     }
+  },
+  "projects": {
+    "seo": {
+      "title": "Projects - Pedro Metidieri | Full Stack Developer",
+      "description": "Explore some of my most recent and challenging projects. Web development, mobile apps, AI and scalable solutions."
+    },
+    "hero": {
+      "title": "My Projects",
+      "subtitle": "Real work that demonstrates my experience and passion for creating high-level digital solutions"
+    },
+    "filters": {
+      "all": "All",
+      "web": "Web",
+      "mobile": "Mobile",
+      "ai": "Artificial Intelligence"
+    },
+    "cta": {
+      "title": "Want a project like these?",
+      "subtitle": "Let's talk about your idea. I'll help you turn it into reality.",
+      "button": "Start a new project"
+    },
+    "viewCaseStudy": "View case study",
+    "ariaLabel": "View case study: {{title}}",
+    "imageAlt": "{{title}} — project screenshot",
+    "ecommerce": {
+      "title": "Scalable E-commerce with Next.js",
+      "description": "Full stack platform with authentication, Stripe payments and SEO optimization."
+    },
+    "dashboard": {
+      "title": "Admin Dashboard with AI Integration",
+      "description": "Real-time dashboard with visualizations and chatbots."
+    },
+    "appmovil": {
+      "title": "Hybrid Mobile App with React Native",
+      "description": "Delivery app with maps, push notifications and serverless backend."
+    },
+    "saas": {
+      "title": "SaaS Management Platform",
+      "description": "Complete business management system with integrated AI and real-time dashboard."
+    }
+  },
+  "project": {
+    "tech": "Technologies",
+    "challenge": "The challenge",
+    "solution": "The solution",
+    "summary": "Project summary",
+    "result": "Result",
+    "viewSite": "View website",
+    "prev": "Previous",
+    "next": "Next",
+    "viewAll": "View all",
+    "navAriaLabel": "Project navigation",
+    "imageAlt": "{{title}} — project screenshot",
+    "categories": {
+      "web": "Web Development",
+      "mobile": "Mobile App",
+      "ai": "Artificial Intelligence"
+    }
+  },
+  "blog": {
+    "seo": {
+      "title": "Blog | Pedro Metidieri — Coming Soon",
+      "description": "Coming soon: articles about web development, React, AI and best practices. Sign up to be the first to read them."
+    },
+    "badge": "Coming soon",
+    "title": "Blog",
+    "introPrefix": "I'm preparing articles about",
+    "introWeb": "web development",
+    "introAI": "artificial intelligence",
+    "introPractices": "best practices",
+    "introSuffix": "in software engineering.",
+    "topicsTitle": "What will I write about?",
+    "topics": {
+      "react": "React & Next.js",
+      "ai": "AI in production",
+      "performance": "Web performance",
+      "practices": "Best practices"
+    },
+    "notifyTitle": "Notify me when it's ready",
+    "notifyDescription": "Leave your email and you'll be among the first to read the first article. No spam, no endless newsletters.",
+    "notifyPlaceholder": "you@email.com",
+    "notifyButton": "Notify me",
+    "notifySuccess": "Perfect! I'll let you know as soon as I publish the first article.",
+    "ctaDescription": "In the meantime, check out my projects or write to me directly.",
+    "ctaProjects": "View projects",
+    "ctaContact": "Contact"
+  },
+  "contact": {
+    "title": "Get in touch",
+    "subtitle": "Have a project in mind or need advice? Write to me and I'll reply within 24 hours.",
+    "name": "Full name",
+    "namePlaceholder": "Your name",
+    "nameRequired": "Name is required",
+    "email": "Email address",
+    "emailPlaceholder": "you@email.com",
+    "emailRequired": "Email is required",
+    "emailInvalid": "Invalid email",
+    "message": "Message",
+    "messagePlaceholder": "Tell me about your project or question...",
+    "messageRequired": "Message cannot be empty",
+    "messageMin": "Minimum 10 characters",
+    "send": "Send message",
+    "sending": "Sending...",
+    "success": "Message sent successfully! I'll get back to you soon.",
+    "error": "There was an error sending the message. Please try again.",
+    "recaptchaError": "The verification system hasn't loaded yet. Wait a few seconds and try again."
+  },
+  "techStack": {
+    "title": "Technologies I use"
+  },
+  "testimonios": {
+    "title": "What my clients say",
+    "starsAriaLabel": "{{count}} stars",
+    "avatarAlt": "Photo of {{name}}",
+    "carouselAriaLabel": "Client testimonials carousel"
+  },
+  "error": {
+    "title": "Something went wrong",
+    "description": "An unexpected error occurred. Don't worry, it's not your fault. You can try reloading the page or go back to the homepage.",
+    "reload": "Reload page",
+    "goHome": "Go to homepage",
+    "details": "Technical details"
+  },
+  "notFound": {
+    "title": "Oops! Looks like this project escaped...",
+    "description": "The page you're looking for isn't here. Maybe it went on vacation or just took the wrong path.",
+    "goHome": "Go to homepage",
+    "viewProjects": "View projects",
+    "lookingFor": "Looking for something? Try:",
+    "about": "About me",
+    "contact": "Contact",
+    "blog": "Blog"
   }
 }

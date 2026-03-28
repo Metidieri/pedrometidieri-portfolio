@@ -1,10 +1,11 @@
 // src/components/TechStack.jsx
-import { Tooltip } from 'react-tooltip'; // instalamos después
+import { useTranslation } from 'react-i18next';
+import { Tooltip } from 'react-tooltip';
 import 'react-tooltip/dist/react-tooltip.css';
 
 const techs = [
   { name: 'React', icon: '/tech/react.svg', color: '#61DAFB' },
-  { name: 'Next.js', icon: '/tech/nextjs.svg', color: '#000000' }, 
+  { name: 'Next.js', icon: '/tech/nextjs.svg', color: '#000000' },
   { name: 'Node.js', icon: '/tech/nodejs.svg', color: '#339933' },
   { name: 'Tailwind CSS', icon: '/tech/tailwind.svg', color: '#38BDF8' },
   { name: 'TypeScript', icon: '/tech/typescript.svg', color: '#3178C6' },
@@ -17,22 +18,23 @@ const techs = [
   { name: 'GitHub', icon: '/tech/github.svg', color: '#F05032' },
   { name: 'Docker', icon: '/tech/docker.svg', color: '#2496ED' },
   { name: 'Grok', icon: '/tech/grok.svg', color: '#FF9900' },
-  // Añade los que uses
 ];
 
 export default function TechStack() {
+  const { t } = useTranslation();
+
   return (
     <section className="py-16 md:py-24 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
       <div className="container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-          Tecnologías que uso
+        <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white">
+          {t('techStack.title')}
         </h2>
 
         <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-6 xl:grid-cols-7 gap-6 md:gap-8 m-items-center">
           {techs.map((tech) => (
             <div
               key={tech.name}
-              className="group relative flex flex-col items-center p-4 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20"
+              className="group relative flex flex-col items-center p-4 rounded-xl bg-gray-100 dark:bg-gray-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/50 transition-all duration-300 hover:scale-110 hover:shadow-lg hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20"
               data-tooltip-id="tech-tooltip"
               data-tooltip-content={tech.name}
             >

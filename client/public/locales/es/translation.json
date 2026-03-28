@@ -1,4 +1,8 @@
 {
+  "common": {
+    "backToTop": "Volver arriba",
+    "downloadCv": "Descargar CV"
+  },
   "header": {
     "title": "Pedro Metidieri",
     "subtitle": "Full Stack Developer | React · Node · Next.js",
@@ -7,10 +11,12 @@
     "projects": "Proyectos",
     "blog": "Blog",
     "services": "Servicios",
-    "hire": "Contratar ahora",
+    "hire": "Contactar",
     "lightMode": "Modo claro",
     "darkMode": "Modo oscuro"
   },
+  "skipToContent": "Saltar al contenido principal",
+  "loading": "Cargando página",
   "home": {
     "seo": {
       "title": "Pedro Metidieri | Full Stack Developer & Consultor",
@@ -21,9 +27,11 @@
       "title2": "Creador de soluciones escalables",
       "title3": "Especialista en React & IA",
       "subtitle": "Creo aplicaciones web y móviles rápidas, escalables y con foco en el usuario. React · Node.js · Next.js · IA · Cloud",
-      "hire": "Contratar ahora",
+      "hire": "Hablemos",
       "seeProjects": "Ver proyectos",
-      "alt": "Pedro Metidieri"
+      "alt": "Pedro Metidieri",
+      "available": "Disponible para proyectos",
+      "imageAlt": "Pedro Metidieri - Full Stack Developer"
     },
     "about": {
       "title": "Hola, soy Pedro Metidieri",
@@ -90,7 +98,13 @@
     "cta": {
       "title": "¿Tienes un proyecto en mente?",
       "subtitle": "Hablemos. Ofrezco presupuestos sin compromiso y respuestas en menos de 24 horas.",
-      "button": "Enviar mensaje"
+      "button": "Hablemos"
+    },
+    "midCta": {
+      "title": "¿Tienes un proyecto en mente?",
+      "subtitle": "Cuéntame tu idea. Respondo en menos de 24 horas y valoramos sin compromiso.",
+      "contact": "Contactar ahora",
+      "services": "Ver servicios"
     }
   },
   "footer": {
@@ -116,12 +130,14 @@
     "cta": {
       "title": "¿Listo para empezar?",
       "subtitle": "Agenda una llamada gratuita o envíame tu idea. Respondo en menos de 24h.",
-      "button": "Contactar ahora"
+      "button": "Contactar"
     },
     "copyright": {
       "name": "Pedro Metidieri",
+      "rights": "Todos los derechos reservados.",
       "madeWith": "Hecho con",
-      "andCode": "y mucho código"
+      "andCode": "y mucho código",
+      "heartAriaLabel": "amor"
     },
     "privacy": "Política de Privacidad",
     "terms": "Términos de Uso",
@@ -146,12 +162,17 @@
       "job1": {
         "title": "Desarrollador Full Stack Freelance",
         "company": "Proyectos independientes",
-        "description": "Desarrollo de aplicaciones web y móviles para clientes de diferentes sectores."
+        "description": "Desarrollo de aplicaciones web/móviles para clientes de diferentes sectores y como portafolios."
       },
       "job2": {
+        "title": "Desarrollador Full Stack",
+        "company": "UNIVERSIDAD DE EXTREMADURA",
+        "description": "Desarrollo full stack, modelado de BBDD, backend en Flask y frontend en Next.js (React)."
+      },
+      "job3": {
         "title": "Desarrollador Frontend",
-        "company": "Agencia Digital",
-        "description": "Creación de interfaces modernas y optimizadas con React y Next.js."
+        "company": "AGING2FUTURE",
+        "description": "Desarrollo frontend con HTML, CSS (Bootstrap) y JavaScript en un proyecto del sector salud."
       }
     },
     "final": {
@@ -170,6 +191,7 @@
       "subtitle": "Soluciones digitales completas y personalizadas para hacer crecer tu negocio"
     },
     "includes": "Qué incluye",
+    "from": "Desde",
     "process": {
       "title": "Cómo trabajo contigo",
       "step1": {
@@ -253,5 +275,137 @@
         "Recomendaciones estratégicas de tecnología"
       ]
     }
+  },
+  "projects": {
+    "seo": {
+      "title": "Proyectos - Pedro Metidieri | Full Stack Developer",
+      "description": "Explora algunos de mis proyectos más recientes y desafiantes. Desarrollo web, apps móviles, IA y soluciones escalables."
+    },
+    "hero": {
+      "title": "Mis Proyectos",
+      "subtitle": "Trabajos reales que demuestran mi experiencia y pasión por crear soluciones digitales de alto nivel"
+    },
+    "filters": {
+      "all": "Todos",
+      "web": "Web",
+      "mobile": "Móvil",
+      "ai": "Inteligencia Artificial"
+    },
+    "cta": {
+      "title": "¿Quieres un proyecto como estos?",
+      "subtitle": "Hablemos sobre tu idea. Te ayudo a convertirla en realidad.",
+      "button": "Empecemos un nuevo proyecto"
+    },
+    "viewCaseStudy": "Ver case study",
+    "ariaLabel": "Ver case study: {{title}}",
+    "imageAlt": "{{title}} — captura del proyecto",
+    "ecommerce": {
+      "title": "E-commerce escalable con Next.js",
+      "description": "Plataforma full stack con autenticación, pagos Stripe y optimización SEO."
+    },
+    "dashboard": {
+      "title": "Dashboard Admin con IA integrada",
+      "description": "Panel de control con visualizaciones en tiempo real y chatbots."
+    },
+    "appmovil": {
+      "title": "App móvil híbrida con React Native",
+      "description": "Aplicación de delivery con mapas, notificaciones push y backend serverless."
+    },
+    "saas": {
+      "title": "Plataforma SaaS de Gestión",
+      "description": "Sistema completo de gestión empresarial con IA integrada y dashboard en tiempo real."
+    }
+  },
+  "project": {
+    "tech": "Tecnologías",
+    "challenge": "El reto",
+    "solution": "La solución",
+    "summary": "Resumen del proyecto",
+    "result": "Resultado",
+    "viewSite": "Ver sitio web",
+    "prev": "Anterior",
+    "next": "Siguiente",
+    "viewAll": "Ver todos",
+    "navAriaLabel": "Navegación entre proyectos",
+    "imageAlt": "{{title}} — captura del proyecto",
+    "categories": {
+      "web": "Desarrollo Web",
+      "mobile": "App Móvil",
+      "ai": "Inteligencia Artificial"
+    }
+  },
+  "blog": {
+    "seo": {
+      "title": "Blog | Pedro Metidieri — Próximamente",
+      "description": "Próximamente: artículos sobre desarrollo web, React, IA y buenas prácticas. Apúntate para ser el primero en leerlos."
+    },
+    "badge": "Próximamente",
+    "title": "Blog",
+    "introPrefix": "Estoy preparando artículos sobre",
+    "introWeb": "desarrollo web",
+    "introAI": "inteligencia artificial",
+    "introPractices": "buenas prácticas",
+    "introSuffix": "de ingeniería.",
+    "topicsTitle": "¿De qué voy a escribir?",
+    "topics": {
+      "react": "React & Next.js",
+      "ai": "IA en producción",
+      "performance": "Rendimiento web",
+      "practices": "Buenas prácticas"
+    },
+    "notifyTitle": "Avísame cuando esté listo",
+    "notifyDescription": "Déjame tu email y serás de los primeros en leer el primer artículo. Sin spam, sin newsletters infinitas.",
+    "notifyPlaceholder": "tu@email.com",
+    "notifyButton": "Avísame",
+    "notifySuccess": "¡Perfecto! Te avisaré en cuanto publique el primer artículo.",
+    "ctaDescription": "Mientras tanto, echa un vistazo a mis proyectos o escríbeme directamente.",
+    "ctaProjects": "Ver proyectos",
+    "ctaContact": "Contactar"
+  },
+  "contact": {
+    "title": "Contacta conmigo",
+    "subtitle": "¿Tienes un proyecto en mente o necesitas asesoría? Escríbeme y te respondo en menos de 24 horas.",
+    "name": "Nombre completo",
+    "namePlaceholder": "Tu nombre",
+    "nameRequired": "El nombre es obligatorio",
+    "email": "Correo electrónico",
+    "emailPlaceholder": "tu@email.com",
+    "emailRequired": "El email es obligatorio",
+    "emailInvalid": "Email inválido",
+    "message": "Mensaje",
+    "messagePlaceholder": "Cuéntame sobre tu proyecto o consulta...",
+    "messageRequired": "El mensaje no puede estar vacío",
+    "messageMin": "Mínimo 10 caracteres",
+    "send": "Enviar mensaje",
+    "sending": "Enviando...",
+    "success": "¡Mensaje enviado con éxito! Te responderé pronto.",
+    "error": "Hubo un error al enviar el mensaje. Inténtalo de nuevo.",
+    "recaptchaError": "El sistema de verificación aún no ha cargado. Espera unos segundos e inténtalo de nuevo."
+  },
+  "techStack": {
+    "title": "Tecnologías que uso"
+  },
+  "testimonios": {
+    "title": "Lo que dicen mis clientes",
+    "starsAriaLabel": "{{count}} estrellas",
+    "avatarAlt": "Foto de {{name}}",
+    "carouselAriaLabel": "Carrusel de testimonios de clientes"
+  },
+  "error": {
+    "title": "Algo salió mal",
+    "description": "Ha ocurrido un error inesperado. No te preocupes, no es culpa tuya. Puedes intentar recargar la página o volver al inicio.",
+    "reload": "Recargar página",
+    "goHome": "Volver al inicio",
+    "details": "Detalles técnicos"
+  },
+  "notFound": {
+    "title": "¡Ups! Parece que este proyecto se escapó...",
+    "description": "La página que buscas no está aquí. Quizás se fue de vacaciones o simplemente tomó el camino equivocado.",
+    "goHome": "Volver al inicio",
+    "viewProjects": "Ver proyectos",
+    "lookingFor": "¿Buscas algo en particular? Prueba:",
+    "about": "Sobre mí",
+    "contact": "Contacto",
+    "blog": "Blog"
   }
 }

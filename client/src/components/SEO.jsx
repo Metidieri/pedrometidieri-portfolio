@@ -1,13 +1,19 @@
 // src/components/SEO.jsx
 import { Helmet } from 'react-helmet-async';
 
+const BASE_URL = 'https://pedrometidieri.com';
+
 export default function SEO({
-  title = 'Pedro Metidieri | Full Stack Developer',
+  title       = 'Pedro Metidieri | Full Stack Developer',
   description = 'Desarrollador Full Stack especializado en React, Node.js, Next.js y soluciones escalables. Proyectos web y apps a medida.',
-  image = 'https://tudominio.com/assets/og-image.jpg', // pon tu imagen real aquí
-  url = 'https://tudominio.com',
-  type = 'website',
+  image       = `${BASE_URL}/og-image.jpg`,
+  url         = BASE_URL,
+  type        = 'website',
 }) {
+  // Extraer el path relativo de la URL para los hreflang
+  const path = url.startsWith(BASE_URL) ? url.slice(BASE_URL.length) || '/' : '/';
+  const canonicalUrl = `${BASE_URL}${path}`;
+
   return (
     <Helmet>
       {/* Título básico */}
@@ -18,25 +24,30 @@ export default function SEO({
       <meta name="description" content={description} />
 
       {/* Canonical */}
-      <link rel="canonical" href={url} />
+      <link rel="canonical" href={canonicalUrl} />
+
+      {/* hreflang — sitio bilingüe (es/en) en la misma URL */}
+      <link rel="alternate" hreflang="es"      href={canonicalUrl} />
+      <link rel="alternate" hreflang="en"      href={canonicalUrl} />
+      <link rel="alternate" hreflang="x-default" href={canonicalUrl} />
 
       {/* Open Graph / Facebook */}
-      <meta property="og:type" content={type} />
-      <meta property="og:url" content={url} />
-      <meta property="og:title" content={title} />
+      <meta property="og:type"        content={type} />
+      <meta property="og:url"         content={canonicalUrl} />
+      <meta property="og:title"       content={title} />
       <meta property="og:description" content={description} />
-      <meta property="og:image" content={image} />
-      <meta property="og:site_name" content="Pedro Metidieri" />
+      <meta property="og:image"       content={image} />
+      <meta property="og:site_name"   content="Pedro Metidieri" />
 
       {/* Twitter Cards */}
-      <meta name="twitter:card" content="summary_large_image" />
-      <meta name="twitter:url" content={url} />
-      <meta name="twitter:title" content={title} />
+      <meta name="twitter:card"        content="summary_large_image" />
+      <meta name="twitter:url"         content={canonicalUrl} />
+      <meta name="twitter:title"       content={title} />
       <meta name="twitter:description" content={description} />
-      <meta name="twitter:image" content={image} />
+      <meta name="twitter:image"       content={image} />
 
-      {/* Favicon (asegúrate de tenerlo en public/) */}
-      <link rel="icon" href="/favicon.ico" />
+      {/* Favicon */}
+      <link rel="icon"            href="/favicon.ico" />
       <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     </Helmet>
   );

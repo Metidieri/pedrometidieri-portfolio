@@ -1,5 +1,5 @@
 // src/components/Footer.jsx
-import { Linkedin, Github, Mail, Heart } from 'lucide-react';
+import { Linkedin, Github, Mail } from 'lucide-react';
 import logo from '../assets/logo.png';
 import { useTranslation } from 'react-i18next';
 
@@ -17,10 +17,14 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="w-full bg-white dark:bg-gray-950 border-t border-gray-300 dark:border-gray-800 text-gray-700 dark:text-gray-400 transition-colors duration-300">
+    <>
+      {/* Separador con gradiente indigo */}
+      <div className="h-px bg-gradient-to-r from-transparent via-indigo-500 to-transparent" aria-hidden="true" />
+
+    <footer className="w-full bg-white dark:bg-gray-950 text-gray-700 dark:text-gray-400 transition-colors duration-300">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 py-16 lg:py-20">
-          
+
           {/* Columna 1: Logo + descripción */}
           <div className="flex flex-col">
             <div className="flex items-center gap-3 mb-4">
@@ -53,8 +57,8 @@ export default function Footer() {
             <ul className="space-y-3 text-sm">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a 
-                    href={link.href} 
+                  <a
+                    href={link.href}
                     className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
                   >
                     {link.name}
@@ -98,14 +102,16 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-gray-300 dark:border-gray-800 py-8 text-center text-sm text-gray-600 dark:text-gray-500">
           <p>
-            © {currentYear} {t('footer.copyright.name')}. {t('footer.copyright.madeWith')} <Heart className="inline h-4 w-4 text-red-500 mx-1 fill-current" /> {t('footer.copyright.andCode')}
+            © {currentYear} {t('footer.copyright.name')}. {t('footer.copyright.rights')}
           </p>
           <p className="mt-2">
-            <a href="/privacidad" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.privacy')}</a> · 
-            <a href="/terminos" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors ml-3">{t('footer.terms')}</a>
+            <a href="/privacidad" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">{t('footer.privacy')}</a>
+            {' · '}
+            <a href="/terminos" className="hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200">{t('footer.terms')}</a>
           </p>
         </div>
       </div>
     </footer>
+    </>
   );
 }
