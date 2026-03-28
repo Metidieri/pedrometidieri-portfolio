@@ -16,7 +16,7 @@ export const projects = [
     result:
       'El restaurante eliminó las cartas físicas, redujo tiempos de actualización del menú y mejoró la experiencia del cliente con un diseño moderno y responsive.',
     tech: ['React', 'Vite', 'TailwindCSS', 'Framer Motion', 'FontAwesome'],
-    image: '/src/assets/elaperitivo-index.png',
+    image: '/projects/elaperitivo-index.png'
     link: 'https://www.elaperitivotalarrubias.com/',
     category: 'web',
     external: true,
@@ -34,7 +34,7 @@ export const projects = [
       'Diseñé una landing page limpia y moderna con React y Tailwind CSS, enfocada en la velocidad de carga y la claridad del mensaje.',
     result: 'Una landing funcional y rápida que sirve como primer punto de contacto profesional.',
     tech: ['React', 'Vite', 'Tailwind CSS'],
-    image: '/src/assets/mtdr-landing.png',
+    image: '/projects/mtdr-landing.png',
     link: 'https://mtdr.es/',
     category: 'web',
     external: true,
