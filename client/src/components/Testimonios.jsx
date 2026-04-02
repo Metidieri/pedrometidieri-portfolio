@@ -1,5 +1,6 @@
 // src/components/Testimonios.jsx
 import { memo } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
@@ -8,9 +9,11 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import { Star } from 'lucide-react';
 import { testimonials } from '../data/testimonials';
+import AnimatedTitle from './AnimatedTitle';
+import { viewportOnce } from '../lib/motion';
 
 const TestimonioCard = memo(({ testimonial, t }) => (
-  <div className="group h-full bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-600 hover:shadow-xl hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20 transition-all duration-300 flex flex-col">
+  <div className="group h-full bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-600 hover:shadow-xl hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20 transition-all duration-300 flex flex-col cursor-default">
     {/* Estrellas */}
     <div className="flex mb-4" aria-label={t('testimonios.starsAriaLabel', { count: testimonial.rating })}>
       {Array.from({ length: testimonial.rating }).map((_, idx) => (
@@ -47,6 +50,7 @@ const TestimonioCard = memo(({ testimonial, t }) => (
 
 export default function Testimonios() {
   const { t } = useTranslation();
+  const shouldReduce = useReducedMotion();
 
   return (
     <section
@@ -54,39 +58,45 @@ export default function Testimonios() {
       aria-labelledby="testimonios-title"
     >
       <div className="container mx-auto px-4">
-        <h2
-          id="testimonios-title"
+        <AnimatedTitle
           className="text-3xl md:text-4xl font-bold text-center mb-12 text-gray-900 dark:text-white"
         >
-          {t('testimonios.title')}
-        </h2>
+          <span id="testimonios-title">{t('testimonios.title')}</span>
+        </AnimatedTitle>
 
-        <Swiper
-          modules={[Autoplay, Pagination, Navigation]}
-          spaceBetween={24}
-          slidesPerView={1}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            1024: { slidesPerView: 3 },
-            1280: { slidesPerView: 4 },
-          }}
-          autoplay={{
-            delay: 5000,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: true,
-          }}
-          pagination={{ clickable: true }}
-          navigation={true}
-          loop={true}
-          className="!pb-12"
-          aria-label={t('testimonios.carouselAriaLabel')}
+        <motion.div
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={viewportOnce}
+          transition={shouldReduce ? { duration: 0 } : { duration: 0.6, delay: 0.2 }}
         >
-          {testimonials.map((testimonial, i) => (
-            <SwiperSlide key={i}>
-              <TestimonioCard testimonial={testimonial} t={t} />
-            </SwiperSlide>
-          ))}
-        </Swiper>
+          <Swiper
+            modules={[Autoplay, Pagination, Navigation]}
+            spaceBetween={24}
+            slidesPerView={1}
+            breakpoints={{
+              640: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+              1280: { slidesPerView: 4 },
+            }}
+            autoplay={{
+              delay: 5000,
+              disableOnInteraction: false,
+              pauseOnMouseEnter: true,
+            }}
+            pagination={{ clickable: true }}
+            navigation={true}
+            loop={true}
+            className="!pb-12"
+            aria-label={t('testimonios.carouselAriaLabel')}
+          >
+            {testimonials.map((testimonial, i) => (
+              <SwiperSlide key={i}>
+                <TestimonioCard testimonial={testimonial} t={t} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </motion.div>
       </div>
     </section>
   );

@@ -79,8 +79,8 @@ export default function Contacto() {
   return (
     <>
       <SEO
-        title="Contacto | Pedro Metidieri"
-        description="¿Tienes un proyecto en mente? Contacta con Pedro Metidieri, Full Stack Developer. Respuesta en menos de 24 horas."
+        title={t('contact.seo.title')}
+        description={t('contact.seo.description')}
         url="https://pedrometidieri.com/contacto"
       />
 

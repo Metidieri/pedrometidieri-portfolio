@@ -1,7 +1,7 @@
 // src/pages/Blog.jsx
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, BookOpen, Mail } from 'lucide-react';
+import { ArrowRight, BookOpen, Mail, Atom, Bot, Rocket, Wrench } from 'lucide-react';
 import SEO from '../components/SEO';
 import RevealOnScroll from '../components/RevealOnScroll';
 
@@ -11,10 +11,10 @@ export default function Blog() {
   const [submitted, setSubmitted] = useState(false);
 
   const topics = [
-    { icon: '⚛️', labelKey: 'react' },
-    { icon: '🤖', labelKey: 'ai' },
-    { icon: '🚀', labelKey: 'performance' },
-    { icon: '🛠️', labelKey: 'practices' },
+    { icon: Atom, labelKey: 'react' },
+    { icon: Bot, labelKey: 'ai' },
+    { icon: Rocket, labelKey: 'performance' },
+    { icon: Wrench, labelKey: 'practices' },
   ];
 
   const handleNotify = (e) => {
@@ -34,7 +34,7 @@ export default function Blog() {
       <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-gray-50 via-white to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
         <div className="container mx-auto px-4 text-center max-w-3xl">
           <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-medium mb-8">
-            <BookOpen className="h-4 w-4" />
+            <BookOpen className="h-4 w-4" aria-hidden="true" />
             {t('blog.badge')}
           </div>
 
@@ -61,19 +61,20 @@ export default function Blog() {
           </h2>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {topics.map((topic) => (
-              <div
-                key={topic.labelKey}
-                className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-center"
-              >
-                <span className="text-3xl" role="img" aria-hidden="true">
-                  {topic.icon}
-                </span>
-                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                  {t(`blog.topics.${topic.labelKey}`)}
-                </span>
-              </div>
-            ))}
+            {topics.map((topic) => {
+              const Icon = topic.icon;
+              return (
+                <div
+                  key={topic.labelKey}
+                  className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-center"
+                >
+                  <Icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                    {t(`blog.topics.${topic.labelKey}`)}
+                  </span>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -83,7 +84,7 @@ export default function Blog() {
       <RevealOnScroll direction="fade" delay={100}>
       <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
         <div className="container mx-auto px-4 max-w-xl text-center">
-          <Mail className="h-10 w-10 text-indigo-600 dark:text-indigo-400 mx-auto mb-6" />
+          <Mail className="h-10 w-10 text-indigo-600 dark:text-indigo-400 mx-auto mb-6" aria-hidden="true" />
 
           <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900 dark:text-white">
             {t('blog.notifyTitle')}
@@ -103,6 +104,7 @@ export default function Blog() {
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
+                aria-label={t('blog.notifyPlaceholder')}
                 placeholder={t('blog.notifyPlaceholder')}
                 className="flex-1 px-5 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
               />

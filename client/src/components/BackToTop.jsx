@@ -23,8 +23,7 @@ export default function BackToTop() {
   return (
     <button
       onClick={scrollToTop}
-      style={{ transitionProperty: 'opacity, transform, box-shadow', transitionDuration: '300ms', transitionTimingFunction: 'ease' }}
-      className={`cursor-pointer fixed bottom-6 left-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 hover:scale-110 hover:shadow-xl active:scale-95 ${
+      className={`cursor-pointer fixed bottom-6 left-6 z-50 p-3 rounded-full bg-indigo-600 text-white shadow-lg hover:bg-indigo-700 dark:hover:bg-indigo-500 hover:scale-110 hover:shadow-xl active:scale-95 transition-all duration-300 ${
         isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'
       }`}
       aria-label={t('common.backToTop')}

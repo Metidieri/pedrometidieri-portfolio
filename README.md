@@ -10,7 +10,7 @@ Sitio en producción: [pedrometidieri.com](https://pedrometidieri.com)
 
 | Capa | Tecnología |
 |---|---|
-| UI | React 19 + Vite 7 |
+| UI | React 18 + Vite 7 |
 | Estilos | Tailwind CSS v4 |
 | Routing | react-router-dom v7 |
 | i18n | react-i18next (ES / EN) |

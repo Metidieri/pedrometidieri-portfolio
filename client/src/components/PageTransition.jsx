@@ -1,30 +1,34 @@
 // src/components/PageTransition.jsx
-// Fade-in + slide-up sutil al montar una nueva página.
-// Se activa cambiando la key por pathname en App.jsx, lo que fuerza
-// el remount del componente en cada navegación.
+import { motion, useReducedMotion } from 'framer-motion';
 
-import { useState, useEffect } from 'react';
+const pageVariants = {
+  initial: { opacity: 0, y: 16 },
+  animate: { opacity: 1, y: 0 },
+  exit: { opacity: 0, y: -8 },
+};
+
+const pageTransition = {
+  duration: 0.4,
+  ease: [0.4, 0, 0.2, 1],
+};
 
 export default function PageTransition({ children }) {
-  const [mounted, setMounted] = useState(false);
+  const shouldReduce = useReducedMotion();
 
-  useEffect(() => {
-    // Esperar un frame para que el estado inicial (opacity-0) se pinte primero,
-    // luego aplicar el estado final (opacity-100) y disparar la transición CSS.
-    const frame = requestAnimationFrame(() => setMounted(true));
-    return () => cancelAnimationFrame(frame);
-  }, []);
+  if (shouldReduce) {
+    return <div>{children}</div>;
+  }
 
   return (
-    <div
-      style={{
-        transitionProperty: 'opacity, transform',
-        transitionDuration: '400ms',
-        transitionTimingFunction: 'ease-out',
-      }}
-      className={mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}
+    <motion.div
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      transition={pageTransition}
+      className="will-change-transform"
     >
       {children}
-    </div>
+    </motion.div>
   );
 }

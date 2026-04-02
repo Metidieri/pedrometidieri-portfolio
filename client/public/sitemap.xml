@@ -43,6 +43,16 @@
     <xhtml:link rel="alternate" hreflang="en" href="https://pedrometidieri.com/servicios" />
   </url>
 
+  <!-- Experiencia -->
+  <url>
+    <loc>https://pedrometidieri.com/experiencia</loc>
+    <lastmod>2026-04-01</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="es" href="https://pedrometidieri.com/experiencia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://pedrometidieri.com/experiencia" />
+  </url>
+
   <!-- Contacto -->
   <url>
     <loc>https://pedrometidieri.com/contacto</loc>

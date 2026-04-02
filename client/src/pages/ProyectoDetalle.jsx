@@ -157,8 +157,7 @@ export default function ProyectoDetalle() {
                   href={project.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-                  className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg"
+                  className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg transition-all duration-200"
                 >
                   {t('project.viewSite')}
                   <ExternalLink className="h-5 w-5" aria-hidden="true" />

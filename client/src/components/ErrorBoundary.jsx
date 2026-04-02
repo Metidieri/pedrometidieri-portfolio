@@ -1,9 +1,7 @@
 // src/components/ErrorBoundary.jsx
-// Captura errores de renderizado y muestra una UI de fallback elegante
-// En lugar de que la app entera crashee en blanco
-
 import { Component } from 'react';
 import { withTranslation } from 'react-i18next';
+import { AlertTriangle } from 'lucide-react';
 
 class ErrorBoundary extends Component {
   constructor(props) {
@@ -26,7 +24,7 @@ class ErrorBoundary extends Component {
       return (
         <div className="min-h-screen flex items-center justify-center bg-white dark:bg-gray-950 px-4 transition-colors duration-300">
           <div className="text-center max-w-lg">
-            <div className="text-8xl mb-6">⚠️</div>
+            <AlertTriangle className="h-20 w-20 text-amber-500 mx-auto mb-6" aria-hidden="true" />
 
             <h1 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">
               {t('error.title')}

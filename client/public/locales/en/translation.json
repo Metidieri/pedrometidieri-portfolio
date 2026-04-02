@@ -11,6 +11,7 @@
     "projects": "Projects",
     "blog": "Blog",
     "services": "Services",
+    "experience": "Experience",
     "hire": "Contact",
     "lightMode": "Light mode",
     "darkMode": "Dark mode"
@@ -59,52 +60,12 @@
     "projects": {
       "title": "Featured Projects",
       "subtitle": "Some of my most recent and challenging works",
-      "seeAll": "View all projects",
-      "ecommerce": {
-        "title": "Scalable E-commerce with Next.js",
-        "description": "Full stack platform with authentication, Stripe payments and SEO optimization."
-      },
-      "dashboard": {
-        "title": "Admin Dashboard with AI Integration",
-        "description": "Real-time dashboard with visualizations and chatbots."
-      },
-      "appmovil": {
-        "title": "Hybrid Mobile App with React Native",
-        "description": "Delivery app with maps, push notifications and serverless backend."
-      }
-    },
-    "blog": {
-      "title": "Latest Articles",
-      "subtitle": "Fresh content on web development, performance and 2026 trends",
-      "readMore": "Read more articles",
-      "posts": {
-        "react19": {
-          "title": "Advanced Optimizations in React 19 (2026)",
-          "excerpt": "New features like use() and automatic compilation that change everything.",
-          "date": "February 15, 2026"
-        },
-        "next15": {
-          "title": "Migrating to Server Components in Next.js 15",
-          "excerpt": "Practical guide to improve performance and reduce bundle size.",
-          "date": "January 28, 2026"
-        },
-        "iaweb": {
-          "title": "Integrating AI in Web Apps: Best Practices",
-          "excerpt": "How to use Grok, Gemini and OpenAI without breaking user experience.",
-          "date": "January 10, 2026"
-        }
-      }
+      "seeAll": "View all projects"
     },
     "cta": {
       "title": "Have a project in mind?",
       "subtitle": "Let's talk. I offer commitment-free quotes and reply within 24 hours.",
       "button": "Let's talk"
-    },
-    "midCta": {
-      "title": "Have a project in mind?",
-      "subtitle": "Tell me your idea. I reply within 24 hours, no commitment needed.",
-      "contact": "Contact now",
-      "services": "View services"
     }
   },
   "footer": {
@@ -139,8 +100,6 @@
       "andCode": "and lots of code",
       "heartAriaLabel": "love"
     },
-    "privacy": "Privacy Policy",
-    "terms": "Terms of Use",
     "logoAlt": "Pedro Metidieri"
   },
   "about": {
@@ -159,20 +118,39 @@
     "cta": "Want to know more?",
     "experience": {
       "title": "Experience",
+      "current": "Current",
       "job1": {
-        "title": "Full Stack Freelance Developer",
-        "company": "Independent Projects",
-        "description": "Development of web and mobile applications for clients from different sectors."
+        "title": "Founder & Lead Developer",
+        "company": "MTDR – Digital Services",
+        "period": "2024 – Present",
+        "description": [
+          "Own digital agency: automation, SEO and web development for dental clinics in Spain",
+          "4+ web projects in production (React + Vite + Tailwind + Framer Motion) deployed on Vercel",
+          "Mobile-first QR digital menus with animations, allergen filters and i18n",
+          "Security: API keys with Serverless Functions, reCAPTCHA, CI/CD pipelines on Vercel"
+        ]
       },
       "job2": {
-        "title": "Full Stack Developer",
-        "company": "UNIVERSITY OF EXTREMADURA",
-        "description": "Full stack development, database modeling, backend in Flask and frontend in Next.js (React)."
+        "title": "Full-Stack Web Developer",
+        "company": "University of Extremadura",
+        "period": "Mar 2025 – Nov 2025",
+        "description": [
+          "Complete web app from scratch: Flask + Next.js + MySQL (9 months, end-to-end cycle)",
+          "Database modeling (7 tables), REST API, JWT authentication, role-based access control",
+          "Admin panel with dashboards, real-time statistics and review system",
+          "Autonomous maintenance of 3+ WordPress sites"
+        ]
       },
       "job3": {
-        "title": "Frontend Developer",
-        "company": "AGING2FUTURE",
-        "description": "Frontend development with HTML, CSS (Bootstrap) and JavaScript in a healthcare project."
+        "title": "Web Developer / Support Technician",
+        "company": "Aging to Future",
+        "period": "Mar 2024 – Sep 2024",
+        "description": [
+          "Maintenance and optimization of 4 sites (WordPress + Joomla), healthcare sector",
+          "~50 incidents/month resolved with <24h response time",
+          "Frontend interfaces (HTML5, CSS/Bootstrap, JS) for medical research platform",
+          "Medical IoT research for elderly autonomy"
+        ]
       }
     },
     "final": {
@@ -298,23 +276,7 @@
     },
     "viewCaseStudy": "View case study",
     "ariaLabel": "View case study: {{title}}",
-    "imageAlt": "{{title}} — project screenshot",
-    "ecommerce": {
-      "title": "Scalable E-commerce with Next.js",
-      "description": "Full stack platform with authentication, Stripe payments and SEO optimization."
-    },
-    "dashboard": {
-      "title": "Admin Dashboard with AI Integration",
-      "description": "Real-time dashboard with visualizations and chatbots."
-    },
-    "appmovil": {
-      "title": "Hybrid Mobile App with React Native",
-      "description": "Delivery app with maps, push notifications and serverless backend."
-    },
-    "saas": {
-      "title": "SaaS Management Platform",
-      "description": "Complete business management system with integrated AI and real-time dashboard."
-    }
+    "imageAlt": "{{title}} — project screenshot"
   },
   "project": {
     "tech": "Technologies",
@@ -363,6 +325,10 @@
     "ctaContact": "Contact"
   },
   "contact": {
+    "seo": {
+      "title": "Contact | Pedro Metidieri",
+      "description": "Have a project in mind? Contact Pedro Metidieri, Full Stack Developer. Response within 24 hours."
+    },
     "title": "Get in touch",
     "subtitle": "Have a project in mind or need advice? Write to me and I'll reply within 24 hours.",
     "name": "Full name",
@@ -397,6 +363,17 @@
     "reload": "Reload page",
     "goHome": "Go to homepage",
     "details": "Technical details"
+  },
+  "experience": {
+    "seo": {
+      "title": "Experience - Pedro Metidieri | Full Stack Developer",
+      "description": "My professional journey as a full stack developer. Real projects, technologies and achievements at each role."
+    },
+    "badge": "Professional journey",
+    "title": "My experience",
+    "subtitle": "Every project has been an opportunity to grow, learn and deliver real solutions that make an impact.",
+    "cta": "Let's talk about your project",
+    "seeAll": "View full experience"
   },
   "notFound": {
     "title": "Oops! Looks like this project escaped...",

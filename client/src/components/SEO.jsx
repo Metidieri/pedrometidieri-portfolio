@@ -1,21 +1,28 @@
 // src/components/SEO.jsx
 import { Helmet } from 'react-helmet-async';
+import { useTranslation } from 'react-i18next';
 
 const BASE_URL = 'https://pedrometidieri.com';
 
 export default function SEO({
   title       = 'Pedro Metidieri | Full Stack Developer',
   description = 'Desarrollador Full Stack especializado en React, Node.js, Next.js y soluciones escalables. Proyectos web y apps a medida.',
-  image       = `${BASE_URL}/og-image.jpg`,
+  image       = `${BASE_URL}/og-image.png`,
   url         = BASE_URL,
   type        = 'website',
 }) {
+  const { i18n } = useTranslation();
+  const lang = i18n.language || 'es';
+
   // Extraer el path relativo de la URL para los hreflang
   const path = url.startsWith(BASE_URL) ? url.slice(BASE_URL.length) || '/' : '/';
   const canonicalUrl = `${BASE_URL}${path}`;
 
   return (
     <Helmet>
+      {/* Dynamic html lang attribute */}
+      <html lang={lang} />
+
       {/* Título básico */}
       <title>{title}</title>
       <meta name="title" content={title} />

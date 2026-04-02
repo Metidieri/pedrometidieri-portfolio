@@ -1,5 +1,6 @@
 // src/pages/Servicios.jsx
 import { useTranslation } from 'react-i18next';
+import { Check } from 'lucide-react';
 import SEO from '../components/SEO';
 import { services, processSteps } from '../data/services';
 import RevealOnScroll from '../components/RevealOnScroll';
@@ -42,9 +43,9 @@ export default function Servicios() {
               return (
                 <RevealOnScroll key={service.key} direction="up" delay={idx * 100}>
                 <div
-                  className="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-indigo-500 dark:hover:border-indigo-600 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 ease-out flex flex-col h-full"
+                  className="group bg-white dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-indigo-500 dark:hover:border-indigo-600 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 ease-out flex flex-col h-full cursor-default"
                 >
-                  <Icon className="h-12 w-12 text-indigo-600 dark:text-indigo-500 mb-6 group-hover:rotate-6 transition-transform duration-300" />
+                  <Icon className="h-12 w-12 text-indigo-600 dark:text-indigo-500 mb-6 group-hover:rotate-6 transition-transform duration-300" aria-hidden="true" />
                   <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
                     {t(`services.${service.key}.title`)}
                   </h3>
@@ -59,7 +60,7 @@ export default function Servicios() {
                     <ul className="space-y-2 text-sm text-gray-600 dark:text-gray-400">
                       {includes.map((item, idx) => (
                         <li key={idx} className="flex items-start gap-2">
-                          <span className="text-emerald-500 mt-1">✓</span>
+                          <Check className="h-4 w-4 text-emerald-500 mt-0.5 flex-shrink-0" aria-hidden="true" />
                           {item}
                         </li>
                       ))}
@@ -108,18 +109,17 @@ export default function Servicios() {
 
       {/* CTA Final */}
       <RevealOnScroll direction="up">
-        <section className="py-24 dark:bg-gradient-to-b from-gray-950 to-black dark:text-white text-center">
+        <section className="py-24 bg-gradient-to-b from-gray-950 to-black text-white text-center">
           <div className="container mx-auto px-4">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
               {t('services.final.title')}
             </h2>
-            <p className="text-xl dark:text-gray-400 max-w-2xl mx-auto mb-10">
+            <p className="text-xl text-gray-400 max-w-2xl mx-auto mb-10">
               {t('services.final.subtitle')}
             </p>
             <a
               href="/contacto"
-              style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-              className="inline-block rounded-full text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-14 py-6 text-xl font-medium hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 active:scale-95 shadow-2xl"
+              className="inline-block rounded-full text-white bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-14 py-6 text-xl font-medium hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 active:scale-95 shadow-2xl transition-all duration-200"
             >
               {t('services.final.button')}
             </a>

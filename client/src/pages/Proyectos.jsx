@@ -51,7 +51,7 @@ export default function Proyectos() {
               <button
                 key={cat.key}
                 onClick={() => setFilter(cat.key)}
-                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 ${
+                className={`px-6 py-2.5 rounded-full text-sm font-medium transition-colors duration-200 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-indigo-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-gray-950 ${
                   filter === cat.key
                     ? 'bg-indigo-600 text-white shadow-lg'
                     : 'bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-700'
@@ -76,7 +76,7 @@ export default function Proyectos() {
                 <RevealOnScroll key={project.id} direction="up" delay={idx * 100}>
                   <Link
                     to={`/proyectos/${project.slug}`}
-                    className="group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-indigo-500 dark:hover:border-indigo-600 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 ease-out flex flex-col h-full"
+                    className="group bg-white dark:bg-gray-900 rounded-3xl overflow-hidden border border-gray-200 dark:border-gray-800 hover:border-indigo-500 dark:hover:border-indigo-600 hover:-translate-y-2 hover:shadow-xl transition-all duration-300 ease-out flex flex-col h-full cursor-pointer"
                     aria-label={t('projects.ariaLabel', { title })}
                   >
                     <div className="aspect-video overflow-hidden bg-gray-200 dark:bg-gray-800">
@@ -132,8 +132,7 @@ export default function Proyectos() {
             </p>
             <a
               href="/contacto"
-              style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-              className="inline-block rounded-full bg-white text-gray-900 px-14 py-6 text-xl font-medium hover:bg-gray-100 hover:scale-105 hover:shadow-lg active:scale-95 shadow-2xl"
+              className="inline-block rounded-full bg-white text-gray-900 px-14 py-6 text-xl font-medium hover:bg-gray-100 hover:scale-105 hover:shadow-lg active:scale-95 shadow-2xl transition-all duration-200"
             >
               {t('projects.cta.button')}
             </a>

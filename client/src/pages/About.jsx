@@ -1,18 +1,25 @@
 // src/pages/About.jsx
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import SEO from '../components/SEO';
 import RevealOnScroll from '../components/RevealOnScroll';
-import { ArrowRight, Download } from 'lucide-react';
+import AnimatedTitle from '../components/AnimatedTitle';
+import SectionDivider from '../components/SectionDivider';
+import { ArrowRight, Download, Briefcase } from 'lucide-react';
 import logo from '../assets/logo.png';
+import { experience } from '../data/experience';
+import {
+  staggerContainer,
+  fadeInUp,
+  hoverScale,
+  viewportOnce,
+} from '../lib/motion';
 
-const experiences = [
-  { period: '2025 — Actualidad', jobKey: 'job1' },
-  { period: '2024 — 2025',       jobKey: 'job2' },
-  { period: '2023 — 2024',       jobKey: 'job3' },
-];
+const stagger = staggerContainer(0.1);
 
 export default function About() {
   const { t } = useTranslation();
+  const shouldReduce = useReducedMotion();
 
   return (
     <>
@@ -23,39 +30,62 @@ export default function About() {
         url="https://pedrometidieri.com/about"
       />
 
-      {/* ── Hero ── */}
+      {/* Hero */}
       <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-white dark:bg-gray-950 transition-colors duration-300">
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
-              {t('about.title')}
-            </h1>
-            <p className="text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <motion.div
+              initial={shouldReduce ? {} : { opacity: 0, scale: 0.9 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
+            >
+              <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+                {t('about.title')}
+              </h1>
+            </motion.div>
+            <motion.p
+              initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
+              className="text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            >
               {t('about.subtitle')}
-            </p>
+            </motion.p>
+            {/* Animated underline */}
+            <motion.div
+              initial={shouldReduce ? {} : { scaleX: 0 }}
+              animate={{ scaleX: 1 }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
+              className="mt-4 mx-auto h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-center"
+              aria-hidden="true"
+            />
           </div>
         </div>
       </section>
 
-      {/* ── Foto + Bio ── */}
+      <SectionDivider variant="dots" />
+
+      {/* Foto + Bio */}
       <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-            {/* Foto — entra desde la izquierda */}
             <RevealOnScroll direction="left">
               <div className="flex justify-center">
-                <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800">
-                  <img
-                    src={logo}
-                    alt={t('about.photoAlt')}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
+                <div className="relative group">
+                  {/* Glow behind photo */}
+                  <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" aria-hidden="true" />
+                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800">
+                    <img
+                      src={logo}
+                      alt={t('about.photoAlt')}
+                      className="w-full h-full object-cover"
+                      loading="lazy"
+                    />
+                  </div>
                 </div>
               </div>
             </RevealOnScroll>
 
-            {/* Biografía — entra desde la derecha */}
             <RevealOnScroll direction="right" delay={100}>
               <div className="space-y-6 text-lg">
                 <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
@@ -69,23 +99,23 @@ export default function About() {
                 </p>
 
                 <div className="pt-6 flex flex-col sm:flex-row gap-4">
-                  <a
+                  <motion.a
                     href="/contacto"
-                    style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-                    className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-8 py-4 text-lg font-medium text-white hover:bg-indigo-700 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 active:scale-95 shadow-lg"
+                    {...hoverScale}
+                    className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-8 py-4 text-lg font-medium text-white hover:bg-indigo-700 shadow-lg hover:shadow-xl hover:shadow-indigo-500/25 transition-colors duration-200 will-change-transform"
                   >
                     {t('about.cta')}
                     <ArrowRight className="h-6 w-6" aria-hidden="true" />
-                  </a>
-                  <a
+                  </motion.a>
+                  <motion.a
                     href="/docs/cv-pedro-metidieri.pdf"
                     download
-                    style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-                    className="inline-flex items-center gap-3 rounded-full border-2 border-gray-300 dark:border-gray-600 px-8 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:border-indigo-600 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:text-indigo-400 hover:scale-105 active:scale-95"
+                    {...hoverScale}
+                    className="inline-flex items-center gap-3 rounded-full border-2 border-gray-300 dark:border-gray-600 px-8 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:border-indigo-600 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:text-indigo-400 transition-colors duration-200 will-change-transform"
                   >
                     <Download className="h-5 w-5" aria-hidden="true" />
                     {t('common.downloadCv')}
-                  </a>
+                  </motion.a>
                 </div>
               </div>
             </RevealOnScroll>
@@ -93,57 +123,111 @@ export default function About() {
         </div>
       </section>
 
-      {/* ── Experiencia ── */}
-      <section className="py-20 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
-        <div className="container mx-auto px-4">
-          <RevealOnScroll direction="up">
-            <h2 className="font-display text-3xl font-bold text-center mb-12 text-gray-900 dark:text-white">
-              {t('about.experience.title')}
-            </h2>
-          </RevealOnScroll>
+      <SectionDivider variant="wave" />
 
-          <div className="max-w-3xl mx-auto space-y-12">
-            {experiences.map(({ period, jobKey }, idx) => (
-              <RevealOnScroll key={jobKey} direction="up" delay={idx * 120}>
-                <div className="flex flex-col md:flex-row gap-8">
-                  <div className="md:w-48 text-sm text-gray-500 dark:text-gray-400 font-medium shrink-0">
-                    {period}
+      {/* Experiencia - resumen con link */}
+      <section className="py-20 bg-white dark:bg-gray-950 transition-colors duration-300">
+        <div className="container mx-auto px-4">
+          <AnimatedTitle
+            className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+          >
+            {t('about.experience.title')}
+          </AnimatedTitle>
+          <motion.p
+            initial={shouldReduce ? {} : { opacity: 0, y: 12 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={viewportOnce}
+            transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
+            className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-xl mx-auto"
+          >
+            {t('experience.subtitle')}
+          </motion.p>
+
+          <motion.div
+            variants={stagger}
+            initial="hidden"
+            whileInView="visible"
+            viewport={viewportOnce}
+            className="max-w-3xl mx-auto space-y-6"
+          >
+            {experience.map((job) => {
+              const Icon = job.icon;
+              return (
+                <motion.div
+                  key={job.id}
+                  variants={fadeInUp}
+                  whileHover={{
+                    y: -4,
+                    boxShadow: '0 12px 30px rgba(99, 102, 241, 0.12)',
+                    transition: { type: 'spring', stiffness: 300, damping: 20 },
+                  }}
+                  className="flex items-center gap-4 p-5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 transition-colors duration-200 will-change-transform cursor-default"
+                >
+                  <div className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center ${
+                    job.current
+                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600'
+                      : 'bg-gray-200 dark:bg-gray-800'
+                  }`}>
+                    <Icon className={`w-5 h-5 ${job.current ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`} />
                   </div>
-                  <div>
-                    <h3 className="text-2xl font-semibold text-gray-900 dark:text-white mb-2">
-                      {t(`about.experience.${jobKey}.title`)}
+                  <div className="flex-1 min-w-0">
+                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm md:text-base">
+                      {t(`about.experience.${job.jobKey}.title`)}
                     </h3>
-                    <p className="text-indigo-600 dark:text-indigo-400 mb-3">
-                      {t(`about.experience.${jobKey}.company`)}
-                    </p>
-                    <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                      {t(`about.experience.${jobKey}.description`)}
+                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                      {t(`about.experience.${job.jobKey}.company`)} · {t(`about.experience.${job.jobKey}.period`)}
                     </p>
                   </div>
-                </div>
-              </RevealOnScroll>
-            ))}
-          </div>
+                  {job.current && (
+                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 uppercase tracking-wider">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
+                      {t('about.experience.current')}
+                    </span>
+                  )}
+                </motion.div>
+              );
+            })}
+          </motion.div>
+
+          <motion.div
+            initial={shouldReduce ? {} : { opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={viewportOnce}
+            transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
+            className="text-center mt-10"
+          >
+            <motion.a
+              href="/experiencia"
+              {...hoverScale}
+              className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors duration-200"
+            >
+              <Briefcase className="w-4 h-4" />
+              {t('experience.seeAll')}
+              <ArrowRight className="h-4 w-4" />
+            </motion.a>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── CTA final ── */}
+      {/* CTA final */}
       <RevealOnScroll direction="fade">
         <section className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-black text-center">
           <div className="container mx-auto px-4">
-            <h2 className="font-display text-3xl font-bold mb-6 text-gray-900 dark:text-white">
+            <AnimatedTitle
+              className="font-display text-3xl font-bold mb-6 text-gray-900 dark:text-white"
+            >
               {t('about.final.title')}
-            </h2>
+            </AnimatedTitle>
             <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
               {t('about.final.subtitle')}
             </p>
-            <a
+            <motion.a
               href="/contacto"
-              style={{ transitionProperty: 'all', transitionDuration: '200ms' }}
-              className="inline-block rounded-full bg-indigo-600 px-10 py-5 text-xl font-medium text-white hover:bg-indigo-700 hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-xl"
+              {...hoverScale}
+              className="inline-block rounded-full bg-indigo-600 px-10 py-5 text-xl font-medium text-white hover:bg-indigo-700 shadow-xl hover:shadow-xl hover:shadow-indigo-500/25 transition-colors duration-200 will-change-transform"
             >
               {t('about.final.button')}
-            </a>
+            </motion.a>
           </div>
         </section>
       </RevealOnScroll>
