@@ -106,8 +106,10 @@ export default function Header() {
               <img
                 src={logo}
                 alt="Logo de Pedro Metidieri"
+                width="375"
+                height="375"
                 className="h-full w-full object-cover"
-                loading="lazy"
+                loading="eager"
                 decoding="async"
               />
             </div>
@@ -169,9 +171,12 @@ export default function Header() {
             >
               <img
                 src={`https://flagcdn.com/24x18/${i18n.language === 'es' ? 'es' : 'gb'}.png`}
-                alt={i18n.language === 'es' ? 'Español' : 'English'}
+                alt={i18n.language === 'es' ? 'Bandera de España' : 'Flag of United Kingdom'}
+                width="24"
+                height="18"
                 className="w-5 h-4 rounded-sm shadow-sm object-cover"
                 loading="lazy"
+                decoding="async"
               />
               <span className="text-xs font-medium text-gray-800 dark:text-gray-200">
                 {i18n.language.toUpperCase()}
@@ -259,9 +264,12 @@ export default function Header() {
                 >
                   <img
                     src={`https://flagcdn.com/24x18/${i18n.language === 'es' ? 'es' : 'gb'}.png`}
-                    alt={i18n.language === 'es' ? 'Español' : 'English'}
+                    alt={i18n.language === 'es' ? 'Bandera de España' : 'Flag of United Kingdom'}
+                    width="24"
+                    height="18"
                     className="w-6 rounded-sm shadow-sm object-cover"
                     loading="lazy"
+                    decoding="async"
                   />
                   <span>{i18n.language === 'es' ? 'Español' : 'English'}</span>
                 </button>

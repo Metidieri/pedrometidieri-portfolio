@@ -3,7 +3,7 @@
 // Ruta: /proyectos/:slug
 
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ExternalLink } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Check } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { projects } from '../data/projects';
 import SEO from '../components/SEO';
@@ -39,9 +39,12 @@ export default function ProyectoDetalle() {
           <img
             src={project.image}
             alt={t('project.imageAlt', { title })}
+            width="1905"
+            height="1071"
             className="w-full h-full object-cover opacity-70"
             loading="eager"
             decoding="async"
+            fetchpriority="high"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent" />
         </div>
@@ -67,6 +70,20 @@ export default function ProyectoDetalle() {
       {/* ── Contenido principal ─────────────────────────────────────── */}
       <div className="bg-white dark:bg-gray-950 transition-colors duration-300">
         <div className="container mx-auto px-4 py-16 md:py-24 max-w-4xl">
+
+          {/* Cliente / contexto */}
+          {project.client && (
+            <RevealOnScroll direction="up">
+              <div className="mb-10">
+                <h2 className="font-display text-sm font-semibold uppercase tracking-wider mb-2 text-gray-500 dark:text-gray-400">
+                  {t('project.client')}
+                </h2>
+                <p className="text-lg text-gray-800 dark:text-gray-200">
+                  {project.client}
+                </p>
+              </div>
+            </RevealOnScroll>
+          )}
 
           {/* Tecnologías */}
           <RevealOnScroll direction="up">
@@ -132,6 +149,30 @@ export default function ProyectoDetalle() {
             </RevealOnScroll>
           )}
 
+          {/* Decisiones técnicas destacadas */}
+          {project.decisions?.length > 0 && (
+            <RevealOnScroll direction="up">
+              <div className="mb-14">
+                <h2 className="font-display text-2xl font-bold mb-5 text-gray-900 dark:text-white">
+                  {t('project.decisions')}
+                </h2>
+                <ul className="space-y-3">
+                  {project.decisions.map((decision, i) => (
+                    <li
+                      key={i}
+                      className="flex items-start gap-3 text-gray-700 dark:text-gray-300 leading-relaxed"
+                    >
+                      <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
+                        <Check className="w-3 h-3 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
+                      </span>
+                      <span>{decision}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </RevealOnScroll>
+          )}
+
           {/* Resultado */}
           {project.result && (
             <RevealOnScroll direction="up" delay={50}>
@@ -149,19 +190,32 @@ export default function ProyectoDetalle() {
             </RevealOnScroll>
           )}
 
-          {/* CTA: Ver sitio web (solo si es proyecto externo con URL) */}
-          {project.external && project.link && (
+          {/* CTA: Ver sitio web + GitHub (opcional) */}
+          {(project.link || project.github) && (
             <RevealOnScroll direction="up">
-              <div className="text-center mb-6">
-                <a
-                  href={project.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg transition-all duration-200"
-                >
-                  {t('project.viewSite')}
-                  <ExternalLink className="h-5 w-5" aria-hidden="true" />
-                </a>
+              <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
+                {project.external && project.link && (
+                  <a
+                    href={project.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg transition-all duration-200"
+                  >
+                    {t('project.viewSite')}
+                    <ExternalLink className="h-5 w-5" aria-hidden="true" />
+                  </a>
+                )}
+                {project.github && (
+                  <a
+                    href={project.github}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-3 rounded-full border-2 border-gray-900 dark:border-white px-8 py-4 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 active:scale-95 transition-all duration-200"
+                  >
+                    <Github className="h-5 w-5" aria-hidden="true" />
+                    {t('project.viewCode')}
+                  </a>
+                )}
               </div>
             </RevealOnScroll>
           )}

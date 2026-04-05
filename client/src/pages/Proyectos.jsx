@@ -83,8 +83,11 @@ export default function Proyectos() {
                       <img
                         src={project.image}
                         alt={`${title} — captura del proyecto`}
+                        width="1905"
+                        height="1071"
                         className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
                         loading="lazy"
+                        decoding="async"
                       />
                     </div>
 

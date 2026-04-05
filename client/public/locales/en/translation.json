@@ -280,6 +280,9 @@
   },
   "project": {
     "tech": "Technologies",
+    "client": "Client / Context",
+    "decisions": "Key technical decisions",
+    "viewCode": "View code",
     "challenge": "The challenge",
     "solution": "The solution",
     "summary": "Project summary",
@@ -349,7 +352,46 @@
     "recaptchaError": "The verification system hasn't loaded yet. Wait a few seconds and try again."
   },
   "techStack": {
-    "title": "Technologies I use"
+    "title": "Technologies I use",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "ai": "Artificial Intelligence & Data",
+      "devops": "Deployment & DevOps"
+    },
+    "ctx": {
+      "html5": "Semantic markup",
+      "css3": "Styles & animations",
+      "js": "Browser logic",
+      "ts": "Typed JavaScript",
+      "react": "SPAs & components",
+      "nextjs": "SSR & dynamic routes",
+      "tailwind": "Utility-first styling",
+      "bootstrap": "Classic UI system",
+      "framer": "Fluid animations",
+      "vite": "Lightning-fast tooling",
+      "node": "Server runtime",
+      "express": "Minimal APIs",
+      "python": "Scripts & backends",
+      "flask": "Python microframework",
+      "php": "WordPress & Joomla",
+      "rest": "Service integration",
+      "postgres": "Relational SQL",
+      "mysql": "Production database",
+      "supabase": "Backend as a Service",
+      "openai": "GPT & embeddings",
+      "claude": "Anthropic LLM",
+      "grok": "Conversational AI",
+      "langchain": "LLM orchestration",
+      "prompteng": "Prompt design",
+      "git": "Version control",
+      "github": "Repos & PRs",
+      "docker": "Containers",
+      "vercel": "Deploy & CI/CD",
+      "cicd": "Automated deploys",
+      "hostinger": "Traditional hosting",
+      "serverless": "Serverless backend"
+    }
   },
   "testimonios": {
     "title": "What my clients say",

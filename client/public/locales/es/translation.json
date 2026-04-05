@@ -280,6 +280,9 @@
   },
   "project": {
     "tech": "Tecnologías",
+    "client": "Cliente / Contexto",
+    "decisions": "Decisiones técnicas destacadas",
+    "viewCode": "Ver código",
     "challenge": "El reto",
     "solution": "La solución",
     "summary": "Resumen del proyecto",
@@ -349,7 +352,46 @@
     "recaptchaError": "El sistema de verificación aún no ha cargado. Espera unos segundos e inténtalo de nuevo."
   },
   "techStack": {
-    "title": "Tecnologías que uso"
+    "title": "Tecnologías que uso",
+    "groups": {
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "ai": "Inteligencia Artificial & Data",
+      "devops": "Despliegue & DevOps"
+    },
+    "ctx": {
+      "html5": "Estructura semántica",
+      "css3": "Estilos y animaciones",
+      "js": "Lógica en el navegador",
+      "ts": "JavaScript con tipos",
+      "react": "SPAs y componentes",
+      "nextjs": "SSR y rutas dinámicas",
+      "tailwind": "Utility-first styling",
+      "bootstrap": "Sistema de UI clásico",
+      "framer": "Animaciones fluidas",
+      "vite": "Build tool ultrarrápido",
+      "node": "Runtime del servidor",
+      "express": "APIs minimalistas",
+      "python": "Scripts y backends",
+      "flask": "Microframework Python",
+      "php": "WordPress y Joomla",
+      "rest": "Integración de servicios",
+      "postgres": "SQL relacional",
+      "mysql": "BBDD en producción",
+      "supabase": "Backend as a Service",
+      "openai": "GPT y embeddings",
+      "claude": "LLM de Anthropic",
+      "grok": "IA conversacional",
+      "langchain": "Orquestación de LLMs",
+      "prompteng": "Diseño de prompts",
+      "git": "Control de versiones",
+      "github": "Repositorios y PRs",
+      "docker": "Contenedores",
+      "vercel": "Deploy y CI/CD",
+      "cicd": "Despliegue automático",
+      "hostinger": "Hosting tradicional",
+      "serverless": "Backend sin servidor"
+    }
   },
   "testimonios": {
     "title": "Lo que dicen mis clientes",

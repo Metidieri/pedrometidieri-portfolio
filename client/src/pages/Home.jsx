@@ -60,9 +60,12 @@ export default function Home() {
                 <img
                   src={logo}
                   alt={t('home.hero.imageAlt')}
+                  width="375"
+                  height="375"
                   className="w-full h-full object-cover"
                   loading="eager"
                   decoding="async"
+                  fetchpriority="high"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-indigo-600/30 to-transparent" />
               </div>
@@ -82,8 +85,10 @@ export default function Home() {
               {t('home.hero.available')}
             </motion.div>
 
-            {/* Animated gradient title */}
-            <motion.h1 variants={fadeInUp} className="font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white">
+            {/* Animated gradient title — min-h reserves space for up to 3 lines at each breakpoint
+                (base text-4xl lh 2.5rem × 3 = 7.5rem; md text-6xl lh 3.75rem × 3 = 11.25rem;
+                lg text-7xl lh 4.5rem × 3 = 13.5rem) so the typewriter cannot shift layout. */}
+            <motion.h1 variants={fadeInUp} className="block font-display text-4xl md:text-6xl lg:text-7xl font-bold tracking-tight mb-6 text-gray-900 dark:text-white min-h-[7.5rem] md:min-h-[11.25rem] lg:min-h-[13.5rem]">
               <TypeAnimation
                 sequence={[
                   t('home.hero.title1'), 2000,
@@ -242,7 +247,9 @@ export default function Home() {
                   <div className="aspect-video overflow-hidden bg-gray-300 dark:bg-gray-700">
                     <img
                       src={project.image}
-                      alt={project.title}
+                      alt={`${project.title} — captura del proyecto`}
+                      width="1905"
+                      height="1071"
                       loading="lazy"
                       decoding="async"
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"

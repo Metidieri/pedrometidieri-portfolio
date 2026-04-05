@@ -15,9 +15,9 @@ import { viewportOnce } from '../lib/motion';
 const TestimonioCard = memo(({ testimonial, t }) => (
   <div className="group h-full bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700 hover:border-indigo-500 dark:hover:border-indigo-600 hover:shadow-xl hover:shadow-indigo-500/20 dark:hover:shadow-indigo-600/20 transition-all duration-300 flex flex-col cursor-default">
     {/* Estrellas */}
-    <div className="flex mb-4" aria-label={t('testimonios.starsAriaLabel', { count: testimonial.rating })}>
+    <div className="flex mb-4" role="img" aria-label={t('testimonios.starsAriaLabel', { count: testimonial.rating })}>
       {Array.from({ length: testimonial.rating }).map((_, idx) => (
-        <Star key={idx} className="h-5 w-5 text-yellow-400 fill-current" />
+        <Star key={idx} className="h-5 w-5 text-yellow-400 fill-current" aria-hidden="true" />
       ))}
     </div>
 
@@ -33,8 +33,11 @@ const TestimonioCard = memo(({ testimonial, t }) => (
           <img
             src={testimonial.avatar}
             alt={t('testimonios.avatarAlt', { name: testimonial.name })}
+            width="48"
+            height="48"
             className="w-full h-full object-cover"
             loading="lazy"
+            decoding="async"
           />
         ) : (
           testimonial.name.charAt(0)

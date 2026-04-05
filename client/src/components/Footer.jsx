@@ -47,7 +47,7 @@ export default function Footer() {
             <motion.div variants={shouldReduce ? {} : fadeInUp} className="flex flex-col">
               <div className="flex items-center gap-3 mb-4">
                 <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 to-purple-700">
-                  <img src={logo} alt={t('footer.logoAlt')} className="h-full w-full object-cover" loading="lazy" decoding="async" />
+                  <img src={logo} alt={t('footer.logoAlt')} width="375" height="375" className="h-full w-full object-cover" loading="lazy" decoding="async" />
                 </div>
                 <span className="text-lg font-bold text-gray-900 dark:text-white">{t('footer.title')}</span>
               </div>

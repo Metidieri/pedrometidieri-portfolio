@@ -78,8 +78,11 @@ export default function About() {
                     <img
                       src={logo}
                       alt={t('about.photoAlt')}
+                      width="375"
+                      height="375"
                       className="w-full h-full object-cover"
                       loading="lazy"
+                      decoding="async"
                     />
                   </div>
                 </div>

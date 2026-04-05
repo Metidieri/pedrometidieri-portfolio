@@ -16,22 +16,34 @@ export default function Contacto() {
   // Carga dinámica del script de reCAPTCHA v3
   useEffect(() => {
     const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+    // Guardia: si la site key no está definida, el script cargaría con
+    // ?render=undefined y nunca registraría un cliente ("No reCAPTCHA clients exist")
+    if (!siteKey) {
+      console.error('[reCAPTCHA] VITE_RECAPTCHA_SITE_KEY no está definida');
+      return;
+    }
+
+    // Evitar duplicar el script si el componente se remonta (StrictMode, navegación)
+    if (document.querySelector(`script[src*="recaptcha/api.js"]`)) return;
+
     const script = document.createElement('script');
     script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
     script.async = true;
     document.head.appendChild(script);
 
     return () => {
-      document.head.removeChild(script);
-      // Eliminar el badge de reCAPTCHA que inyecta Google en el DOM
-      const badge = document.querySelector('.grecaptcha-badge');
-      if (badge) badge.remove();
+      // No eliminamos el script ni el badge en cleanup: si el usuario vuelve a
+      // esta página, grecaptcha.execute() fallará con "No reCAPTCHA clients exist"
+      // porque el cliente ya estaba registrado contra el script eliminado.
     };
   }, []);
 
   const onSubmit = async (data) => {
-    // Guardia: asegurarse de que el script ya cargó
-    if (!window.grecaptcha) {
+    const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
+
+    // Guardia: asegurarse de que el script ya cargó y tiene site key
+    if (!siteKey || !window.grecaptcha) {
       setStatus({
         type: 'error',
         message: t('contact.recaptchaError'),
@@ -43,10 +55,11 @@ export default function Contacto() {
     setStatus({ type: null, message: '' });
 
     try {
-      const recaptchaToken = await window.grecaptcha.execute(
-        import.meta.env.VITE_RECAPTCHA_SITE_KEY,
-        { action: 'submit' }
-      );
+      // Esperar a que reCAPTCHA registre el cliente para la site key.
+      // Sin esto, execute() lanza "No reCAPTCHA clients exist".
+      await new Promise((resolve) => window.grecaptcha.ready(resolve));
+
+      const recaptchaToken = await window.grecaptcha.execute(siteKey, { action: 'submit' });
 
       const res = await fetch('/api/contact', {
         method: 'POST',
