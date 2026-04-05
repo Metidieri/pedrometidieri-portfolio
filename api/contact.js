@@ -37,6 +37,8 @@ export default async function handler(req, res) {
     }
 
     // 2. Enviar email via EmailJS REST API
+    // IMPORTANTE: desde servidor EmailJS exige accessToken (private key).
+    // Sin él devuelve 403 "API calls to this endpoint are disabled for non-browser applications".
     const emailRes = await fetch('https://api.emailjs.com/api/v1.0/email/send', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -44,6 +46,7 @@ export default async function handler(req, res) {
         service_id: process.env.EMAILJS_SERVICE_ID,
         template_id: process.env.EMAILJS_TEMPLATE_ID,
         user_id: process.env.EMAILJS_PUBLIC_KEY,
+        accessToken: process.env.EMAILJS_PRIVATE_KEY,
         template_params: {
           from_name: name,
           from_email: email,
@@ -55,8 +58,12 @@ export default async function handler(req, res) {
 
     if (!emailRes.ok) {
       const errorText = await emailRes.text();
-      console.error('EmailJS error:', errorText);
-      return res.status(500).json({ error: 'Error al enviar el email. Inténtalo de nuevo.' });
+      console.error('EmailJS error:', emailRes.status, errorText);
+      // Devolver detalle al cliente para depurar desde Vercel Logs
+      return res.status(500).json({
+        error: 'Error al enviar el email. Inténtalo de nuevo.',
+        debug: `EmailJS ${emailRes.status}: ${errorText.slice(0, 200)}`,
+      });
     }
 
     return res.status(200).json({ success: true, message: 'Email enviado correctamente' });
