@@ -94,6 +94,8 @@ export default function Home() {
                   t('home.hero.title1'), 2000,
                   t('home.hero.title2'), 2000,
                   t('home.hero.title3'), 2000,
+                  t('home.hero.title4'), 2000,
+                  t('home.hero.title5'), 2000,
                 ]}
                 wrapper="span"
                 speed={50}
@@ -233,9 +235,7 @@ export default function Home() {
             {featuredProjects.map((project) => (
                 <motion.a
                   key={project.id}
-                  href={project.link}
-                  target={project.external ? '_blank' : undefined}
-                  rel={project.external ? 'noopener noreferrer' : undefined}
+                  href={`/proyectos/${project.slug}`}
                   variants={fadeInUp}
                   whileHover={{
                     y: -8,
@@ -261,7 +261,7 @@ export default function Home() {
                     </h3>
                     <p className="text-gray-600 dark:text-gray-400 mb-4">{project.description}</p>
                     <div className="flex flex-wrap gap-2">
-                      {project.tech.map((tech) => (
+                      {(project.stack || project.tech || []).map((tech) => (
                         <span
                           key={tech}
                           className="text-xs px-3 py-1 bg-gray-200 dark:bg-gray-800 rounded-full text-gray-700 dark:text-gray-300"

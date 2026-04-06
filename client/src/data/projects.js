@@ -3,115 +3,101 @@
 
 export const projects = [
   {
-    id: 1,
-    slug: 'el-aperitivo-talarrubias',
-    title: 'El Aperitivo Talarrubias',
+    id: 'el-aperitivo',
+    slug: 'el-aperitivo',
+    title: 'Carta Digital QR — El Aperitivo Talarrubias',
     description:
       'Carta digital con código QR para bar-restaurante. Mobile-first, sin necesidad de app nativa.',
-    longDescription:
-      'Carta digital interactiva con acceso vía QR para Bar El Aperitivo (Talarrubias, Badajoz). Diseñada mobile-first con navegación por categorías, sistema visual de alérgenos, animaciones suaves y carga optimizada. Desplegada con dominio propio y pipeline de actualizaciones sin coste para el cliente.',
-    client: 'Bar El Aperitivo — Talarrubias (Badajoz)',
-    challenge:
-      'El bar necesitaba una carta digital accesible mediante QR que no obligara al cliente a descargar una app nativa, con capacidad de actualización rápida del menú y coste operativo cero.',
-    solution:
-      'Web app mobile-first con React 19 + Vite + Tailwind, navegación por categorías animada con Framer Motion, sistema visual de alérgenos y splash screen personalizado. Despliegue en Vercel con CI/CD desde Git para publicar cambios de menú en segundos.',
-    decisions: [
-      'Vite como bundler por velocidad de build y HMR en desarrollo',
-      'Framer Motion para transiciones entre categorías, respetando prefers-reduced-motion',
-      'Lazy loading de imágenes del menú y formato WebP para optimizar carga en 3G/4G',
-      'Despliegue en Vercel con dominio propio y CI/CD desde Git (actualizaciones sin coste)',
-    ],
-    result:
-      'Carta digital en producción en elaperitivotalarrubias.com con dominio propio. El cliente puede actualizar platos y precios vía Git sin coste por cambio, y eliminó las cartas físicas reimpresas.',
-    tech: ['React 19', 'Vite', 'Tailwind CSS', 'Framer Motion', 'Vercel'],
+    client: 'Bar El Aperitivo, Talarrubias (Badajoz)',
+    url: 'https://elaperitivotalarrubias.com',
+    github: null,
     image: '/projects/elaperitivo-index.webp',
-    link: 'https://www.elaperitivotalarrubias.com/',
-    github: null,
-    category: 'web',
-    external: true,
-  },
-  {
-    id: 2,
-    slug: 'casa-de-la-cultura',
-    title: 'Casa de la Cultura',
-    description:
-      'Carta digital QR para café-bar con animaciones cinéticas y paleta extremeña.',
-    longDescription:
-      'Carta digital para Café Bar Casa de la Cultura (Esparragosa de Lares). Resuelve la misma necesidad que El Aperitivo pero con una identidad visual diferenciada: animaciones cinéticas, tipografía de carácter y paleta de colores inspirada en Extremadura.',
-    client: 'Café Bar Casa de la Cultura — Esparragosa de Lares (Badajoz)',
-    challenge:
-      'Misma necesidad que El Aperitivo: carta digital QR sin app nativa. Requería además una identidad visual propia, diferenciada del primer proyecto, con paleta extremeña y animaciones más cinéticas.',
-    solution:
-      'Reutilización de la arquitectura de El Aperitivo (React 19 + Vite + Tailwind v4 + Framer Motion) adaptando paleta, tipografía y sistema de animaciones. Tailwind v4 permitió iterar rápido sobre el nuevo sistema de diseño.',
+    stack: ['React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion', 'Vercel'],
+    problem:
+      'El negocio usaba una carta en papel que resultaba costosa de actualizar y poco higiénica. Necesitaban una solución digital accesible mediante QR sin requerir instalación de ninguna app.',
     decisions: [
-      'Tailwind CSS v4 con variables CSS nativas para el sistema de color extremeño',
-      'Animaciones cinéticas con Framer Motion (stagger + ease personalizados)',
-      'Arquitectura compartida con El Aperitivo para reducir tiempo de desarrollo',
-      'Despliegue en Vercel con CI/CD desde Git',
+      'SPA con React para evitar recargas de página y lograr una experiencia fluida en móvil, que es el 95% del tráfico esperado.',
+      'Sistema de alérgenos basado en los 14 alérgenos obligatorios de la UE, con badges visuales por plato.',
+      'Lazy loading de imágenes para mantener un rendimiento óptimo en conexiones móviles lentas.',
+      'Deploy en Vercel con CI/CD desde GitHub: cualquier actualización de carta se despliega en menos de 2 minutos sin intervención técnica del cliente.',
+      'Dominio propio configurado vía Namecheap con DNS apuntando a Vercel.',
     ],
     result:
-      'Web desplegada en Vercel con CI/CD activo. El cliente actualiza contenido vía Git y los cambios se publican automáticamente.',
-    tech: ['React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion', 'Vercel'],
-    image: '/projects/casa-de-la-cultura.webp', // pendiente de añadir
-    link: null, // pendiente de publicar URL
-    github: null,
+      'Carta digital en producción con dominio propio, accesible mediante QR desde cualquier dispositivo. El cliente actualiza los precios mediante un cambio en el repositorio sin conocimientos técnicos adicionales.',
     category: 'web',
-    external: true,
   },
   {
-    id: 3,
+    id: 'casa-cultura',
+    slug: 'casa-cultura',
+    title: 'Carta Digital QR — Café Bar Casa de la Cultura',
+    description:
+      'Carta digital QR para café-bar con animaciones cinéticas y paleta personalizada.',
+    client: 'Café Bar Casa de la Cultura, Esparragosa de Lares (Badajoz)',
+    url: null,
+    github: null,
+    image: null,
+    stack: ['React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion', 'Vercel'],
+    problem:
+      'Misma necesidad que El Aperitivo: digitalizar la carta de forma económica y mantenible, con identidad visual propia del establecimiento.',
+    decisions: [
+      'Paleta de colores personalizada basada en la identidad visual del bar.',
+      'Animaciones cinéticas con Framer Motion para una experiencia más premium.',
+      'Reutilización de la arquitectura de El Aperitivo, reduciendo el tiempo de desarrollo en un 60% respecto al primer proyecto.',
+      'Deploy independiente en Vercel con su propio pipeline de CI/CD.',
+    ],
+    result:
+      'Segundo proyecto de carta digital desplegado en producción, validando el modelo de negocio replicable de MTDR para hostelería local.',
+    category: 'web',
+  },
+  {
+    id: 'mtdr',
     slug: 'mtdr',
-    title: 'MTDR Servicios Digitales',
+    title: 'Landing Page — MTDR Servicios Digitales',
     description:
       'Landing page de la agencia propia, enfocada en clínicas dentales y negocios locales.',
-    longDescription:
-      'Landing page de MTDR Servicios Digitales, la agencia propia enfocada en desarrollo web, automatización y SEO para clínicas dentales y pymes en España. Diseño minimalista, claro y orientado a conversión.',
-    client: 'MTDR Servicios Digitales — agencia propia',
-    challenge:
-      'Necesitaba una landing corporativa que posicionara la agencia ante clínicas dentales y negocios locales, transmitiendo profesionalidad y capacidad técnica sin fricción.',
-    solution:
-      'Landing one-page con React 19 + Tailwind CSS, enfocada en velocidad de carga y mensaje directo. DNS gestionado en Hostinger apuntando al despliegue de Vercel.',
+    client: 'Proyecto propio — Agencia digital fundada por Pedro Metidieri',
+    url: 'https://mtdr.es',
+    github: 'https://github.com/Metidieri/mtdr-landing',
+    image: '/projects/mtdr-landing.webp',
+    stack: ['React 19', 'Tailwind CSS v4', 'Framer Motion', 'Vercel', 'Hostinger DNS'],
+    problem:
+      'Necesitaba una presencia digital propia para la agencia, enfocada en captar clientes del sector sanitario (clínicas dentales) con un diseño que transmitiera confianza y profesionalidad.',
     decisions: [
-      'React 19 + Tailwind CSS para iteración rápida del diseño',
-      'Despliegue en Vercel con CI/CD y dominio conectado vía Hostinger DNS',
-      'Arquitectura ligera sin framework pesado (no Next.js) al ser una landing estática',
+      'Diseño orientado a conversión: CTA claro above the fold, propuesta de valor en los primeros 3 segundos.',
+      'DNS configurado en Hostinger apuntando a Vercel, combinando el hosting de dominio económico con la infraestructura de deploy de Vercel.',
+      'Resolución de conflictos de dependencias React 19 con react-helmet-async v3 y swiper v11 usando --legacy-peer-deps.',
     ],
     result:
-      'Landing en producción en mtdr.es, sirviendo como primer punto de contacto comercial de la agencia.',
-    tech: ['React 19', 'Tailwind CSS', 'Vercel', 'Hostinger DNS'],
-    image: '/projects/mtdr-landing.webp',
-    link: 'https://mtdr.es/',
-    github: null,
+      'Landing page en producción en mtdr.es con CI/CD desde GitHub. Primera presencia digital oficial de la agencia.',
     category: 'web',
-    external: true,
   },
   {
-    id: 4,
+    id: 'portfolio',
     slug: 'portfolio',
-    title: 'Portfolio Personal',
+    title: 'Portfolio Personal — pedrometidieri.com',
     description:
-      'Portfolio profesional bilingüe con dark mode, i18n y Serverless Functions.',
-    longDescription:
-      'Portfolio personal en pedrometidieri.com. Sitio bilingüe (ES/EN), mobile-first, con dark mode, accesibilidad WCAG, animaciones Framer Motion y formulario de contacto protegido mediante Serverless Functions.',
-    client: 'Proyecto propio — marca personal Pedro Metidieri',
-    challenge:
-      'Necesitaba una presencia web profesional como desarrollador full-stack que mostrara case studies reales, funcionara en dos idiomas y protegiera las API keys del formulario de contacto.',
-    solution:
-      'SPA con React 19 + Vite + Tailwind v4, enrutado con React Router, i18n con react-i18next, animaciones con Framer Motion y formulario de contacto servido por Serverless Functions en Vercel para ocultar las API keys de EmailJS y reCAPTCHA.',
+      'Portfolio profesional bilingüe con dark mode, i18n y formulario de contacto seguro.',
+    client: 'Proyecto propio',
+    url: 'https://pedrometidieri.com',
+    github: 'https://github.com/Metidieri/pedrometidieri-portfolio',
+    image: '/projects/portfolio.webp',
+    stack: [
+      'React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion',
+      'react-i18next', 'EmailJS', 'reCAPTCHA v3', 'Vercel',
+    ],
+    problem:
+      'Necesitaba un portfolio que demostrara capacidad técnica real, no solo diseño. El reto era construir algo que funcionara como argumento de contratación por sí solo.',
     decisions: [
-      'API keys protegidas vía Serverless Functions de Vercel (EmailJS + reCAPTCHA) — nunca expuestas al cliente',
-      'SPA routing cubierto en vercel.json con fallback a index.html para evitar 404 en deep links',
-      'Tailwind CSS v4 + variables CSS para theming (light/dark) sin runtime overhead',
-      'Code splitting por ruta con React.lazy + Suspense para optimizar LCP',
+      'i18n completo español/inglés con react-i18next para alcanzar tanto mercado nacional como oportunidades remotas internacionales.',
+      'Formulario de contacto con reCAPTCHA v3 y EmailJS directamente desde el cliente, eliminando la Serverless Function intermediaria que causaba errores 403 por restricciones de entorno no-browser de EmailJS.',
+      'API keys protegidas mediante variables de entorno con prefijo VITE_ para exposición controlada al cliente.',
+      'SPA routing configurado en vercel.json con rewrites para evitar 404s en navegación directa a rutas.',
+      'Service Worker para capacidades PWA y carga offline básica.',
+      'Sitemap.xml y robots.txt para indexación correcta por buscadores.',
     ],
     result:
-      'Portfolio en producción en pedrometidieri.com con Lighthouse Accessibility 100, bilingüe ES/EN, y formulario de contacto seguro con validación reCAPTCHA.',
-    tech: ['React 19', 'Vite', 'Tailwind CSS v4', 'Vercel', 'Serverless Functions'],
-    image: '/projects/portfolio.webp',
-    link: 'https://pedrometidieri.com/',
-    github: 'https://github.com/Metidieri/pedrometidieri-portfolio',
+      'Portfolio en producción con Lighthouse score objetivo de 90+ en Performance, Accessibility y SEO. Bilingüe, con casos de estudio reales y formulario de contacto funcional.',
     category: 'web',
-    external: true,
   },
 ];
 

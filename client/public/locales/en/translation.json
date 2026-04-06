@@ -24,9 +24,11 @@
       "description": "Build fast, scalable web and mobile apps. Specialized in React, Node.js, Next.js, AI and cloud. Custom projects and technical advice."
     },
     "hero": {
-      "title1": "Full Stack Developer",
-      "title2": "Builder of scalable solutions",
-      "title3": "Specialist in React & AI",
+      "title1": "I ship products, not just code.",
+      "title2": "From idea to production deployment.",
+      "title3": "React · Flask · Real results.",
+      "title4": "Founder of MTDR Digital Services.",
+      "title5": "Available for projects and remote positions.",
       "subtitle": "I build fast, scalable web and mobile applications with a focus on the user. React · Node.js · Next.js · AI · Cloud",
       "hire": "Let's talk",
       "seeProjects": "View projects",
@@ -36,8 +38,8 @@
     },
     "about": {
       "title": "Hi, I'm Pedro Metidieri",
-      "p1": "Full stack developer with +1 year of experience building digital products for startups and companies. I love turning ideas into clean, performant and maintainable code.",
-      "p2": "Currently available for freelance projects or long-term collaborations."
+      "p1": "I'm Pedro Metidieri, a Full Stack Developer based in Extremadura, Spain, and founder of MTDR Digital Services. I build real web products: from architecture to production deployment, including direct client relationships.",
+      "p2": "My main stack is React 19, Flask/Python, and Tailwind CSS. I'm looking to join a technical team where I can grow as a Full Stack developer. Available for on-site positions in Madrid or remote."
     },
     "skills": {
       "frontend": {
@@ -111,9 +113,9 @@
     "subtitle": "My story and how I can help you",
     "photoAlt": "Photo of Pedro Metidieri",
     "bio": {
-      "p1": "I'm a full stack developer passionate about creating digital solutions that truly make a difference.",
-      "p2": "With over a year of experience working with startups and companies, I've learned that the key is to understand the problem before writing a single line of code.",
-      "p3": "My approach always combines modern technology with user-centered design."
+      "p1": "I'm Pedro Metidieri, a Full Stack Developer based in Extremadura, Spain, and founder of MTDR Digital Services. I build real web products: from architecture to production deployment, including direct client relationships.",
+      "p2": "My main stack is React 19, Flask/Python, and Tailwind CSS, deployed on Vercel with CI/CD from GitHub. I've delivered projects for real local businesses —QR digital menus, conversion landing pages— and maintain this portfolio as a live example of what I do.",
+      "p3": "I'm looking to join a technical team where I can grow as a Full Stack developer, contributing from day one on both frontend and backend. Available for on-site positions in Madrid or remote."
     },
     "cta": "Want to know more?",
     "experience": {
@@ -283,6 +285,7 @@
     "client": "Client / Context",
     "decisions": "Key technical decisions",
     "viewCode": "View code",
+    "problem": "The problem",
     "challenge": "The challenge",
     "solution": "The solution",
     "summary": "Project summary",
@@ -301,29 +304,14 @@
   },
   "blog": {
     "seo": {
-      "title": "Blog | Pedro Metidieri — Coming Soon",
-      "description": "Coming soon: articles about web development, React, AI and best practices. Sign up to be the first to read them."
+      "title": "Blog | Pedro Metidieri — Web Development",
+      "description": "Articles about web development, React, Vercel deployment and engineering best practices."
     },
-    "badge": "Coming soon",
     "title": "Blog",
-    "introPrefix": "I'm preparing articles about",
-    "introWeb": "web development",
-    "introAI": "artificial intelligence",
-    "introPractices": "best practices",
-    "introSuffix": "in software engineering.",
-    "topicsTitle": "What will I write about?",
-    "topics": {
-      "react": "React & Next.js",
-      "ai": "AI in production",
-      "performance": "Web performance",
-      "practices": "Best practices"
-    },
-    "notifyTitle": "Notify me when it's ready",
-    "notifyDescription": "Leave your email and you'll be among the first to read the first article. No spam, no endless newsletters.",
-    "notifyPlaceholder": "you@email.com",
-    "notifyButton": "Notify me",
-    "notifySuccess": "Perfect! I'll let you know as soon as I publish the first article.",
-    "ctaDescription": "In the meantime, check out my projects or write to me directly.",
+    "subtitle": "Articles about real problems I encounter while developing and how I solve them.",
+    "readMore": "Read article",
+    "backToList": "Back to blog",
+    "ctaDescription": "Want to see more? Check out my projects or write to me directly.",
     "ctaProjects": "View projects",
     "ctaContact": "Contact"
   },

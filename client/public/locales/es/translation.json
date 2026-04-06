@@ -24,9 +24,11 @@
       "description": "Crea aplicaciones web y móviles rápidas y escalables. Especializado en React, Node.js, Next.js, IA y cloud. Proyectos a medida y asesoría técnica."
     },
     "hero": {
-      "title1": "Desarrollador Full Stack",
-      "title2": "Creador de soluciones escalables",
-      "title3": "Especialista en React & IA",
+      "title1": "Entrego productos, no solo código.",
+      "title2": "De la idea al deploy en producción.",
+      "title3": "React · Flask · Resultados reales.",
+      "title4": "Fundador de MTDR Servicios Digitales.",
+      "title5": "Disponible para proyectos y posiciones remotas.",
       "subtitle": "Creo aplicaciones web y móviles rápidas, escalables y con foco en el usuario. React · Node.js · Next.js · IA · Cloud",
       "hire": "Hablemos",
       "seeProjects": "Ver proyectos",
@@ -36,8 +38,8 @@
     },
     "about": {
       "title": "Hola, soy Pedro Metidieri",
-      "p1": "Desarrollador full stack con +1 año de experiencia creando productos digitales para startups y empresas. Me apasiona transformar ideas en código limpio, performante y mantenible.",
-      "p2": "Actualmente disponible para proyectos freelance o colaboraciones a largo plazo."
+      "p1": "Soy Pedro Metidieri, desarrollador Full Stack con base en Extremadura, España, y fundador de MTDR Servicios Digitales. Construyo productos web reales: desde la arquitectura hasta el deploy en producción, pasando por la relación directa con el cliente.",
+      "p2": "Mi stack principal es React 19, Flask/Python y Tailwind CSS. Busco incorporarme a un equipo técnico donde pueda crecer como desarrollador Full Stack. Disponible para posiciones presenciales en Madrid o remotas."
     },
     "skills": {
       "frontend": {
@@ -111,9 +113,9 @@
     "subtitle": "Mi historia y cómo puedo ayudarte",
     "photoAlt": "Foto de Pedro Metidieri",
     "bio": {
-      "p1": "Soy un desarrollador full stack apasionado por crear soluciones digitales que realmente marquen la diferencia.",
-      "p2": "Con más de un año de experiencia trabajando con startups y empresas, he aprendido que la clave está en entender el problema antes de escribir una sola línea de código.",
-      "p3": "Mi enfoque siempre combina tecnología moderna con un diseño centrado en el usuario."
+      "p1": "Soy Pedro Metidieri, desarrollador Full Stack con base en Extremadura, España, y fundador de MTDR Servicios Digitales. Construyo productos web reales: desde la arquitectura hasta el deploy en producción, pasando por la relación directa con el cliente.",
+      "p2": "Mi stack principal es React 19, Flask/Python y Tailwind CSS, desplegado en Vercel con CI/CD desde GitHub. He entregado proyectos para negocios locales reales —cartas digitales QR, landings de conversión— y mantengo este portfolio como ejemplo vivo de lo que hago.",
+      "p3": "Busco incorporarme a un equipo técnico donde pueda crecer como desarrollador Full Stack, aportando desde el primer día tanto en frontend como en backend. Disponible para posiciones presenciales en Madrid o remotas."
     },
     "cta": "¿Quieres saber más?",
     "experience": {
@@ -283,6 +285,7 @@
     "client": "Cliente / Contexto",
     "decisions": "Decisiones técnicas destacadas",
     "viewCode": "Ver código",
+    "problem": "El problema",
     "challenge": "El reto",
     "solution": "La solución",
     "summary": "Resumen del proyecto",
@@ -301,29 +304,14 @@
   },
   "blog": {
     "seo": {
-      "title": "Blog | Pedro Metidieri — Próximamente",
-      "description": "Próximamente: artículos sobre desarrollo web, React, IA y buenas prácticas. Apúntate para ser el primero en leerlos."
+      "title": "Blog | Pedro Metidieri — Desarrollo Web",
+      "description": "Artículos sobre desarrollo web, React, despliegue en Vercel y buenas prácticas de ingeniería."
     },
-    "badge": "Próximamente",
     "title": "Blog",
-    "introPrefix": "Estoy preparando artículos sobre",
-    "introWeb": "desarrollo web",
-    "introAI": "inteligencia artificial",
-    "introPractices": "buenas prácticas",
-    "introSuffix": "de ingeniería.",
-    "topicsTitle": "¿De qué voy a escribir?",
-    "topics": {
-      "react": "React & Next.js",
-      "ai": "IA en producción",
-      "performance": "Rendimiento web",
-      "practices": "Buenas prácticas"
-    },
-    "notifyTitle": "Avísame cuando esté listo",
-    "notifyDescription": "Déjame tu email y serás de los primeros en leer el primer artículo. Sin spam, sin newsletters infinitas.",
-    "notifyPlaceholder": "tu@email.com",
-    "notifyButton": "Avísame",
-    "notifySuccess": "¡Perfecto! Te avisaré en cuanto publique el primer artículo.",
-    "ctaDescription": "Mientras tanto, echa un vistazo a mis proyectos o escríbeme directamente.",
+    "subtitle": "Artículos sobre problemas reales que encuentro desarrollando y cómo los resuelvo.",
+    "readMore": "Leer artículo",
+    "backToList": "Volver al blog",
+    "ctaDescription": "¿Quieres ver más? Echa un vistazo a mis proyectos o escríbeme directamente.",
     "ctaProjects": "Ver proyectos",
     "ctaContact": "Contactar"
   },

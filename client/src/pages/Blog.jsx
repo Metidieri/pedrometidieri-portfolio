@@ -1,26 +1,17 @@
 // src/pages/Blog.jsx
-import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
-import { ArrowRight, BookOpen, Mail, Atom, Bot, Rocket, Wrench } from 'lucide-react';
+import { ArrowRight, Clock, Calendar } from 'lucide-react';
 import SEO from '../components/SEO';
 import RevealOnScroll from '../components/RevealOnScroll';
+import { articles } from '../data/blog';
 
 export default function Blog() {
-  const { t } = useTranslation();
-  const [email, setEmail] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const { t, i18n } = useTranslation();
+  const lang = i18n.language?.startsWith('en') ? 'en' : 'es';
 
-  const topics = [
-    { icon: Atom, labelKey: 'react' },
-    { icon: Bot, labelKey: 'ai' },
-    { icon: Rocket, labelKey: 'performance' },
-    { icon: Wrench, labelKey: 'practices' },
-  ];
-
-  const handleNotify = (e) => {
-    e.preventDefault();
-    if (email) setSubmitted(true);
-  };
+  // Most recent first
+  const sorted = [...articles].sort((a, b) => new Date(b.date) - new Date(a.date));
 
   return (
     <>
@@ -33,96 +24,65 @@ export default function Blog() {
       {/* Hero */}
       <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-gradient-to-b from-gray-50 via-white to-white dark:from-gray-950 dark:via-gray-900 dark:to-gray-950 transition-colors duration-300">
         <div className="container mx-auto px-4 text-center max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-indigo-100 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-sm font-medium mb-8">
-            <BookOpen className="h-4 w-4" aria-hidden="true" />
-            {t('blog.badge')}
-          </div>
-
-          <h1 className="text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+          <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
             {t('blog.title')}
           </h1>
-
           <p className="text-xl md:text-2xl text-gray-600 dark:text-gray-400 leading-relaxed">
-            {t('blog.introPrefix')}{' '}
-            <span className="text-indigo-600 dark:text-indigo-400 font-semibold">{t('blog.introWeb')}</span>,{' '}
-            <span className="text-purple-600 dark:text-purple-400 font-semibold">{t('blog.introAI')}</span>{' '}
-            {t('blog.introPractices') && <>y <span className="text-pink-600 dark:text-pink-400 font-semibold">{t('blog.introPractices')}</span>{' '}</>}
-            {t('blog.introSuffix')}
+            {t('blog.subtitle')}
           </p>
         </div>
       </section>
 
-      {/* Temas que se cubrirán */}
-      <RevealOnScroll direction="fade">
-      <section className="py-16 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+      {/* Articles list */}
+      <section className="py-16 md:py-24 bg-white dark:bg-gray-950 transition-colors duration-300">
         <div className="container mx-auto px-4 max-w-3xl">
-          <h2 className="text-2xl font-bold text-center mb-10 text-gray-900 dark:text-white">
-            {t('blog.topicsTitle')}
-          </h2>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-            {topics.map((topic) => {
-              const Icon = topic.icon;
-              return (
-                <div
-                  key={topic.labelKey}
-                  className="flex flex-col items-center gap-3 p-6 rounded-2xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 text-center"
+          <div className="space-y-8">
+            {sorted.map((article, idx) => (
+              <RevealOnScroll key={article.id} direction="up" delay={idx * 100}>
+                <Link
+                  to={`/blog/${article.slug}`}
+                  className="group block bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 hover:border-indigo-500 dark:hover:border-indigo-600 hover:-translate-y-1 hover:shadow-lg transition-all duration-300"
                 >
-                  <Icon className="h-8 w-8 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-                  <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                    {t(`blog.topics.${topic.labelKey}`)}
+                  {/* Meta */}
+                  <div className="flex items-center gap-4 text-sm text-gray-500 dark:text-gray-400 mb-4">
+                    <span className="inline-flex items-center gap-1.5">
+                      <Calendar className="h-4 w-4" aria-hidden="true" />
+                      {new Date(article.date).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
+                        year: 'numeric',
+                        month: 'short',
+                        day: 'numeric',
+                      })}
+                    </span>
+                    <span className="inline-flex items-center gap-1.5">
+                      <Clock className="h-4 w-4" aria-hidden="true" />
+                      {article.readTime} min
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h2 className="text-xl md:text-2xl font-bold text-gray-900 dark:text-white group-hover:text-indigo-600 dark:group-hover:text-indigo-400 transition-colors duration-200 mb-3">
+                    {article.title[lang]}
+                  </h2>
+
+                  {/* Excerpt */}
+                  <p className="text-gray-600 dark:text-gray-400 mb-4 leading-relaxed">
+                    {article.excerpt[lang]}
+                  </p>
+
+                  {/* Read more */}
+                  <span className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 font-medium text-sm">
+                    {t('blog.readMore')}
+                    <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
                   </span>
-                </div>
-              );
-            })}
+                </Link>
+              </RevealOnScroll>
+            ))}
           </div>
         </div>
       </section>
-      </RevealOnScroll>
 
-      {/* Formulario de notificación */}
-      <RevealOnScroll direction="fade" delay={100}>
-      <section className="py-16 md:py-24 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
-        <div className="container mx-auto px-4 max-w-xl text-center">
-          <Mail className="h-10 w-10 text-indigo-600 dark:text-indigo-400 mx-auto mb-6" aria-hidden="true" />
-
-          <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900 dark:text-white">
-            {t('blog.notifyTitle')}
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 mb-8">
-            {t('blog.notifyDescription')}
-          </p>
-
-          {submitted ? (
-            <div className="p-5 rounded-xl bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200 border border-green-200 dark:border-green-800 font-medium">
-              {t('blog.notifySuccess')}
-            </div>
-          ) : (
-            <form onSubmit={handleNotify} className="flex flex-col sm:flex-row gap-3">
-              <input
-                type="email"
-                value={email}
-                onChange={(e) => setEmail(e.target.value)}
-                required
-                aria-label={t('blog.notifyPlaceholder')}
-                placeholder={t('blog.notifyPlaceholder')}
-                className="flex-1 px-5 py-3 rounded-xl border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition-colors duration-200"
-              />
-              <button
-                type="submit"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl bg-indigo-600 text-white font-medium hover:bg-indigo-700 transition-colors duration-200 shadow-lg whitespace-nowrap"
-              >
-                {t('blog.notifyButton')}
-                <ArrowRight className="h-4 w-4" />
-              </button>
-            </form>
-          )}
-        </div>
-      </section>
-      </RevealOnScroll>
-
-      {/* CTA alternativo */}
-      <section className="py-16 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+      {/* CTA */}
+      <section className="py-16 bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
         <div className="container mx-auto px-4 text-center">
           <p className="text-gray-600 dark:text-gray-400 mb-6">
             {t('blog.ctaDescription')}

@@ -36,16 +36,20 @@ export default function ProyectoDetalle() {
       <section className="relative bg-gray-950 pt-16 md:pt-20">
         {/* Imagen de portada */}
         <div className="relative w-full aspect-video max-h-[65vh] overflow-hidden">
-          <img
-            src={project.image}
-            alt={t('project.imageAlt', { title })}
-            width="1905"
-            height="1071"
-            className="w-full h-full object-cover opacity-70"
-            loading="eager"
-            decoding="async"
-            fetchpriority="high"
-          />
+          {project.image ? (
+            <img
+              src={project.image}
+              alt={t('project.imageAlt', { title })}
+              width="1905"
+              height="1071"
+              className="w-full h-full object-cover opacity-70"
+              loading="eager"
+              decoding="async"
+              fetchpriority="high"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-indigo-900 to-purple-900" />
+          )}
           <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent" />
         </div>
 
@@ -92,7 +96,7 @@ export default function ProyectoDetalle() {
                 {t('project.tech')}
               </h2>
               <div className="flex flex-wrap gap-3">
-                {project.tech.map((tech) => (
+                {(project.stack || project.tech || []).map((tech) => (
                   <span
                     key={tech}
                     className="px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 font-medium text-sm"
@@ -104,46 +108,18 @@ export default function ProyectoDetalle() {
             </div>
           </RevealOnScroll>
 
-          {/* Reto + Solución en grid */}
-          <div className="grid md:grid-cols-2 gap-8 mb-14">
-            <RevealOnScroll direction="left">
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 h-full">
+          {/* El problema */}
+          {project.problem && (
+            <RevealOnScroll direction="up">
+              <div className="mb-14 bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800">
                 <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
                   <span className="text-xl" aria-hidden="true">🎯</span>
                 </div>
                 <h2 className="font-display text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {t('project.challenge')}
+                  {t('project.problem')}
                 </h2>
                 <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {project.challenge}
-                </p>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll direction="right" delay={100}>
-              <div className="bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800 h-full">
-                <div className="w-10 h-10 rounded-xl bg-indigo-100 dark:bg-indigo-900/30 flex items-center justify-center mb-4">
-                  <span className="text-xl" aria-hidden="true">💡</span>
-                </div>
-                <h2 className="font-display text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {t('project.solution')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {project.solution}
-                </p>
-              </div>
-            </RevealOnScroll>
-          </div>
-
-          {/* Resumen largo */}
-          {project.longDescription && (
-            <RevealOnScroll direction="up">
-              <div className="mb-14">
-                <h2 className="font-display text-2xl font-bold mb-5 text-gray-900 dark:text-white">
-                  {t('project.summary')}
-                </h2>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {project.longDescription}
+                  {project.problem}
                 </p>
               </div>
             </RevealOnScroll>
@@ -191,12 +167,12 @@ export default function ProyectoDetalle() {
           )}
 
           {/* CTA: Ver sitio web + GitHub (opcional) */}
-          {(project.link || project.github) && (
+          {(project.url || project.link || project.github) && (
             <RevealOnScroll direction="up">
               <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-                {project.external && project.link && (
+                {(project.url || project.link) && (
                   <a
-                    href={project.link}
+                    href={project.url || project.link}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg transition-all duration-200"

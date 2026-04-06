@@ -80,15 +80,21 @@ export default function Proyectos() {
                     aria-label={t('projects.ariaLabel', { title })}
                   >
                     <div className="aspect-video overflow-hidden bg-gray-200 dark:bg-gray-800">
-                      <img
-                        src={project.image}
-                        alt={`${title} — captura del proyecto`}
-                        width="1905"
-                        height="1071"
-                        className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                        loading="lazy"
-                        decoding="async"
-                      />
+                      {project.image ? (
+                        <img
+                          src={project.image}
+                          alt={`${title} — captura del proyecto`}
+                          width="1905"
+                          height="1071"
+                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      ) : (
+                        <div className="w-full h-full flex items-center justify-center text-gray-400 dark:text-gray-600 text-sm">
+                          {title}
+                        </div>
+                      )}
                     </div>
 
                     <div className="p-8 flex flex-col flex-grow">
@@ -100,7 +106,7 @@ export default function Proyectos() {
                       </p>
 
                       <div className="flex flex-wrap gap-2 mb-8">
-                        {project.tech.map((tech, techIdx) => (
+                        {(project.stack || project.tech || []).map((tech, techIdx) => (
                           <span
                             key={techIdx}
                             className="text-xs px-4 py-1.5 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 rounded-full"
