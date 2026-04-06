@@ -35,7 +35,7 @@ export const projects = [
     client: 'Café Bar Casa de la Cultura, Esparragosa de Lares (Badajoz)',
     url: null,
     github: null,
-    image: null,
+    image: '/projects/casa-cultura.webp',
     stack: ['React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion', 'Vercel'],
     problem:
       'Misma necesidad que El Aperitivo: digitalizar la carta de forma económica y mantenible, con identidad visual propia del establecimiento.',
