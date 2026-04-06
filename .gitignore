@@ -1,0 +1,23 @@
+# Dependencias
+node_modules/
+client/node_modules/
+
+# Build
+client/dist/
+
+# Entorno
+.env
+.env.local
+client/.env.local
+client/.env
+
+# Python
+venv/
+__pycache__/
+*.pyc
+*.pyo
+.Python
+
+# Sistema
+.DS_Store
+Thumbs.db

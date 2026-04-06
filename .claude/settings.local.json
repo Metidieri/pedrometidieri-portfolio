@@ -40,7 +40,8 @@
       "Bash(curl -s -o /dev/null -w \"deep link: %{http_code}\\\\n\" http://localhost:4173/proyectos/el-aperitivo-talarrubias)",
       "Bash(curl -s -o /dev/null -w \"bad slug: %{http_code}\\\\n\" http://localhost:4173/proyectos/no-existe)",
       "Bash(ls:*)",
-      "Bash(curl:*)"
+      "Bash(curl:*)",
+      "Bash(python3 -c ':*)"
     ]
   }
 }
