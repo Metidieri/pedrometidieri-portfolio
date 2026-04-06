@@ -1,8 +1,9 @@
 // src/pages/Contacto.jsx
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import { Send, CheckCircle, AlertCircle } from 'lucide-react';
+import emailjs from '@emailjs/browser';
 import confetti from 'canvas-confetti';
 import SEO from '../components/SEO';
 import RevealOnScroll from '../components/RevealOnScroll';
@@ -12,68 +13,36 @@ export default function Contacto() {
   const { register, handleSubmit, formState: { errors }, reset } = useForm();
   const [status, setStatus]   = useState({ type: null, message: '' });
   const [loading, setLoading] = useState(false);
+  const formRef = useRef(null);
 
   // Carga dinámica del script de reCAPTCHA v3
   useEffect(() => {
     const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
 
-    // Guardia: si la site key no está definida, el script cargaría con
-    // ?render=undefined y nunca registraría un cliente ("No reCAPTCHA clients exist")
     if (!siteKey) {
       console.error('[reCAPTCHA] VITE_RECAPTCHA_SITE_KEY no está definida');
       return;
     }
 
-    // Evitar duplicar el script si el componente se remonta (StrictMode, navegación)
     if (document.querySelector(`script[src*="recaptcha/api.js"]`)) return;
 
     const script = document.createElement('script');
     script.src = `https://www.google.com/recaptcha/api.js?render=${siteKey}`;
     script.async = true;
     document.head.appendChild(script);
-
-    return () => {
-      // No eliminamos el script ni el badge en cleanup: si el usuario vuelve a
-      // esta página, grecaptcha.execute() fallará con "No reCAPTCHA clients exist"
-      // porque el cliente ya estaba registrado contra el script eliminado.
-    };
   }, []);
 
-  const onSubmit = async (data) => {
-    const siteKey = import.meta.env.VITE_RECAPTCHA_SITE_KEY;
-
-    // Guardia: asegurarse de que el script ya cargó y tiene site key
-    if (!siteKey || !window.grecaptcha) {
-      setStatus({
-        type: 'error',
-        message: t('contact.recaptchaError'),
-      });
-      return;
-    }
-
+  const onSubmit = async () => {
     setLoading(true);
     setStatus({ type: null, message: '' });
 
     try {
-      // Esperar a que reCAPTCHA registre el cliente para la site key.
-      // Sin esto, execute() lanza "No reCAPTCHA clients exist".
-      await new Promise((resolve) => window.grecaptcha.ready(resolve));
-
-      const recaptchaToken = await window.grecaptcha.execute(siteKey, { action: 'submit' });
-
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          name:           data.name,
-          email:          data.email,
-          message:        data.message,
-          recaptchaToken,
-        }),
-      });
-
-      const result = await res.json();
-      if (!res.ok) throw new Error(result.error || t('contact.error'));
+      await emailjs.sendForm(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID,
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        formRef.current,
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+      );
 
       setStatus({ type: 'success', message: t('contact.success') });
       confetti({ particleCount: 100, spread: 70, origin: { y: 0.6 } });
@@ -82,7 +51,7 @@ export default function Contacto() {
       console.error(error);
       setStatus({
         type: 'error',
-        message: error.message || t('contact.error'),
+        message: error?.text || t('contact.error'),
       });
     } finally {
       setLoading(false);
@@ -108,6 +77,7 @@ export default function Contacto() {
 
           <RevealOnScroll direction="up">
             <form
+              ref={formRef}
               onSubmit={handleSubmit(onSubmit)}
               noValidate
               aria-label={t('contact.title')}
