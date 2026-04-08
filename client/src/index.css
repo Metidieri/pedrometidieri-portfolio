@@ -3,13 +3,53 @@
 @custom-variant dark (&:where(.dark, .dark *));
 
 @theme {
-  /* Tipografía — Inter como sans por defecto, Plus Jakarta Sans para display */
-  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Plus Jakarta Sans', ui-sans-serif, system-ui, sans-serif;
+  /* Tipografía — Archivo para headings, Space Grotesk para body, JetBrains Mono para código */
+  --font-display: 'Archivo', sans-serif;
+  --font-sans: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+
+  /* Design system colors */
+  --color-bg: #0F172A;
+  --color-surface: #1E293B;
+  --color-surface-2: #334155;
+  --color-primary: #6366F1;
+  --color-green: #22C55E;
+  --color-text: #F8FAFC;
+  --color-text-muted: #94A3B8;
+  --color-border: #334155;
 }
 
 html {
   scroll-behavior: smooth;
+}
+
+/* Hero: grid pattern background */
+.hero-grid-bg {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='60'%3E%3Cpath d='M60 0H0v60' fill='none' stroke='rgba(255,255,255,0.05)' stroke-width='1'/%3E%3C/svg%3E");
+}
+
+/* Hero: pulsing green dot */
+@keyframes hero-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.5; transform: scale(1.4); }
+}
+.hero-pulse-dot {
+  animation: hero-pulse 2s infinite;
+}
+
+/* Hero: blinking cursor */
+@keyframes hero-blink {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0; }
+}
+.hero-cursor-blink {
+  display: inline-block;
+  width: 8px;
+  height: 18px;
+  background: var(--color-primary);
+  margin-left: 2px;
+  vertical-align: text-bottom;
+  animation: hero-blink 1s infinite;
 }
 
 /* Animated gradient for hero text */

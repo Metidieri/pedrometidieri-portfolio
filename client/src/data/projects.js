@@ -3,6 +3,38 @@
 
 export const projects = [
   {
+    id: 'mtdr-saas',
+    slug: 'mtdr-saas',
+    title: 'MTDR Soluciones Digitales — SaaS Multi-tenant',
+    description:
+      'Plataforma SaaS de gestión de proyectos con arquitectura multi-tenant real, tres roles de usuario y portal de cliente en tiempo real.',
+    client: 'Proyecto propio — Plataforma SaaS para agencias digitales',
+    url: 'https://app.mtdr.es',
+    github: null,
+    image: '/projects/mtdr-saas.webp',
+    category: 'saas',
+    featured: true,
+    stack: [
+      'React 19', 'Vite', 'Tailwind CSS v4', 'Framer Motion',
+      'TanStack Query v5', 'React Router v7', 'Recharts',
+      'Python', 'Flask', 'PostgreSQL', 'SQLAlchemy', 'Alembic',
+      'Flask-JWT-Extended', 'Flask-Limiter', 'Flask-Talisman', 'Resend',
+    ],
+    problem:
+      'Las agencias digitales no tienen forma de dar a sus clientes visibilidad real del avance de sus proyectos sin emails manuales de actualización. Esto genera desconfianza y aumenta la carga de comunicación del equipo.',
+    decisions: [
+      'Arquitectura multi-tenant con middleware @tenant_required: toda query filtra obligatoriamente por organization_id extraído del JWT, haciendo imposible el acceso cruzado entre tenants incluso manipulando la petición.',
+      'JWT con blocklist persistente en PostgreSQL en lugar de en memoria, garantizando que los tokens invalidados al hacer logout no puedan reutilizarse ni tras reiniciar el servidor.',
+      'Separación estricta routes/services/schemas: las rutas solo orquestan HTTP, los servicios contienen la lógica de negocio sin dependencia de Flask, lo que permite testear la lógica sin levantar HTTP.',
+      'Rate limiting por endpoint con Flask-Limiter: /login 10/min, /register 5/hora. Headers de seguridad HTTP con Flask-Talisman (X-Frame-Options, X-Content-Type-Options, CORS restrictivo por entorno).',
+      'Sistema de invitaciones por email con token temporal de 48h vía Resend: el admin invita por email, el invitado acepta en un endpoint público que consume y destruye el token.',
+      'Portal cliente diferenciado con RoleGuard en frontend y @role_required en backend: el usuario con rol client solo ve sus proyectos y las actualizaciones marcadas como visibles por la agencia.',
+      'Dashboard con métricas reales (Recharts BarChart + DonutChart) alimentadas desde /api/org/stats. Vista kanban y lista con toggle persistente en localStorage. Exportación de proyectos a CSV.',
+    ],
+    result:
+      'Backend completo con 62 tests que validan auth, aislamiento multi-tenant, CRUD completo, sistema de invitaciones y portal cliente. Frontend con dark mode, dashboard con gráficas, vista kanban y exportación CSV. Desplegado en Railway (backend) + Vercel (frontend) con dominio app.mtdr.es.',
+  },
+  {
     id: 'el-aperitivo',
     slug: 'el-aperitivo',
     title: 'Carta Digital QR — El Aperitivo Talarrubias',

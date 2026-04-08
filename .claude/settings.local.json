@@ -41,7 +41,8 @@
       "Bash(curl -s -o /dev/null -w \"bad slug: %{http_code}\\\\n\" http://localhost:4173/proyectos/no-existe)",
       "Bash(ls:*)",
       "Bash(curl:*)",
-      "Bash(python3 -c ':*)"
+      "Bash(python3 -c ':*)",
+      "WebFetch(domain:pedrometidieri.com)"
     ]
   }
 }

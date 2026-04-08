@@ -3,25 +3,43 @@
 // Ruta: /proyectos/:slug
 
 import { useParams, Navigate, Link } from 'react-router-dom';
-import { ArrowLeft, ArrowRight, ExternalLink, Github, Check } from 'lucide-react';
+import { ArrowLeft, ArrowRight, ExternalLink, Github, Target, CheckCircle } from 'lucide-react';
+import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
 import { projects } from '../data/projects';
 import SEO from '../components/SEO';
-import RevealOnScroll from '../components/RevealOnScroll';
+
+const EASE_EXPO = [0.22, 1, 0.36, 1];
+
+const heroStagger = {
+  hidden: {},
+  visible: { transition: { staggerChildren: 0.1 } },
+};
+
+const heroItem = {
+  hidden: { opacity: 0, y: 30 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: { duration: 0.6, ease: EASE_EXPO },
+  },
+};
 
 export default function ProyectoDetalle() {
   const { slug } = useParams();
-  const { t }    = useTranslation();
+  const { t } = useTranslation();
+  const shouldReduce = useReducedMotion();
 
   const idx = projects.findIndex((p) => p.slug === slug);
   if (idx === -1) return <Navigate to="/proyectos" replace />;
 
-  const project     = projects[idx];
+  const project = projects[idx];
   const prevProject = idx > 0 ? projects[idx - 1] : null;
   const nextProject = idx < projects.length - 1 ? projects[idx + 1] : null;
 
-  const title       = project.title       || t(project.titleKey);
+  const title = project.title || t(project.titleKey);
   const description = project.description || t(project.descriptionKey);
+  const stack = project.stack || project.tech || [];
 
   return (
     <>
@@ -32,219 +50,422 @@ export default function ProyectoDetalle() {
         url={`https://pedrometidieri.com/proyectos/${project.slug}`}
       />
 
-      {/* ── Hero: imagen + titular ──────────────────────────────────── */}
-      <section className="relative bg-gray-950 pt-16 md:pt-20">
-        {/* Imagen de portada */}
-        <div className="relative w-full aspect-video max-h-[65vh] overflow-hidden">
-          {project.image ? (
+      {/* ── Hero ───────────────────────────────────────────── */}
+      <section
+        className="relative overflow-hidden flex items-end"
+        style={{ backgroundColor: 'var(--color-bg)', minHeight: '70vh' }}
+      >
+        {/* Background image */}
+        {project.image && (
+          <div className="absolute inset-0" aria-hidden="true">
             <img
               src={project.image}
-              alt={t('project.imageAlt', { title })}
+              alt=""
               width="1905"
               height="1071"
-              className="w-full h-full object-cover opacity-70"
+              className="w-full h-full object-cover"
               loading="eager"
               decoding="async"
               fetchpriority="high"
             />
-          ) : (
-            <div className="w-full h-full bg-gradient-to-br from-indigo-900 to-purple-900" />
-          )}
-          <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/50 to-transparent" />
-        </div>
-
-        {/* Texto superpuesto */}
-        <div className="absolute bottom-0 left-0 right-0">
-          <div className="container mx-auto px-4 pb-10 md:pb-14">
-            <div className="max-w-3xl">
-              <span className="inline-block px-3 py-1 rounded-full bg-indigo-600/90 text-white text-xs font-semibold tracking-wide uppercase mb-4">
-                {t(`project.categories.${project.category}`) || project.category}
-              </span>
-              <h1 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-white mb-3 leading-tight">
-                {title}
-              </h1>
-              <p className="text-lg text-gray-300 max-w-2xl">
-                {description}
-              </p>
-            </div>
+            <div
+              className="absolute inset-0"
+              style={{
+                background:
+                  'linear-gradient(to bottom, rgba(15,23,42,0.3) 0%, rgba(15,23,42,0.95) 100%)',
+              }}
+            />
           </div>
+        )}
+
+        {/* Content */}
+        <div className="relative container mx-auto px-6 max-w-[800px] pb-16 pt-32">
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={shouldReduce ? {} : heroStagger}
+            className="flex flex-col items-center text-center"
+          >
+            {/* Breadcrumb */}
+            <motion.nav
+              variants={shouldReduce ? {} : heroItem}
+              className="flex items-center gap-2 mb-6 font-sans"
+              style={{ fontSize: '13px' }}
+              aria-label="Breadcrumb"
+            >
+              <Link
+                to="/proyectos"
+                className="transition-colors duration-200 cursor-pointer"
+                style={{ color: 'var(--color-text-muted)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+              >
+                Proyectos
+              </Link>
+              <span style={{ color: 'var(--color-border)' }}>/</span>
+              <span style={{ color: 'var(--color-text-muted)' }}>{title}</span>
+            </motion.nav>
+
+            {/* Category badge */}
+            <motion.span
+              variants={shouldReduce ? {} : heroItem}
+              className="inline-flex px-3 py-1 rounded-full text-xs font-semibold mb-6"
+              style={{
+                backgroundColor: 'rgba(99,102,241,0.2)',
+                color: 'var(--color-primary)',
+              }}
+            >
+              {t(`project.categories.${project.category}`) || project.category}
+            </motion.span>
+
+            {/* Title */}
+            <motion.h1
+              variants={shouldReduce ? {} : heroItem}
+              className="font-display font-black tracking-tight mb-5 max-w-[800px]"
+              style={{
+                fontSize: 'clamp(2rem, 5vw, 3.25rem)',
+                color: '#FFFFFF',
+                lineHeight: 1.15,
+              }}
+            >
+              {title}
+            </motion.h1>
+
+            {/* Description */}
+            <motion.p
+              variants={shouldReduce ? {} : heroItem}
+              className="font-sans mb-8 max-w-[600px]"
+              style={{
+                fontSize: '18px',
+                color: 'var(--color-text-muted)',
+                lineHeight: 1.6,
+              }}
+            >
+              {description}
+            </motion.p>
+
+            {/* Stack pills */}
+            <motion.div
+              variants={shouldReduce ? {} : heroItem}
+              className="flex flex-wrap justify-center gap-2 mb-10"
+            >
+              {stack.map((tech) => (
+                <span
+                  key={tech}
+                  className="text-xs px-3 py-1.5 rounded-full font-medium"
+                  style={{
+                    backgroundColor: 'rgba(255,255,255,0.1)',
+                    border: '1px solid rgba(255,255,255,0.2)',
+                    color: '#FFFFFF',
+                  }}
+                >
+                  {tech}
+                </span>
+              ))}
+            </motion.div>
+
+            {/* CTA buttons */}
+            <motion.div
+              variants={shouldReduce ? {} : heroItem}
+              className="flex flex-wrap justify-center gap-4"
+            >
+              {(project.url || project.link) && (
+                <a
+                  href={project.url || project.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 cursor-pointer hover:shadow-lg hover:shadow-indigo-600/25"
+                  style={{ backgroundColor: 'var(--color-primary)' }}
+                >
+                  {t('project.viewSite')}
+                  <ExternalLink className="h-4 w-4" aria-hidden="true" />
+                </a>
+              )}
+              {project.github && (
+                <a
+                  href={project.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 cursor-pointer"
+                  style={{ border: '1px solid rgba(255,255,255,0.2)' }}
+                  onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
+                  onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
+                >
+                  <Github className="h-4 w-4" aria-hidden="true" />
+                  {t('project.viewCode')}
+                </a>
+              )}
+              <Link
+                to="/proyectos"
+                className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-200 cursor-pointer"
+                style={{ color: 'var(--color-text-muted)' }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
+              >
+                <ArrowLeft className="h-4 w-4" aria-hidden="true" />
+                {t('project.viewAll')}
+              </Link>
+            </motion.div>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── Contenido principal ─────────────────────────────────────── */}
-      <div className="bg-white dark:bg-gray-950 transition-colors duration-300">
-        <div className="container mx-auto px-4 py-16 md:py-24 max-w-4xl">
+      {/* ── Body ───────────────────────────────────────────── */}
+      <div style={{ backgroundColor: 'var(--color-bg)' }}>
+        <div className="mx-auto px-6 py-16 md:py-24" style={{ maxWidth: '760px' }}>
 
-          {/* Cliente / contexto */}
+          {/* Client context */}
           {project.client && (
-            <RevealOnScroll direction="up">
-              <div className="mb-10">
-                <h2 className="font-display text-sm font-semibold uppercase tracking-wider mb-2 text-gray-500 dark:text-gray-400">
-                  {t('project.client')}
-                </h2>
-                <p className="text-lg text-gray-800 dark:text-gray-200">
-                  {project.client}
-                </p>
-              </div>
-            </RevealOnScroll>
+            <motion.div
+              initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: EASE_EXPO }}
+              className="mb-12"
+            >
+              <p
+                className="font-sans text-xs font-semibold uppercase tracking-wider mb-2"
+                style={{ color: 'var(--color-text-muted)' }}
+              >
+                {t('project.client')}
+              </p>
+              <p className="font-sans" style={{ fontSize: '16px', color: '#FFFFFF' }}>
+                {project.client}
+              </p>
+            </motion.div>
           )}
 
-          {/* Tecnologías */}
-          <RevealOnScroll direction="up">
-            <div className="mb-14">
-              <h2 className="font-display text-2xl font-bold mb-5 text-gray-900 dark:text-white">
-                {t('project.tech')}
-              </h2>
-              <div className="flex flex-wrap gap-3">
-                {(project.stack || project.tech || []).map((tech) => (
-                  <span
-                    key={tech}
-                    className="px-4 py-2 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/60 text-indigo-700 dark:text-indigo-300 font-medium text-sm"
+          {/* The Problem */}
+          {project.problem && (
+            <motion.div
+              initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: EASE_EXPO }}
+              className="mb-16 rounded-2xl p-8"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                borderLeft: '4px solid var(--color-primary)',
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <Target
+                  className="flex-shrink-0"
+                  style={{ width: '24px', height: '24px', color: 'var(--color-primary)' }}
+                  aria-hidden="true"
+                />
+                <h2
+                  className="font-display font-semibold"
+                  style={{ fontSize: '22px', color: '#FFFFFF' }}
+                >
+                  {t('project.problem')}
+                </h2>
+              </div>
+              <p
+                className="font-sans"
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 1.7,
+                }}
+              >
+                {project.problem}
+              </p>
+            </motion.div>
+          )}
+
+          {/* Technical Decisions */}
+          {project.decisions?.length > 0 && (
+            <div className="mb-16">
+              <motion.div
+                initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: '-80px' }}
+                transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: EASE_EXPO }}
+                className="mb-8"
+              >
+                <h2
+                  className="font-display font-black tracking-tight"
+                  style={{ fontSize: '28px', color: '#FFFFFF', lineHeight: 1.2 }}
+                >
+                  {t('project.decisions')}
+                </h2>
+                <motion.div
+                  initial={{ width: 40 }}
+                  whileInView={{ width: 120 }}
+                  viewport={{ once: true }}
+                  transition={shouldReduce ? { duration: 0 } : { duration: 0.8, ease: EASE_EXPO, delay: 0.1 }}
+                  className="h-0.5 rounded-full mt-4"
+                  style={{ backgroundColor: 'var(--color-primary)' }}
+                />
+              </motion.div>
+
+              <div>
+                {project.decisions.map((decision, i) => (
+                  <motion.div
+                    key={i}
+                    initial={shouldReduce ? {} : { opacity: 0, x: -20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-60px' }}
+                    transition={shouldReduce ? { duration: 0 } : {
+                      duration: 0.4,
+                      ease: EASE_EXPO,
+                      delay: i * 0.08,
+                    }}
+                    className="py-6"
+                    style={{
+                      borderBottom:
+                        i < project.decisions.length - 1
+                          ? '1px solid var(--color-border)'
+                          : 'none',
+                    }}
                   >
-                    {tech}
-                  </span>
+                    <span
+                      className="font-mono block mb-1"
+                      style={{
+                        fontSize: '12px',
+                        color: 'var(--color-primary)',
+                      }}
+                    >
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <p
+                      className="font-sans"
+                      style={{
+                        fontSize: '15px',
+                        color: 'var(--color-text-muted)',
+                        lineHeight: 1.7,
+                      }}
+                    >
+                      {decision}
+                    </p>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          </RevealOnScroll>
-
-          {/* El problema */}
-          {project.problem && (
-            <RevealOnScroll direction="up">
-              <div className="mb-14 bg-gray-50 dark:bg-gray-900 rounded-2xl p-8 border border-gray-200 dark:border-gray-800">
-                <div className="w-10 h-10 rounded-xl bg-orange-100 dark:bg-orange-900/30 flex items-center justify-center mb-4">
-                  <span className="text-xl" aria-hidden="true">🎯</span>
-                </div>
-                <h2 className="font-display text-xl font-bold mb-3 text-gray-900 dark:text-white">
-                  {t('project.problem')}
-                </h2>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
-                  {project.problem}
-                </p>
-              </div>
-            </RevealOnScroll>
           )}
 
-          {/* Decisiones técnicas destacadas */}
-          {project.decisions?.length > 0 && (
-            <RevealOnScroll direction="up">
-              <div className="mb-14">
-                <h2 className="font-display text-2xl font-bold mb-5 text-gray-900 dark:text-white">
-                  {t('project.decisions')}
-                </h2>
-                <ul className="space-y-3">
-                  {project.decisions.map((decision, i) => (
-                    <li
-                      key={i}
-                      className="flex items-start gap-3 text-gray-700 dark:text-gray-300 leading-relaxed"
-                    >
-                      <span className="mt-1 flex-shrink-0 w-5 h-5 rounded-full bg-indigo-100 dark:bg-indigo-900/40 flex items-center justify-center">
-                        <Check className="w-3 h-3 text-indigo-600 dark:text-indigo-400" aria-hidden="true" />
-                      </span>
-                      <span>{decision}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </RevealOnScroll>
-          )}
-
-          {/* Resultado */}
+          {/* Result */}
           {project.result && (
-            <RevealOnScroll direction="up" delay={50}>
-              <div className="mb-14 bg-gradient-to-r from-indigo-50 to-purple-50 dark:from-indigo-950/30 dark:to-purple-950/30 rounded-2xl p-8 border border-indigo-100 dark:border-indigo-900/40">
-                <div className="w-10 h-10 rounded-xl bg-emerald-100 dark:bg-emerald-900/30 flex items-center justify-center mb-4">
-                  <span className="text-xl" aria-hidden="true">📈</span>
-                </div>
-                <h2 className="font-display text-xl font-bold mb-3 text-gray-900 dark:text-white">
+            <motion.div
+              initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: EASE_EXPO }}
+              className="mb-16 rounded-2xl p-8"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                borderLeft: '4px solid var(--color-green)',
+              }}
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <CheckCircle
+                  className="flex-shrink-0"
+                  style={{ width: '24px', height: '24px', color: 'var(--color-green)' }}
+                  aria-hidden="true"
+                />
+                <h2
+                  className="font-display font-semibold"
+                  style={{ fontSize: '22px', color: '#FFFFFF' }}
+                >
                   {t('project.result')}
                 </h2>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
-                  {project.result}
-                </p>
               </div>
-            </RevealOnScroll>
-          )}
-
-          {/* CTA: Ver sitio web + GitHub (opcional) */}
-          {(project.url || project.link || project.github) && (
-            <RevealOnScroll direction="up">
-              <div className="flex flex-wrap items-center justify-center gap-4 mb-6">
-                {(project.url || project.link) && (
-                  <a
-                    href={project.url || project.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-full bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 px-10 py-5 text-lg font-medium text-white hover:scale-105 hover:shadow-xl hover:shadow-indigo-500/25 active:scale-95 shadow-lg transition-all duration-200"
-                  >
-                    {t('project.viewSite')}
-                    <ExternalLink className="h-5 w-5" aria-hidden="true" />
-                  </a>
-                )}
-                {project.github && (
-                  <a
-                    href={project.github}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-3 rounded-full border-2 border-gray-900 dark:border-white px-8 py-4 text-base font-medium text-gray-900 dark:text-white hover:bg-gray-900 hover:text-white dark:hover:bg-white dark:hover:text-gray-900 active:scale-95 transition-all duration-200"
-                  >
-                    <Github className="h-5 w-5" aria-hidden="true" />
-                    {t('project.viewCode')}
-                  </a>
-                )}
-              </div>
-            </RevealOnScroll>
+              <p
+                className="font-sans"
+                style={{
+                  fontSize: '16px',
+                  color: 'var(--color-text-muted)',
+                  lineHeight: 1.7,
+                }}
+              >
+                {project.result}
+              </p>
+            </motion.div>
           )}
         </div>
       </div>
 
-      {/* ── Navegación entre proyectos ──────────────────────────────── */}
+      {/* ── Prev / Next navigation ─────────────────────────── */}
       <nav
-        className="border-t border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900 py-10 transition-colors duration-300"
+        className="py-10"
+        style={{
+          backgroundColor: 'var(--color-bg)',
+          borderTop: '1px solid var(--color-border)',
+        }}
         aria-label={t('project.navAriaLabel')}
       >
-        <div className="container mx-auto px-4 max-w-4xl flex items-center justify-between gap-4">
-          {/* Anterior */}
+        <div className="mx-auto px-6 flex flex-col sm:flex-row items-stretch gap-4" style={{ maxWidth: '760px' }}>
+          {/* Previous */}
           {prevProject ? (
             <Link
               to={`/proyectos/${prevProject.slug}`}
-              className="group flex items-center gap-3 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 max-w-xs"
+              className="group flex items-center gap-3 flex-1 rounded-xl p-5 transition-all duration-200 cursor-pointer"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--color-border)')}
             >
-              <ArrowLeft className="h-5 w-5 flex-shrink-0 group-hover:-translate-x-1 transition-transform duration-200" aria-hidden="true" />
+              <ArrowLeft
+                className="h-5 w-5 flex-shrink-0 transition-transform duration-200 group-hover:-translate-x-1"
+                style={{ color: 'var(--color-text-muted)' }}
+                aria-hidden="true"
+              />
               <div>
-                <div className="text-xs text-gray-400 dark:text-gray-500 mb-0.5">{t('project.prev')}</div>
-                <div className="font-medium line-clamp-1">
+                <div
+                  className="text-xs font-sans mb-1"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {t('project.prev')}
+                </div>
+                <div
+                  className="font-display font-medium text-sm line-clamp-1"
+                  style={{ color: '#FFFFFF' }}
+                >
                   {prevProject.title || t(prevProject.titleKey)}
                 </div>
               </div>
             </Link>
           ) : (
-            <div aria-hidden="true" />
+            <div className="flex-1" aria-hidden="true" />
           )}
 
-          <Link
-            to="/proyectos"
-            className="text-sm text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 whitespace-nowrap"
-          >
-            {t('project.viewAll')}
-          </Link>
-
-          {/* Siguiente */}
+          {/* Next */}
           {nextProject ? (
             <Link
               to={`/proyectos/${nextProject.slug}`}
-              className="group flex items-center gap-3 text-right text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 max-w-xs"
+              className="group flex items-center justify-end gap-3 flex-1 rounded-xl p-5 text-right transition-all duration-200 cursor-pointer"
+              style={{
+                backgroundColor: 'var(--color-surface)',
+                border: '1px solid var(--color-border)',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.borderColor = 'var(--color-primary)')}
+              onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--color-border)')}
             >
               <div>
-                <div className="text-xs text-gray-400 dark:text-gray-500 mb-0.5">{t('project.next')}</div>
-                <div className="font-medium line-clamp-1">
+                <div
+                  className="text-xs font-sans mb-1"
+                  style={{ color: 'var(--color-text-muted)' }}
+                >
+                  {t('project.next')}
+                </div>
+                <div
+                  className="font-display font-medium text-sm line-clamp-1"
+                  style={{ color: '#FFFFFF' }}
+                >
                   {nextProject.title || t(nextProject.titleKey)}
                 </div>
               </div>
-              <ArrowRight className="h-5 w-5 flex-shrink-0 group-hover:translate-x-1 transition-transform duration-200" aria-hidden="true" />
+              <ArrowRight
+                className="h-5 w-5 flex-shrink-0 transition-transform duration-200 group-hover:translate-x-1"
+                style={{ color: 'var(--color-text-muted)' }}
+                aria-hidden="true"
+              />
             </Link>
           ) : (
-            <div aria-hidden="true" />
+            <div className="flex-1" aria-hidden="true" />
           )}
         </div>
       </nav>
