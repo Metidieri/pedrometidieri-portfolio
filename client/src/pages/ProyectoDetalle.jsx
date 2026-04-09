@@ -97,10 +97,10 @@ export default function ProyectoDetalle() {
                 to="/proyectos"
                 className="transition-colors duration-200 cursor-pointer"
                 style={{ color: 'var(--color-text-muted)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
               >
-                Proyectos
+                {t('project.breadcrumbProjects')}
               </Link>
               <span style={{ color: 'var(--color-border)' }}>/</span>
               <span style={{ color: 'var(--color-text-muted)' }}>{title}</span>
@@ -186,8 +186,8 @@ export default function ProyectoDetalle() {
                   href={project.github}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 cursor-pointer"
-                  style={{ border: '1px solid rgba(255,255,255,0.2)' }}
+                  className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-all duration-200 cursor-pointer"
+                  style={{ border: '1px solid rgba(255,255,255,0.2)', color: '#FFFFFF' }}
                   onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                   onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
                 >
@@ -199,7 +199,7 @@ export default function ProyectoDetalle() {
                 to="/proyectos"
                 className="inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold transition-colors duration-200 cursor-pointer"
                 style={{ color: 'var(--color-text-muted)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
               >
                 <ArrowLeft className="h-4 w-4" aria-hidden="true" />
@@ -229,7 +229,7 @@ export default function ProyectoDetalle() {
               >
                 {t('project.client')}
               </p>
-              <p className="font-sans" style={{ fontSize: '16px', color: '#FFFFFF' }}>
+              <p className="font-sans" style={{ fontSize: '16px', color: 'var(--color-text)' }}>
                 {project.client}
               </p>
             </motion.div>
@@ -256,7 +256,7 @@ export default function ProyectoDetalle() {
                 />
                 <h2
                   className="font-display font-semibold"
-                  style={{ fontSize: '22px', color: '#FFFFFF' }}
+                  style={{ fontSize: '22px', color: 'var(--color-text)' }}
                 >
                   {t('project.problem')}
                 </h2>
@@ -286,7 +286,7 @@ export default function ProyectoDetalle() {
               >
                 <h2
                   className="font-display font-black tracking-tight"
-                  style={{ fontSize: '28px', color: '#FFFFFF', lineHeight: 1.2 }}
+                  style={{ fontSize: '28px', color: 'var(--color-text)', lineHeight: 1.2 }}
                 >
                   {t('project.decisions')}
                 </h2>
@@ -366,7 +366,7 @@ export default function ProyectoDetalle() {
                 />
                 <h2
                   className="font-display font-semibold"
-                  style={{ fontSize: '22px', color: '#FFFFFF' }}
+                  style={{ fontSize: '22px', color: 'var(--color-text)' }}
                 >
                   {t('project.result')}
                 </h2>
@@ -422,7 +422,7 @@ export default function ProyectoDetalle() {
                 </div>
                 <div
                   className="font-display font-medium text-sm line-clamp-1"
-                  style={{ color: '#FFFFFF' }}
+                  style={{ color: 'var(--color-text)' }}
                 >
                   {prevProject.title || t(prevProject.titleKey)}
                 </div>
@@ -453,7 +453,7 @@ export default function ProyectoDetalle() {
                 </div>
                 <div
                   className="font-display font-medium text-sm line-clamp-1"
-                  style={{ color: '#FFFFFF' }}
+                  style={{ color: 'var(--color-text)' }}
                 >
                   {nextProject.title || t(nextProject.titleKey)}
                 </div>

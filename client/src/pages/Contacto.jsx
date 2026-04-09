@@ -66,12 +66,12 @@ export default function Contacto() {
         url="https://pedrometidieri.com/contacto"
       />
 
-      <div className="min-h-screen bg-white dark:bg-gray-950 py-16 md:py-24 transition-colors duration-300">
+      <div className="min-h-screen py-16 md:py-24 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="container mx-auto px-4 max-w-3xl">
-          <h1 className="text-4xl md:text-5xl font-bold text-center mb-6 text-gray-900 dark:text-white">
+          <h1 className="text-4xl md:text-5xl font-bold text-center mb-6" style={{ color: 'var(--color-text)' }}>
             {t('contact.title')}
           </h1>
-          <p className="text-center text-lg text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
+          <p className="text-center text-lg mb-12 max-w-2xl mx-auto" style={{ color: 'var(--color-text-muted)' }}>
             {t('contact.subtitle')}
           </p>
 
@@ -81,11 +81,12 @@ export default function Contacto() {
               onSubmit={handleSubmit(onSubmit)}
               noValidate
               aria-label={t('contact.title')}
-              className="space-y-6 bg-gray-50 dark:bg-gray-900 p-8 rounded-2xl border border-gray-200 dark:border-gray-800 shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              className="space-y-6 p-8 rounded-2xl border shadow-xl hover:shadow-2xl transition-shadow duration-300"
+              style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
             >
               {/* Nombre */}
               <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="name" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-text)' }}>
                   {t('contact.name')}
                 </label>
                 <input
@@ -95,9 +96,13 @@ export default function Contacto() {
                   aria-invalid={errors.name ? 'true' : 'false'}
                   aria-describedby={errors.name ? 'name-error' : undefined}
                   {...register('name', { required: t('contact.nameRequired') })}
-                  className={`w-full px-5 py-3 rounded-lg border ${
-                    errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                  } bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 transition-colors duration-200`}
+                  className={`w-full px-5 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors duration-200`}
+                  style={{
+                    backgroundColor: 'var(--color-surface-2)',
+                    color: 'var(--color-text)',
+                    borderColor: errors.name ? '#EF4444' : 'var(--color-border)',
+                    '--tw-ring-color': 'var(--color-primary)',
+                  }}
                   placeholder={t('contact.namePlaceholder')}
                 />
                 {errors.name && (
@@ -109,7 +114,7 @@ export default function Contacto() {
 
               {/* Email */}
               <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="email" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-text)' }}>
                   {t('contact.email')}
                 </label>
                 <input
@@ -125,9 +130,13 @@ export default function Contacto() {
                       message: t('contact.emailInvalid'),
                     },
                   })}
-                  className={`w-full px-5 py-3 rounded-lg border ${
-                    errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                  } bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 transition-colors duration-200`}
+                  className={`w-full px-5 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors duration-200`}
+                  style={{
+                    backgroundColor: 'var(--color-surface-2)',
+                    color: 'var(--color-text)',
+                    borderColor: errors.email ? '#EF4444' : 'var(--color-border)',
+                    '--tw-ring-color': 'var(--color-primary)',
+                  }}
                   placeholder={t('contact.emailPlaceholder')}
                 />
                 {errors.email && (
@@ -139,7 +148,7 @@ export default function Contacto() {
 
               {/* Mensaje */}
               <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
+                <label htmlFor="message" className="block text-sm font-medium mb-2" style={{ color: 'var(--color-text)' }}>
                   {t('contact.message')}
                 </label>
                 <textarea
@@ -152,9 +161,13 @@ export default function Contacto() {
                     required: t('contact.messageRequired'),
                     minLength: { value: 10, message: t('contact.messageMin') },
                   })}
-                  className={`w-full px-5 py-3 rounded-lg border ${
-                    errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'
-                  } bg-white dark:bg-gray-800 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 dark:focus:ring-indigo-600 transition-colors duration-200 resize-none`}
+                  className={`w-full px-5 py-3 rounded-lg border focus:outline-none focus:ring-2 transition-colors duration-200 resize-none`}
+                  style={{
+                    backgroundColor: 'var(--color-surface-2)',
+                    color: 'var(--color-text)',
+                    borderColor: errors.message ? '#EF4444' : 'var(--color-border)',
+                    '--tw-ring-color': 'var(--color-primary)',
+                  }}
                   placeholder={t('contact.messagePlaceholder')}
                 />
                 {errors.message && (

@@ -34,12 +34,42 @@
       "seeProjects": "View projects",
       "alt": "Pedro Metidieri",
       "available": "Available for projects",
-      "imageAlt": "Pedro Metidieri - Full Stack Developer"
+      "imageAlt": "Pedro Metidieri - Full Stack Developer",
+      "stats": {
+        "projects": "projects delivered",
+        "experience": "years experience",
+        "uptime": "uptime"
+      }
     },
     "about": {
       "title": "Hi, I'm Pedro Metidieri",
+      "label": "// about me",
+      "greeting": "Hi, I'm",
       "p1": "I'm Pedro Metidieri, a Full Stack Developer based in Extremadura, Spain, and founder of MTDR Digital Services. I build real web products: from architecture to production deployment, including direct client relationships.",
-      "p2": "My main stack is React 19, Flask/Python, and Tailwind CSS. I'm looking to join a technical team where I can grow as a Full Stack developer. Available for on-site positions in Madrid or remote."
+      "p2": "My main stack is React 19, Flask/Python, and Tailwind CSS. I'm looking to join a technical team where I can grow as a Full Stack developer. Available for on-site positions in Madrid or remote.",
+      "pills": {
+        "location": "Extremadura, ES",
+        "available": "Available for work",
+        "languages": "ES / EN"
+      },
+      "cards": {
+        "frontend": {
+          "label": "Frontend",
+          "items": "React, Next.js, Tailwind, TypeScript"
+        },
+        "backend": {
+          "label": "Backend",
+          "items": "Flask, Node.js, Python, REST APIs"
+        },
+        "databases": {
+          "label": "Databases",
+          "items": "PostgreSQL, MySQL, Supabase"
+        },
+        "devops": {
+          "label": "DevOps & AI",
+          "items": "Docker, Vercel, Railway, OpenAI"
+        }
+      }
     },
     "skills": {
       "frontend": {
@@ -60,9 +90,14 @@
       }
     },
     "projects": {
-      "title": "Featured Projects",
+      "titleMain": "Featured",
+      "titleAccent": "projects",
       "subtitle": "Some of my most recent and challenging works",
-      "seeAll": "View all projects"
+      "seeAll": "View all projects",
+      "featuredBadge": "Featured project",
+      "moreTech": "+{{count}} more",
+      "viewCaseStudy": "View case study",
+      "viewSite": "View site"
     },
     "cta": {
       "title": "Have a project in mind?",
@@ -263,8 +298,12 @@
     },
     "hero": {
       "title": "My Projects",
+      "titleLine1": "My",
+      "titleLine2": "Projects",
       "subtitle": "Real work that demonstrates my experience and passion for creating high-level digital solutions"
     },
+    "featuredBadge": "Featured project",
+    "moreTech": "+{{count}} more",
     "filters": {
       "all": "All",
       "web": "Web",
@@ -285,6 +324,7 @@
     "tech": "Technologies",
     "client": "Client / Context",
     "decisions": "Key technical decisions",
+    "breadcrumbProjects": "Projects",
     "viewCode": "View code",
     "problem": "The problem",
     "challenge": "The challenge",
@@ -343,6 +383,9 @@
   },
   "techStack": {
     "title": "Technologies I use",
+    "tickerTitle": "Tech",
+    "tickerAccent": "stack",
+    "tickerSubtitle": "The tools and frameworks I use to build real products every day.",
     "groups": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -386,8 +429,14 @@
   "testimonios": {
     "title": "What my clients say",
     "starsAriaLabel": "{{count}} stars",
-    "avatarAlt": "Photo of {{name}}",
-    "carouselAriaLabel": "Client testimonials carousel"
+    "juanfrizas": {
+      "quote": "I'm delighted with the result. The modern design and animations really catch customers' attention, and now the waiters can show the menu from the QR without any issue. Pedro delivered exactly what we needed.",
+      "business": "El Aperitivo Talarrubias"
+    },
+    "juanpe": {
+      "quote": "The typography and colors perfectly convey the essence of the place. The delivery speed was also impressive. Very professional work that I would recommend without hesitation.",
+      "business": "Café Bar Casa de la Cultura, Esparragosa de Lares"
+    }
   },
   "error": {
     "title": "Something went wrong",

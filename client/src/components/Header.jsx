@@ -96,13 +96,13 @@ export default function Header() {
   }, [location.pathname]);
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b border-gray-300 dark:border-gray-700 bg-white/95 dark:bg-gray-950/95 backdrop-blur-md transition-colors duration-300">
+    <header className="sticky top-0 z-50 w-full border-b backdrop-blur-md transition-colors duration-300" style={{ borderColor: 'var(--color-border)', backgroundColor: 'color-mix(in srgb, var(--color-bg) 95%, transparent)' }}>
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 md:h-20 items-center justify-between">
 
           {/* Logo + Nombre */}
           <div className="flex items-center gap-3 md:gap-4">
-            <div className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-800">
+            <div className="h-10 w-10 md:h-12 md:w-12 flex-shrink-0 overflow-hidden rounded-full" style={{ backgroundColor: 'var(--color-surface-2)' }}>
               <img
                 src={logo}
                 alt="Logo de Pedro Metidieri"
@@ -114,10 +114,10 @@ export default function Header() {
               />
             </div>
             <div className="flex flex-col">
-              <span className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
+              <span className="text-lg md:text-xl font-bold" style={{ color: 'var(--color-text)' }}>
                 Pedro Metidieri
               </span>
-              <span className="text-xs md:text-sm text-gray-600 dark:text-gray-400">
+              <span className="text-xs md:text-sm" style={{ color: 'var(--color-text-muted)' }}>
                 Full Stack Developer | React · Node · Next.js
               </span>
             </div>
@@ -132,11 +132,10 @@ export default function Header() {
                   key={link.name}
                   href={link.href}
                   aria-current={active ? 'page' : undefined}
-                  className={`group relative text-sm font-medium transition-colors duration-200 pb-0.5 ${
-                    active
-                      ? 'text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-indigo-600 dark:hover:text-indigo-400'
-                  }`}
+                  className="group relative text-sm font-medium transition-colors duration-200 pb-0.5"
+                  style={{ color: active ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
+                  onMouseEnter={(e) => { if (!active) e.currentTarget.style.color = 'var(--color-primary)'; }}
+                  onMouseLeave={(e) => { if (!active) e.currentTarget.style.color = 'var(--color-text-muted)'; }}
                 >
                   {link.name}
                   {/* Animated underline */}
@@ -166,7 +165,8 @@ export default function Header() {
 
             <button
               onClick={() => changeLanguage(i18n.language === 'es' ? 'en' : 'es')}
-              className="flex items-center gap-1.5 p-1.5 rounded-full bg-gray-200/80 dark:bg-gray-700/80 hover:bg-gray-300 dark:hover:bg-gray-600 transition-all duration-200 hover:scale-110 active:scale-95"
+              className="flex items-center gap-1.5 p-1.5 rounded-full transition-all duration-200 hover:scale-110 active:scale-95"
+              style={{ backgroundColor: 'var(--color-surface-2)' }}
               aria-label={i18n.language === 'es' ? 'Switch to English' : 'Cambiar a Español'}
             >
               <img
@@ -178,14 +178,15 @@ export default function Header() {
                 loading="lazy"
                 decoding="async"
               />
-              <span className="text-xs font-medium text-gray-800 dark:text-gray-200">
+              <span className="text-xs font-medium" style={{ color: 'var(--color-text)' }}>
                 {i18n.language.toUpperCase()}
               </span>
             </button>
 
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 text-gray-800 dark:text-gray-200 hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors"
+              className="p-2 rounded-full transition-colors"
+              style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-text)' }}
               aria-label={theme === 'dark' ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'}
             >
               {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
@@ -193,13 +194,13 @@ export default function Header() {
 
             <div className="flex items-center gap-3">
               <a href="https://www.linkedin.com/in/pedrometidieri/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn de Pedro Metidieri">
-                <Linkedin className="h-5 w-5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors" />
+                <Linkedin className="h-5 w-5 transition-colors" style={{ color: 'var(--color-text-muted)' }} />
               </a>
               <a href="https://github.com/Metidieri" target="_blank" rel="noopener noreferrer" aria-label="GitHub de Pedro Metidieri">
-                <Github className="h-5 w-5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors" />
+                <Github className="h-5 w-5 transition-colors" style={{ color: 'var(--color-text-muted)' }} />
               </a>
               <a href="mailto:pedrometidierigomez@gmail.com" aria-label="Enviar email a Pedro Metidieri">
-                <Mail className="h-5 w-5 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-gray-100 transition-colors" />
+                <Mail className="h-5 w-5 transition-colors" style={{ color: 'var(--color-text-muted)' }} />
               </a>
             </div>
           </div>
@@ -207,7 +208,8 @@ export default function Header() {
           {/* Mobile hamburger */}
           <button
             ref={hamburgerRef}
-            className="md:hidden text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+            className="md:hidden transition-colors"
+            style={{ color: 'var(--color-text)' }}
             onClick={() => setIsOpen(!isOpen)}
             aria-label={isOpen ? 'Cerrar menú' : 'Abrir menú'}
             aria-expanded={isOpen}
@@ -231,7 +233,8 @@ export default function Header() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            className="md:hidden border-t border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-950 overflow-hidden"
+            className="md:hidden border-t overflow-hidden"
+            style={{ borderColor: 'var(--color-border)', backgroundColor: 'var(--color-bg)' }}
           >
             <nav className="flex flex-col px-4 py-6 space-y-4" aria-label="Navegación mobile">
               {navLinks.map((link) => (
@@ -240,11 +243,8 @@ export default function Header() {
                   href={link.href}
                   variants={menuItemVariants}
                   aria-current={isActive(link.href) ? 'page' : undefined}
-                  className={`text-base font-medium transition-colors ${
-                    isActive(link.href)
-                      ? 'text-indigo-600 dark:text-indigo-400'
-                      : 'text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100'
-                  }`}
+                  className="text-base font-medium transition-colors"
+                  style={{ color: isActive(link.href) ? 'var(--color-primary)' : 'var(--color-text-muted)' }}
                 >
                   {link.name}
                 </motion.a>
@@ -260,7 +260,8 @@ export default function Header() {
               <motion.div variants={menuItemVariants} className="flex gap-6 justify-center pt-2">
                 <button
                   onClick={() => changeLanguage(i18n.language === 'es' ? 'en' : 'es')}
-                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100 transition-colors"
+                  className="flex items-center gap-2 transition-colors"
+                  style={{ color: 'var(--color-text-muted)' }}
                 >
                   <img
                     src={`https://flagcdn.com/24x18/${i18n.language === 'es' ? 'es' : 'gb'}.png`}
@@ -276,7 +277,8 @@ export default function Header() {
 
                 <button
                   onClick={toggleTheme}
-                  className="flex items-center gap-2 text-gray-700 dark:text-gray-300 hover:text-gray-900 dark:hover:text-gray-100"
+                  className="flex items-center gap-2"
+                  style={{ color: 'var(--color-text-muted)' }}
                 >
                   {theme === 'dark' ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
                   <span>{theme === 'dark' ? t('header.lightMode') : t('header.darkMode')}</span>

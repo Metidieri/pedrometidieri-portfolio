@@ -1,7 +1,7 @@
 // src/pages/Home.jsx
 import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import { ArrowRight, Download } from 'lucide-react';
+import { ArrowRight, Download, MapPin, Briefcase, Globe, Monitor, Server, Database, Cpu } from 'lucide-react';
 import SEO from '../components/SEO';
 import JsonLd from '../components/JsonLd';
 import TechStack from '../components/TechStack';
@@ -11,16 +11,15 @@ import RevealOnScroll from '../components/RevealOnScroll';
 import AnimatedTitle from '../components/AnimatedTitle';
 import SectionDivider from '../components/SectionDivider';
 import { useTranslation } from 'react-i18next';
-import { skillCategories } from '../data/skills';
+/* About section skill cards */
+const aboutCards = [
+  { key: 'frontend', icon: Monitor, level: '90%' },
+  { key: 'backend', icon: Server, level: '80%' },
+  { key: 'databases', icon: Database, level: '75%' },
+  { key: 'devops', icon: Cpu, level: '70%' },
+];
 import { featuredProjects } from '../data/projects';
-import {
-  staggerContainer,
-  fadeInUp,
-  hoverScale,
-  viewportOnce,
-} from '../lib/motion';
-
-const stagger = staggerContainer(0.1);
+import { hoverScale } from '../lib/motion';
 
 /* ── Hero animation config ─────────────────────────────────── */
 const EASE_EXPO = [0.22, 1, 0.36, 1];
@@ -149,7 +148,7 @@ export default function Home() {
             <motion.h1
               variants={shouldReduce ? {} : heroItem(0.1)}
               className="font-display font-black tracking-[-0.03em] mb-4"
-              style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: '#FFFFFF', lineHeight: 1.1 }}
+              style={{ fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', color: 'var(--color-text)', lineHeight: 1.1 }}
             >
               Pedro Metidieri
             </motion.h1>
@@ -203,8 +202,8 @@ export default function Home() {
                 href="/proyectos"
                 whileHover={shouldReduce ? {} : { scale: 1.04 }}
                 whileTap={shouldReduce ? {} : { scale: 0.96 }}
-                className="inline-flex items-center justify-center gap-2 rounded-lg border px-7 py-3.5 text-base font-semibold text-white transition-colors duration-200 cursor-pointer"
-                style={{ borderColor: 'var(--color-border)' }}
+                className="inline-flex items-center justify-center gap-2 rounded-lg border px-7 py-3.5 text-base font-semibold transition-colors duration-200 cursor-pointer"
+                style={{ borderColor: 'var(--color-border)', color: 'var(--color-text)' }}
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = 'var(--color-surface)')}
                 onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = 'transparent')}
               >
@@ -218,7 +217,7 @@ export default function Home() {
                 whileTap={shouldReduce ? {} : { scale: 0.96 }}
                 className="inline-flex items-center justify-center gap-2 px-4 py-3.5 text-base font-medium transition-colors duration-200 cursor-pointer"
                 style={{ color: 'var(--color-text-muted)' }}
-                onMouseEnter={(e) => (e.currentTarget.style.color = '#FFFFFF')}
+                onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-text)')}
                 onMouseLeave={(e) => (e.currentTarget.style.color = 'var(--color-text-muted)')}
               >
                 <Download className="h-4 w-4" aria-hidden="true" />
@@ -232,16 +231,16 @@ export default function Home() {
               className="flex gap-8 mt-12 flex-wrap justify-center lg:justify-start"
             >
               {[
-                { value: '5', suffix: '+', label: 'proyectos entregados' },
-                { value: '3', suffix: '+', label: 'a\u00f1os experiencia' },
-                { value: '100', suffix: '%', label: 'uptime' },
+                { value: '5', suffix: '+', labelKey: 'home.hero.stats.projects' },
+                { value: '3', suffix: '+', labelKey: 'home.hero.stats.experience' },
+                { value: '100', suffix: '%', labelKey: 'home.hero.stats.uptime' },
               ].map((stat) => (
-                <div key={stat.label} className="text-center lg:text-left">
-                  <div className="font-display font-bold text-2xl" style={{ color: '#FFFFFF' }}>
+                <div key={stat.labelKey} className="text-center lg:text-left">
+                  <div className="font-display font-bold text-2xl" style={{ color: 'var(--color-text)' }}>
                     <AnimatedCounter target={stat.value} suffix={stat.suffix} />
                   </div>
                   <div className="text-xs mt-1" style={{ color: 'var(--color-text-muted)' }}>
-                    {stat.label}
+                    {t(stat.labelKey)}
                   </div>
                 </div>
               ))}
@@ -326,58 +325,147 @@ export default function Home() {
       <SectionDivider variant="dots" />
 
       {/* ═══════════════════ ABOUT / SKILLS ═══════════════════ */}
-      <section className="py-20 md:py-24 bg-white dark:bg-gray-950 transition-colors duration-300">
-        <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center">
-            <RevealOnScroll direction="left">
-              <div>
-                <AnimatedTitle
-                  className="font-display text-3xl md:text-4xl font-bold mb-6 text-gray-900 dark:text-white"
-                  center={false}
+      <section className="py-20 md:py-24 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
+        <div className="container mx-auto px-4 max-w-6xl">
+          <div className="grid lg:grid-cols-[3fr_2fr] gap-12 lg:gap-16 items-start">
+
+            {/* ── Left column: text ── */}
+            <motion.div
+              initial={shouldReduce ? {} : { opacity: 0, x: -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.6, ease: EASE_EXPO }}
+            >
+              {/* Label */}
+              <p
+                className="font-mono"
+                style={{ fontSize: '13px', color: 'var(--color-primary)', marginBottom: '12px' }}
+              >
+                {t('home.about.label')}
+              </p>
+
+              {/* Title */}
+              <h2
+                className="font-display font-bold"
+                style={{ fontSize: '42px', color: 'var(--color-text)', lineHeight: 1.15, marginBottom: '24px' }}
+              >
+                {t('home.about.greeting')}
+                <br />
+                <span
+                  style={{
+                    background: 'linear-gradient(135deg, var(--color-primary), #A855F7)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                  }}
                 >
-                  {t('home.about.title')}
-                </AnimatedTitle>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6">
+                  Pedro Metidieri
+                </span>
+              </h2>
+
+              {/* Paragraphs */}
+              <div style={{ maxWidth: '520px' }}>
+                <p
+                  className="font-sans"
+                  style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: 1.8, marginBottom: '16px' }}
+                >
                   {t('home.about.p1')}
                 </p>
-                <p className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p
+                  className="font-sans"
+                  style={{ fontSize: '16px', color: 'var(--color-text-muted)', lineHeight: 1.8, marginBottom: '32px' }}
+                >
                   {t('home.about.p2')}
                 </p>
               </div>
-            </RevealOnScroll>
 
+              {/* Pills */}
+              <div className="flex flex-wrap gap-3">
+                {[
+                  { icon: MapPin, textKey: 'home.about.pills.location' },
+                  { icon: Briefcase, textKey: 'home.about.pills.available' },
+                  { icon: Globe, textKey: 'home.about.pills.languages' },
+                ].map(({ icon: PillIcon, textKey }) => (
+                  <span
+                    key={textKey}
+                    className="inline-flex items-center rounded-full"
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      border: '1px solid var(--color-border)',
+                      padding: '6px 14px',
+                      gap: '6px',
+                      fontSize: '13px',
+                      color: 'var(--color-text-muted)',
+                    }}
+                  >
+                    <PillIcon style={{ width: '14px', height: '14px', color: 'var(--color-primary)', flexShrink: 0 }} aria-hidden="true" />
+                    {t(textKey)}
+                  </span>
+                ))}
+              </div>
+            </motion.div>
+
+            {/* ── Right column: skill cards 2×2 ── */}
             <motion.div
-              variants={stagger}
-              initial="hidden"
-              whileInView="visible"
-              viewport={viewportOnce}
-              className="grid grid-cols-2 gap-6"
+              initial={shouldReduce ? {} : { opacity: 0, x: 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={shouldReduce ? { duration: 0 } : { duration: 0.6, ease: EASE_EXPO }}
+              className="grid grid-cols-2 gap-4"
             >
-              {skillCategories.map((skill) => {
-                const Icon = skill.icon;
+              {aboutCards.map((card, i) => {
+                const CardIcon = card.icon;
                 return (
                   <motion.div
-                    key={skill.key}
-                    variants={fadeInUp}
-                    whileHover={{
-                      y: -6,
-                      boxShadow: '0 20px 40px rgba(99, 102, 241, 0.15)',
-                      borderColor: 'rgba(99, 102, 241, 0.5)',
-                      transition: { type: 'spring', stiffness: 300, damping: 20 },
+                    key={card.key}
+                    initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, margin: '-80px' }}
+                    transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: EASE_EXPO, delay: i * 0.1 }}
+                    className="rounded-xl border cursor-default transition-shadow duration-200"
+                    style={{
+                      backgroundColor: 'var(--color-surface)',
+                      borderColor: 'var(--color-border)',
+                      padding: '20px',
                     }}
-                    className="bg-gray-100 dark:bg-gray-900/50 p-6 rounded-xl border border-gray-300 dark:border-gray-800 transition-colors duration-200 cursor-default will-change-transform"
+                    onMouseEnter={(e) => {
+                      const isDark = document.documentElement.classList.contains('dark');
+                      e.currentTarget.style.boxShadow = isDark
+                        ? '0 4px 20px rgba(99,102,241,0.15)'
+                        : '0 4px 20px rgba(0,0,0,0.08)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.boxShadow = 'none';
+                    }}
                   >
-                    <Icon className="h-8 w-8 text-indigo-600 dark:text-indigo-500 mb-4" />
-                    <h3 className="font-semibold mb-2 text-gray-900 dark:text-white">
-                      {t(`home.skills.${skill.key}.label`)}
+                    <CardIcon
+                      style={{ width: '20px', height: '20px', color: 'var(--color-primary)', marginBottom: '12px' }}
+                      aria-hidden="true"
+                    />
+                    <h3
+                      className="font-display font-semibold"
+                      style={{ fontSize: '15px', color: 'var(--color-text)', marginBottom: '4px' }}
+                    >
+                      {t(`home.about.cards.${card.key}.label`)}
                     </h3>
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
-                      {t(`home.skills.${skill.key}.items`)}
+                    <p style={{ fontSize: '13px', color: 'var(--color-text-muted)', lineHeight: 1.5, marginBottom: '12px' }}>
+                      {t(`home.about.cards.${card.key}.items`)}
                     </p>
+                    {/* Level bar */}
+                    <div className="rounded-full overflow-hidden" style={{ height: '3px', backgroundColor: 'var(--color-border)' }}>
+                      <motion.div
+                        className="h-full rounded-full"
+                        style={{ backgroundColor: 'var(--color-primary)' }}
+                        initial={{ width: 0 }}
+                        whileInView={{ width: card.level }}
+                        viewport={{ once: true }}
+                        transition={shouldReduce ? { duration: 0 } : { duration: 0.8, ease: EASE_EXPO, delay: 0.3 + i * 0.1 }}
+                      />
+                    </div>
                   </motion.div>
                 );
               })}
             </motion.div>
+
           </div>
         </div>
       </section>
@@ -407,8 +495,8 @@ export default function Home() {
               className="font-display font-black tracking-tight"
               style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1 }}
             >
-              <span style={{ color: '#FFFFFF' }}>Proyectos </span>
-              <span style={{ color: 'var(--color-primary)' }}>destacados</span>
+              <span style={{ color: 'var(--color-text)' }}>{t('home.projects.titleMain')} </span>
+              <span style={{ color: 'var(--color-primary)' }}>{t('home.projects.titleAccent')}</span>
             </h2>
             <p
               className="font-sans mt-4 max-w-xl"
@@ -474,12 +562,12 @@ export default function Home() {
                         color: 'var(--color-primary)',
                       }}
                     >
-                      Proyecto destacado
+                      {t('home.projects.featuredBadge')}
                     </span>
 
                     <h3
                       className="font-display font-semibold mb-3"
-                      style={{ fontSize: '22px', color: '#FFFFFF', lineHeight: 1.3 }}
+                      style={{ fontSize: '22px', color: 'var(--color-text)', lineHeight: 1.3 }}
                     >
                       {hero.title}
                     </h3>
@@ -513,7 +601,7 @@ export default function Home() {
                             color: 'var(--color-text-muted)',
                           }}
                         >
-                          +{remaining} m&aacute;s
+                          {t('home.projects.moreTech', { count: remaining })}
                         </span>
                       )}
                     </div>
@@ -523,7 +611,7 @@ export default function Home() {
                       className="inline-flex items-center gap-2 self-start rounded-lg px-6 py-3 text-sm font-semibold text-white transition-all duration-200 group-hover:shadow-lg group-hover:shadow-indigo-600/25"
                       style={{ backgroundColor: 'var(--color-primary)' }}
                     >
-                      Ver case study
+                      {t('home.projects.viewCaseStudy')}
                       <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                     </span>
                   </div>
@@ -581,7 +669,7 @@ export default function Home() {
                         className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold text-white"
                         style={{ backgroundColor: 'var(--color-primary)' }}
                       >
-                        Ver case study
+                        {t('home.projects.viewCaseStudy')}
                         <ArrowRight className="h-3 w-3" aria-hidden="true" />
                       </span>
                       {project.url && (
@@ -589,7 +677,7 @@ export default function Home() {
                           className="inline-flex items-center gap-1.5 rounded-lg px-4 py-2 text-xs font-semibold text-white"
                           style={{ border: '1px solid rgba(255,255,255,0.3)' }}
                         >
-                          Ver sitio
+                          {t('home.projects.viewSite')}
                         </span>
                       )}
                     </div>
@@ -599,7 +687,7 @@ export default function Home() {
                   <div className="p-5">
                     <h3
                       className="font-display font-semibold mb-2 line-clamp-1"
-                      style={{ fontSize: '18px', color: '#FFFFFF' }}
+                      style={{ fontSize: '18px', color: 'var(--color-text)' }}
                     >
                       {project.title}
                     </h3>
@@ -660,14 +748,15 @@ export default function Home() {
 
       {/* ═══════════════════ FINAL CTA ═══════════════════ */}
       <RevealOnScroll direction="fade">
-        <section className="py-20 md:py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-black border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
+        <section className="py-20 md:py-24 border-t transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)', borderColor: 'var(--color-border)' }}>
           <div className="container mx-auto px-4 text-center">
             <AnimatedTitle
-              className="font-display text-3xl md:text-5xl font-bold mb-6 text-gray-900 dark:text-white"
+              className="font-display text-3xl md:text-5xl font-bold mb-6"
+              style={{ color: 'var(--color-text)' }}
             >
               {t('home.cta.title')}
             </AnimatedTitle>
-            <p className="text-xl text-gray-700 dark:text-gray-300 max-w-3xl mx-auto mb-10">
+            <p className="text-xl max-w-3xl mx-auto mb-10" style={{ color: 'var(--color-text-muted)' }}>
               {t('home.cta.subtitle')}
             </p>
             <motion.a

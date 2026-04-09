@@ -28,25 +28,28 @@ export default function BlogPost() {
         return (
           <pre
             key={i}
-            className="my-6 p-5 rounded-xl bg-gray-900 dark:bg-gray-800 border border-gray-700 overflow-x-auto"
+            className="my-6 p-5 rounded-xl border overflow-x-auto"
+            style={{ backgroundColor: 'var(--color-surface-2)', borderColor: 'var(--color-border)' }}
           >
             {langTag && (
-              <div className="text-xs text-gray-400 mb-3 uppercase tracking-wider">{langTag}</div>
+              <div className="text-xs mb-3 uppercase tracking-wider" style={{ color: 'var(--color-text-muted)' }}>{langTag}</div>
             )}
-            <code className="text-sm text-gray-100 font-mono whitespace-pre">{code}</code>
+            <code className="text-sm font-mono whitespace-pre" style={{ color: 'var(--color-text)' }}>{code}</code>
           </pre>
         );
       }
       return part.split('\n\n').map((paragraph, j) => (
         <p
           key={`${i}-${j}`}
-          className="text-lg text-gray-700 dark:text-gray-300 leading-relaxed mb-6"
+          className="text-lg leading-relaxed mb-6"
+          style={{ color: 'var(--color-text-muted)' }}
         >
           {paragraph.split('`').map((seg, k) =>
             k % 2 === 1 ? (
               <code
                 key={k}
-                className="px-1.5 py-0.5 rounded bg-gray-100 dark:bg-gray-800 text-indigo-600 dark:text-indigo-400 text-base font-mono"
+                className="px-1.5 py-0.5 rounded text-base font-mono"
+                style={{ backgroundColor: 'var(--color-surface-2)', color: 'var(--color-primary)' }}
               >
                 {seg}
               </code>
@@ -67,12 +70,13 @@ export default function BlogPost() {
         url={`https://pedrometidieri.com/blog/${article.slug}`}
       />
 
-      <div className="min-h-screen bg-white dark:bg-gray-950 py-16 md:py-24 transition-colors duration-300">
+      <div className="min-h-screen py-16 md:py-24 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="container mx-auto px-4 max-w-3xl">
           {/* Back link */}
           <Link
             to="/blog"
-            className="inline-flex items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors duration-200 mb-10"
+            className="inline-flex items-center gap-2 transition-colors duration-200 mb-10"
+            style={{ color: 'var(--color-text-muted)' }}
           >
             <ArrowLeft className="h-4 w-4" />
             {t('blog.backToList')}
@@ -81,10 +85,10 @@ export default function BlogPost() {
           <RevealOnScroll direction="up">
             {/* Header */}
             <header className="mb-12">
-              <h1 className="font-display text-3xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6 leading-tight">
+              <h1 className="font-display text-3xl md:text-5xl font-bold mb-6 leading-tight" style={{ color: 'var(--color-text)' }}>
                 {title}
               </h1>
-              <div className="flex items-center gap-6 text-sm text-gray-500 dark:text-gray-400">
+              <div className="flex items-center gap-6 text-sm" style={{ color: 'var(--color-text-muted)' }}>
                 <span className="inline-flex items-center gap-1.5">
                   <Calendar className="h-4 w-4" aria-hidden="true" />
                   {new Date(article.date).toLocaleDateString(lang === 'es' ? 'es-ES' : 'en-US', {
@@ -105,10 +109,11 @@ export default function BlogPost() {
           </RevealOnScroll>
 
           {/* Back to blog */}
-          <div className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-800">
+          <div className="mt-16 pt-8 border-t" style={{ borderColor: 'var(--color-border)' }}>
             <Link
               to="/blog"
-              className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors duration-200"
+              className="inline-flex items-center gap-2 font-medium transition-colors duration-200"
+              style={{ color: 'var(--color-primary)' }}
             >
               <ArrowLeft className="h-4 w-4" />
               {t('blog.backToList')}

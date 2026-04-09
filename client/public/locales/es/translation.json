@@ -34,12 +34,42 @@
       "seeProjects": "Ver proyectos",
       "alt": "Pedro Metidieri",
       "available": "Disponible para proyectos",
-      "imageAlt": "Pedro Metidieri - Full Stack Developer"
+      "imageAlt": "Pedro Metidieri - Full Stack Developer",
+      "stats": {
+        "projects": "proyectos entregados",
+        "experience": "años experiencia",
+        "uptime": "uptime"
+      }
     },
     "about": {
       "title": "Hola, soy Pedro Metidieri",
+      "label": "// sobre mí",
+      "greeting": "Hola, soy",
       "p1": "Soy Pedro Metidieri, desarrollador Full Stack con base en Extremadura, España, y fundador de MTDR Servicios Digitales. Construyo productos web reales: desde la arquitectura hasta el deploy en producción, pasando por la relación directa con el cliente.",
-      "p2": "Mi stack principal es React 19, Flask/Python y Tailwind CSS. Busco incorporarme a un equipo técnico donde pueda crecer como desarrollador Full Stack. Disponible para posiciones presenciales en Madrid o remotas."
+      "p2": "Mi stack principal es React 19, Flask/Python y Tailwind CSS. Busco incorporarme a un equipo técnico donde pueda crecer como desarrollador Full Stack. Disponible para posiciones presenciales en Madrid o remotas.",
+      "pills": {
+        "location": "Extremadura, ES",
+        "available": "Disponible para trabajo",
+        "languages": "ES / EN"
+      },
+      "cards": {
+        "frontend": {
+          "label": "Frontend",
+          "items": "React, Next.js, Tailwind, TypeScript"
+        },
+        "backend": {
+          "label": "Backend",
+          "items": "Flask, Node.js, Python, REST APIs"
+        },
+        "databases": {
+          "label": "Bases de datos",
+          "items": "PostgreSQL, MySQL, Supabase"
+        },
+        "devops": {
+          "label": "DevOps & IA",
+          "items": "Docker, Vercel, Railway, OpenAI"
+        }
+      }
     },
     "skills": {
       "frontend": {
@@ -60,9 +90,14 @@
       }
     },
     "projects": {
-      "title": "Proyectos destacados",
+      "titleMain": "Proyectos",
+      "titleAccent": "destacados",
       "subtitle": "Algunos de los trabajos más recientes y desafiantes que he realizado",
-      "seeAll": "Ver todos los proyectos"
+      "seeAll": "Ver todos los proyectos",
+      "featuredBadge": "Proyecto destacado",
+      "moreTech": "+{{count}} más",
+      "viewCaseStudy": "Ver case study",
+      "viewSite": "Ver sitio"
     },
     "cta": {
       "title": "¿Tienes un proyecto en mente?",
@@ -263,8 +298,12 @@
     },
     "hero": {
       "title": "Mis Proyectos",
+      "titleLine1": "Mis",
+      "titleLine2": "Proyectos",
       "subtitle": "Trabajos reales que demuestran mi experiencia y pasión por crear soluciones digitales de alto nivel"
     },
+    "featuredBadge": "Proyecto destacado",
+    "moreTech": "+{{count}} más",
     "filters": {
       "all": "Todos",
       "web": "Web",
@@ -285,6 +324,7 @@
     "tech": "Tecnologías",
     "client": "Cliente / Contexto",
     "decisions": "Decisiones técnicas destacadas",
+    "breadcrumbProjects": "Proyectos",
     "viewCode": "Ver código",
     "problem": "El problema",
     "challenge": "El reto",
@@ -343,6 +383,9 @@
   },
   "techStack": {
     "title": "Tecnologías que uso",
+    "tickerTitle": "Stack",
+    "tickerAccent": "tecnológico",
+    "tickerSubtitle": "Las herramientas y frameworks con los que construyo productos reales cada día.",
     "groups": {
       "frontend": "Frontend",
       "backend": "Backend",
@@ -386,8 +429,14 @@
   "testimonios": {
     "title": "Lo que dicen mis clientes",
     "starsAriaLabel": "{{count}} estrellas",
-    "avatarAlt": "Foto de {{name}}",
-    "carouselAriaLabel": "Carrusel de testimonios de clientes"
+    "juanfrizas": {
+      "quote": "Estoy encantado con el resultado. El diseño moderno y las animaciones llaman mucho la atención de los clientes, y ahora los camareros pueden enseñar la carta desde el QR sin ningún problema. Pedro entregó exactamente lo que necesitábamos.",
+      "business": "El Aperitivo Talarrubias"
+    },
+    "juanpe": {
+      "quote": "La tipografía y los colores transmiten perfectamente la esencia del local. Además, la rapidez de entrega fue impresionante. Un trabajo muy profesional que recomendaría sin dudarlo.",
+      "business": "Café Bar Casa de la Cultura, Esparragosa de Lares"
+    }
   },
   "error": {
     "title": "Algo salió mal",

@@ -33,7 +33,7 @@ export default function Footer() {
         aria-hidden="true"
       />
 
-      <footer className="w-full bg-white dark:bg-gray-950 text-gray-700 dark:text-gray-400 transition-colors duration-300">
+      <footer className="w-full transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text-muted)' }}>
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <motion.div
             variants={shouldReduce ? {} : stagger}
@@ -49,9 +49,9 @@ export default function Footer() {
                 <div className="h-10 w-10 flex-shrink-0 overflow-hidden rounded-full bg-gradient-to-br from-indigo-600 to-purple-700">
                   <img src={logo} alt={t('footer.logoAlt')} width="375" height="375" className="h-full w-full object-cover" loading="lazy" decoding="async" />
                 </div>
-                <span className="text-lg font-bold text-gray-900 dark:text-white">{t('footer.title')}</span>
+                <span className="text-lg font-bold" style={{ color: 'var(--color-text)' }}>{t('footer.title')}</span>
               </div>
-              <p className="text-sm leading-relaxed mb-6 text-gray-700 dark:text-gray-400">
+              <p className="text-sm leading-relaxed mb-6" style={{ color: 'var(--color-text-muted)' }}>
                 {t('footer.description')}
               </p>
               <div className="flex items-center gap-4">
@@ -70,7 +70,7 @@ export default function Footer() {
                     whileTap={shouldReduce ? {} : { scale: 0.9 }}
                     className="will-change-transform"
                   >
-                    <Icon className="h-5 w-5 text-gray-600 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors" />
+                    <Icon className="h-5 w-5 transition-colors" style={{ color: 'var(--color-text-muted)' }} />
                   </motion.a>
                 ))}
               </div>
@@ -78,7 +78,7 @@ export default function Footer() {
 
             {/* Columna 2: Enlaces rápidos */}
             <motion.div variants={shouldReduce ? {} : fadeInUp}>
-              <h3 className="text-gray-900 dark:text-white font-semibold mb-6 uppercase tracking-wider text-sm">
+              <h3 className="font-semibold mb-6 uppercase tracking-wider text-sm" style={{ color: 'var(--color-text)' }}>
                 {t('footer.links.title')}
               </h3>
               <ul className="space-y-3 text-sm">
@@ -86,7 +86,7 @@ export default function Footer() {
                   <li key={link.name}>
                     <a
                       href={link.href}
-                      className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors"
+                      className="transition-colors" style={{ color: 'var(--color-text-muted)' }}
                     >
                       {link.name}
                     </a>
@@ -97,30 +97,31 @@ export default function Footer() {
 
             {/* Columna 3: Servicios */}
             <motion.div variants={shouldReduce ? {} : fadeInUp}>
-              <h3 className="text-gray-900 dark:text-white font-semibold mb-6 uppercase tracking-wider text-sm">
+              <h3 className="font-semibold mb-6 uppercase tracking-wider text-sm" style={{ color: 'var(--color-text)' }}>
                 {t('footer.services.title')}
               </h3>
               <ul className="space-y-3 text-sm">
-                <li><a href="/servicios#web" className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.services.web')}</a></li>
-                <li><a href="/servicios#apps" className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.services.apps')}</a></li>
-                <li><a href="/servicios#optimizacion" className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.services.seo')}</a></li>
-                <li><a href="/servicios#ia" className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.services.ia')}</a></li>
-                <li><a href="/servicios#consultoria" className="text-gray-700 dark:text-gray-400 hover:text-indigo-600 dark:hover:text-indigo-400 transition-colors">{t('footer.services.consulting')}</a></li>
+                <li><a href="/servicios#web" className="transition-colors" style={{ color: 'var(--color-text-muted)' }}>{t('footer.services.web')}</a></li>
+                <li><a href="/servicios#apps" className="transition-colors" style={{ color: 'var(--color-text-muted)' }}>{t('footer.services.apps')}</a></li>
+                <li><a href="/servicios#optimizacion" className="transition-colors" style={{ color: 'var(--color-text-muted)' }}>{t('footer.services.seo')}</a></li>
+                <li><a href="/servicios#ia" className="transition-colors" style={{ color: 'var(--color-text-muted)' }}>{t('footer.services.ia')}</a></li>
+                <li><a href="/servicios#consultoria" className="transition-colors" style={{ color: 'var(--color-text-muted)' }}>{t('footer.services.consulting')}</a></li>
               </ul>
             </motion.div>
 
             {/* Columna 4: CTA */}
             <motion.div variants={shouldReduce ? {} : fadeInUp}>
-              <h3 className="text-gray-900 dark:text-white font-semibold mb-6 uppercase tracking-wider text-sm">
+              <h3 className="font-semibold mb-6 uppercase tracking-wider text-sm" style={{ color: 'var(--color-text)' }}>
                 {t('footer.cta.title')}
               </h3>
-              <p className="text-sm mb-6 text-gray-700 dark:text-gray-400">
+              <p className="text-sm mb-6" style={{ color: 'var(--color-text-muted)' }}>
                 {t('footer.cta.subtitle')}
               </p>
               <motion.a
                 href="/contacto"
                 {...(shouldReduce ? {} : hoverScale)}
-                className="inline-block rounded-lg bg-indigo-600 px-6 py-3 text-sm font-medium text-white hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 transition-colors shadow-md hover:shadow-lg will-change-transform"
+                className="inline-block rounded-lg px-6 py-3 text-sm font-medium text-white transition-colors shadow-md hover:shadow-lg will-change-transform"
+                style={{ backgroundColor: 'var(--color-primary)' }}
               >
                 {t('footer.cta.button')}
               </motion.a>
@@ -133,7 +134,7 @@ export default function Footer() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.3 }}
-            className="border-t border-gray-300 dark:border-gray-800 py-8 text-center text-sm text-gray-600 dark:text-gray-500"
+            className="border-t py-8 text-center text-sm" style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
           >
             <p>
               © {currentYear} {t('footer.copyright.name')}. {t('footer.copyright.rights')}

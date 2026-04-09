@@ -31,7 +31,7 @@ export default function About() {
       />
 
       {/* Hero */}
-      <section className="pt-20 pb-16 md:pt-28 md:pb-24 bg-white dark:bg-gray-950 transition-colors duration-300">
+      <section className="pt-20 pb-16 md:pt-28 md:pb-24 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -39,7 +39,7 @@ export default function About() {
               animate={{ opacity: 1, scale: 1 }}
               transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
             >
-              <h1 className="font-display text-5xl md:text-6xl font-bold mb-6 text-gray-900 dark:text-white">
+              <h1 className="font-display text-5xl md:text-6xl font-bold mb-6" style={{ color: 'var(--color-text)' }}>
                 {t('about.title')}
               </h1>
             </motion.div>
@@ -47,7 +47,8 @@ export default function About() {
               initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="text-2xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+              className="text-2xl max-w-2xl mx-auto"
+              style={{ color: 'var(--color-text-muted)' }}
             >
               {t('about.subtitle')}
             </motion.p>
@@ -66,7 +67,7 @@ export default function About() {
       <SectionDivider variant="dots" />
 
       {/* Foto + Bio */}
-      <section className="py-16 bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+      <section className="py-16 transition-colors duration-300" style={{ backgroundColor: 'var(--color-surface)' }}>
         <div className="container mx-auto px-4">
           <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
             <RevealOnScroll direction="left">
@@ -74,7 +75,7 @@ export default function About() {
                 <div className="relative group">
                   {/* Glow behind photo */}
                   <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" aria-hidden="true" />
-                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl border-8 border-white dark:border-gray-800">
+                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl border-8" style={{ borderColor: 'var(--color-surface)' }}>
                     <img
                       src={logo}
                       alt={t('about.photoAlt')}
@@ -91,13 +92,13 @@ export default function About() {
 
             <RevealOnScroll direction="right" delay={100}>
               <div className="space-y-6 text-lg">
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                   {t('about.bio.p1')}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                   {t('about.bio.p2')}
                 </p>
-                <p className="text-gray-700 dark:text-gray-300 leading-relaxed">
+                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
                   {t('about.bio.p3')}
                 </p>
 
@@ -114,7 +115,8 @@ export default function About() {
                     href="/docs/cv-pedro-metidieri.pdf"
                     download
                     {...hoverScale}
-                    className="inline-flex items-center gap-3 rounded-full border-2 border-gray-300 dark:border-gray-600 px-8 py-4 text-lg font-medium text-gray-700 dark:text-gray-300 hover:border-indigo-600 hover:text-indigo-600 dark:hover:border-indigo-400 dark:hover:text-indigo-400 transition-colors duration-200 will-change-transform"
+                    className="inline-flex items-center gap-3 rounded-full border-2 px-8 py-4 text-lg font-medium transition-colors duration-200 will-change-transform"
+                    style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
                   >
                     <Download className="h-5 w-5" aria-hidden="true" />
                     {t('common.downloadCv')}
@@ -129,10 +131,11 @@ export default function About() {
       <SectionDivider variant="wave" />
 
       {/* Experiencia - resumen con link */}
-      <section className="py-20 bg-white dark:bg-gray-950 transition-colors duration-300">
+      <section className="py-20 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
         <div className="container mx-auto px-4">
           <AnimatedTitle
-            className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+            className="font-display text-3xl md:text-4xl font-bold text-center mb-4"
+            style={{ color: 'var(--color-text)' }}
           >
             {t('about.experience.title')}
           </AnimatedTitle>
@@ -141,7 +144,8 @@ export default function About() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={viewportOnce}
             transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
-            className="text-center text-gray-600 dark:text-gray-400 mb-12 max-w-xl mx-auto"
+            className="text-center mb-12 max-w-xl mx-auto"
+            style={{ color: 'var(--color-text-muted)' }}
           >
             {t('experience.subtitle')}
           </motion.p>
@@ -164,20 +168,22 @@ export default function About() {
                     boxShadow: '0 12px 30px rgba(99, 102, 241, 0.12)',
                     transition: { type: 'spring', stiffness: 300, damping: 20 },
                   }}
-                  className="flex items-center gap-4 p-5 rounded-xl bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 transition-colors duration-200 will-change-transform cursor-default"
+                  className="flex items-center gap-4 p-5 rounded-xl border transition-colors duration-200 will-change-transform cursor-default"
+                  style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
                 >
-                  <div className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center ${
-                    job.current
-                      ? 'bg-gradient-to-br from-indigo-500 to-purple-600'
-                      : 'bg-gray-200 dark:bg-gray-800'
-                  }`}>
-                    <Icon className={`w-5 h-5 ${job.current ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`} />
+                  <div
+                    className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center ${
+                      job.current ? 'bg-gradient-to-br from-indigo-500 to-purple-600' : ''
+                    }`}
+                    style={job.current ? {} : { backgroundColor: 'var(--color-surface-2)' }}
+                  >
+                    <Icon className="w-5 h-5" style={{ color: job.current ? '#FFFFFF' : 'var(--color-text-muted)' }} />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-gray-900 dark:text-white text-sm md:text-base">
+                    <h3 className="font-semibold text-sm md:text-base" style={{ color: 'var(--color-text)' }}>
                       {t(`about.experience.${job.jobKey}.title`)}
                     </h3>
-                    <p className="text-sm text-gray-500 dark:text-gray-400">
+                    <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
                       {t(`about.experience.${job.jobKey}.company`)} · {t(`about.experience.${job.jobKey}.period`)}
                     </p>
                   </div>
@@ -202,7 +208,8 @@ export default function About() {
             <motion.a
               href="/experiencia"
               {...hoverScale}
-              className="inline-flex items-center gap-2 text-indigo-600 dark:text-indigo-400 hover:text-indigo-700 dark:hover:text-indigo-300 font-medium transition-colors duration-200"
+              className="inline-flex items-center gap-2 font-medium transition-colors duration-200"
+              style={{ color: 'var(--color-primary)' }}
             >
               <Briefcase className="w-4 h-4" />
               {t('experience.seeAll')}
@@ -214,14 +221,15 @@ export default function About() {
 
       {/* CTA final */}
       <RevealOnScroll direction="fade">
-        <section className="py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-950 dark:to-black text-center">
+        <section className="py-20 text-center" style={{ background: 'linear-gradient(to bottom, var(--color-bg), var(--color-surface))' }}>
           <div className="container mx-auto px-4">
             <AnimatedTitle
-              className="font-display text-3xl font-bold mb-6 text-gray-900 dark:text-white"
+              className="font-display text-3xl font-bold mb-6"
+              style={{ color: 'var(--color-text)' }}
             >
               {t('about.final.title')}
             </AnimatedTitle>
-            <p className="text-xl text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-10">
+            <p className="text-xl max-w-2xl mx-auto mb-10" style={{ color: 'var(--color-text-muted)' }}>
               {t('about.final.subtitle')}
             </p>
             <motion.a

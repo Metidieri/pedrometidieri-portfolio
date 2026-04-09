@@ -56,10 +56,10 @@ function App() {
         {t('skipToContent')}
       </a>
 
-      <div className="min-h-screen flex flex-col bg-white dark:bg-gray-950 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+      <div className="min-h-screen flex flex-col transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)', color: 'var(--color-text)' }}>
         <Header />
 
-        <main id="main-content" className="flex-grow bg-white dark:bg-gray-950" tabIndex={-1}>
+        <main id="main-content" className="flex-grow" style={{ backgroundColor: 'var(--color-bg)' }} tabIndex={-1}>
           <ErrorBoundary>
             <Suspense fallback={
               <div className="flex items-center justify-center min-h-[60vh]" role="status" aria-label={t('loading')}>

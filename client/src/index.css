@@ -8,15 +8,42 @@
   --font-sans: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
 
-  /* Design system colors */
+  /* Design system colors (defaults consumed by Tailwind v4) */
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-text: #0F172A;
+  --color-text-muted: #64748B;
+  --color-primary: #6366F1;
+  --color-green: #16A34A;
+}
+
+/* ── Light mode (default) ── */
+:root {
+  --color-bg: #F8FAFC;
+  --color-surface: #FFFFFF;
+  --color-surface-2: #F1F5F9;
+  --color-border: #E2E8F0;
+  --color-text: #0F172A;
+  --color-text-muted: #64748B;
+  --color-primary: #6366F1;
+  --color-green: #16A34A;
+  --color-font-display: 'Archivo', sans-serif;
+  --color-font-body: 'Space Grotesk', sans-serif;
+  --color-font-mono: 'JetBrains Mono', monospace;
+}
+
+/* ── Dark mode (class .dark on <html>) ── */
+.dark {
   --color-bg: #0F172A;
   --color-surface: #1E293B;
   --color-surface-2: #334155;
-  --color-primary: #6366F1;
-  --color-green: #22C55E;
+  --color-border: #334155;
   --color-text: #F8FAFC;
   --color-text-muted: #94A3B8;
-  --color-border: #334155;
+  --color-primary: #6366F1;
+  --color-green: #22C55E;
 }
 
 html {
@@ -98,6 +125,49 @@ html {
   .animate-float-slow,
   .animate-float-slow-reverse {
     animation: none;
+  }
+}
+
+/* ── Tech ticker animations ── */
+@keyframes ticker {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+@keyframes ticker-reverse {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+
+.ticker-forward {
+  animation: ticker var(--ticker-speed, 35s) linear infinite;
+}
+
+.ticker-reverse {
+  animation: ticker-reverse var(--ticker-speed, 30s) linear infinite;
+}
+
+@media (max-width: 768px) {
+  .ticker-forward {
+    animation-duration: var(--ticker-speed-mobile, 21s);
+  }
+  .ticker-reverse {
+    animation-duration: var(--ticker-speed-mobile, 18s);
+  }
+}
+
+.ticker-row:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+.ticker-pill:hover {
+  border-color: var(--color-primary) !important;
+  background-color: var(--color-surface-2) !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none !important;
   }
 }
 

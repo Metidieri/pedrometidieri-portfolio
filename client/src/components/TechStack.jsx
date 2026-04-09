@@ -1,156 +1,257 @@
 // src/components/TechStack.jsx
-import { motion, useReducedMotion } from 'framer-motion';
+// Infinite ticker carousel — four rows by category, theme-aware logos.
+import { useState, useEffect } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Code2, Server, Brain, Rocket } from 'lucide-react';
-import AnimatedTitle from './AnimatedTitle';
-import { viewportOnce } from '../lib/motion';
+import { motion, useReducedMotion } from 'framer-motion';
 
-const techGroups = [
-  {
-    key: 'frontend',
-    icon: Code2,
-    items: [
-      { name: 'HTML5', icon: '/tech/html5.svg', color: '#E44D26', ctx: 'html5' },
-      { name: 'CSS3', icon: '/tech/css3.svg', color: '#1572B6', ctx: 'css3' },
-      { name: 'JavaScript (ES6+)', icon: '/tech/javascript.svg', color: '#F7DF1E', ctx: 'js' },
-      { name: 'TypeScript', icon: '/tech/typescript.svg', color: '#3178C6', ctx: 'ts' },
-      { name: 'React', icon: '/tech/react.svg', color: '#61DAFB', ctx: 'react' },
-      { name: 'Next.js', icon: '/tech/nextjs.svg', color: '#6366F1', ctx: 'nextjs' },
-      { name: 'Tailwind CSS', icon: '/tech/tailwind.svg', color: '#38BDF8', ctx: 'tailwind' },
-      { name: 'Bootstrap', icon: '/tech/bootstrap.svg', color: '#7952B3', ctx: 'bootstrap' },
-      { name: 'Framer Motion', icon: '/tech/framer-motion.svg', color: '#0055FF', ctx: 'framer' },
-      { name: 'Vite', icon: '/tech/vite.svg', color: '#646CFF', ctx: 'vite' },
-    ],
-  },
-  {
-    key: 'backend',
-    icon: Server,
-    items: [
-      { name: 'Node.js', icon: '/tech/nodejs.svg', color: '#339933', ctx: 'node' },
-      { name: 'Express.js', icon: '/tech/express.svg', color: '#6B7280', ctx: 'express' },
-      { name: 'Python', icon: '/tech/python.svg', color: '#3776AB', ctx: 'python' },
-      { name: 'Flask', icon: '/tech/flask.svg', color: '#6B7280', ctx: 'flask' },
-      { name: 'PHP', icon: '/tech/php.svg', color: '#6181B6', ctx: 'php' },
-      { name: 'REST APIs', icon: '/tech/rest-api.svg', color: '#009688', ctx: 'rest' },
-      { name: 'PostgreSQL', icon: '/tech/postgresql.svg', color: '#336791', ctx: 'postgres' },
-      { name: 'MySQL', icon: '/tech/mysql.svg', color: '#00758F', ctx: 'mysql' },
-      { name: 'Supabase', icon: '/tech/supabase.svg', color: '#3ECF8E', ctx: 'supabase' },
-    ],
-  },
-  {
-    key: 'ai',
-    icon: Brain,
-    items: [
-      { name: 'OpenAI API', icon: '/tech/openai.svg', color: '#10A37F', ctx: 'openai' },
-      { name: 'Claude API', icon: '/tech/claude.svg', color: '#D97757', ctx: 'claude' },
-      { name: 'Grok', icon: '/tech/grok.svg', color: '#FF9900', ctx: 'grok' },
-      { name: 'LangChain', icon: '/tech/langchain.svg', color: '#1C3C3C', ctx: 'langchain' },
-      { name: 'Prompt Engineering', icon: '/tech/prompt-eng.svg', color: '#6366F1', ctx: 'prompteng' },
-    ],
-  },
-  {
-    key: 'devops',
-    icon: Rocket,
-    items: [
-      { name: 'Git', icon: '/tech/git.svg', color: '#F34F29', ctx: 'git' },
-      { name: 'GitHub', icon: '/tech/github.svg', color: '#6B7280', ctx: 'github' },
-      { name: 'Docker', icon: '/tech/docker.svg', color: '#2496ED', ctx: 'docker' },
-      { name: 'Vercel', icon: '/tech/vercel.svg', color: '#6B7280', ctx: 'vercel' },
-      { name: 'CI/CD Pipelines', icon: '/tech/cicd.svg', color: '#2088FF', ctx: 'cicd' },
-      { name: 'Hostinger', icon: '/tech/hostinger.svg', color: '#673DE6', ctx: 'hostinger' },
-      { name: 'Serverless Functions', icon: '/tech/serverless.svg', color: '#F59E0B', ctx: 'serverless' },
-    ],
-  },
+/* ── Theme detection hook ──────────────────────────────── */
+function useThemeDetect() {
+  const [isDark, setIsDark] = useState(
+    () => document.documentElement.classList.contains('dark')
+  );
+
+  useEffect(() => {
+    const observer = new MutationObserver(() => {
+      setIsDark(document.documentElement.classList.contains('dark'));
+    });
+    observer.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['class'],
+    });
+    return () => observer.disconnect();
+  }, []);
+
+  return isDark;
+}
+
+/* ── Icon theme types ──────────────────────────────────── */
+// neutral  → works on any background, no filter
+// dark     → black icon, needs invert in dark mode
+// light    → white icon, needs invert in light mode
+// themed   → has separate -blanco/-negro variants
+
+/* ── Row data ──────────────────────────────────────────── */
+const frontend = [
+  { name: 'React', icon: '/tech/react.svg', theme: 'neutral' },
+  { name: 'Next.js', icon: '/tech/nextjs.svg', theme: 'dark' },
+  { name: 'TypeScript', icon: '/tech/typescript.svg', theme: 'neutral' },
+  { name: 'JavaScript', icon: '/tech/javascript.svg', theme: 'neutral' },
+  { name: 'HTML5', icon: '/tech/html5.svg', theme: 'neutral' },
+  { name: 'CSS3', icon: '/tech/css3.svg', theme: 'neutral' },
+  { name: 'Tailwind CSS', icon: '/tech/tailwind.svg', theme: 'neutral' },
+  { name: 'Framer Motion', icon: '/tech/framer-motion.svg', theme: 'light' },
+  { name: 'Vite', icon: '/tech/vite.svg', theme: 'neutral' },
+  { name: 'React Router', icon: '/tech/react-router.svg', theme: 'dark' },
+  { name: 'Bootstrap', icon: '/tech/bootstrap.svg', theme: 'neutral' },
 ];
 
-const containerVariants = {
-  hidden: {},
-  visible: { transition: { staggerChildren: 0.04 } },
-};
+const backend = [
+  { name: 'Python', icon: '/tech/python.svg', theme: 'neutral' },
+  { name: 'Flask', icon: '/tech/flask.svg', theme: 'dark' },
+  { name: 'Node.js', icon: '/tech/nodejs.svg', theme: 'neutral' },
+  { name: 'Express', icon: '/tech/express.svg', theme: 'dark' },
+  { name: 'PHP', icon: '/tech/php.svg', theme: 'neutral' },
+  { name: 'PostgreSQL', icon: '/tech/postgresql.svg', theme: 'neutral' },
+  { name: 'MySQL', icon: '/tech/mysql.svg', theme: 'neutral' },
+  { name: 'Supabase', icon: '/tech/supabase.svg', theme: 'neutral' },
+  { name: 'REST APIs', icon: '/tech/rest-api.svg', theme: 'dark' },
+  { name: 'TanStack Query', icon: '/tech/tanstack', theme: 'themed' },
+  { name: 'Claude API', icon: '/tech/claude.svg', theme: 'neutral' },
+];
 
-const itemVariants = {
-  hidden: { opacity: 0, y: 16 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.4, ease: [0.4, 0, 0.2, 1] },
-  },
-};
+const devops = [
+  { name: 'Vercel', icon: '/tech/vercel', theme: 'themed' },
+  { name: 'Railway', icon: '/tech/railway.svg', theme: 'dark' },
+  { name: 'Docker', icon: '/tech/docker.svg', theme: 'neutral' },
+  { name: 'Git', icon: '/tech/git.svg', theme: 'neutral' },
+  { name: 'GitHub', icon: '/tech/github.svg', theme: 'dark' },
+  { name: 'Hostinger', icon: '/tech/hostinger.svg', theme: 'neutral' },
+  { name: 'CI/CD', icon: '/tech/cicd.svg', theme: 'dark' },
+  { name: 'Serverless', icon: '/tech/serverless.svg', theme: 'neutral' },
+];
 
+const aiTools = [
+  { name: 'OpenAI', icon: '/tech/openai.svg', theme: 'dark' },
+  { name: 'Grok', icon: '/tech/grok.svg', theme: 'dark' },
+  { name: 'LangChain', icon: '/tech/langchain.svg', theme: 'neutral' },
+  { name: 'Claude AI', icon: '/tech/claude.svg', theme: 'neutral' },
+];
+
+/* ── Resolve icon src and filter ───────────────────────── */
+function resolveIcon(item, isDark) {
+  const { icon, theme } = item;
+
+  if (theme === 'themed') {
+    const src = isDark ? `${icon}-blanco.svg` : `${icon}-negro.svg`;
+    return { src, filter: 'none' };
+  }
+
+  if (theme === 'dark') {
+    return { src: icon, filter: isDark ? 'invert(1)' : 'none' };
+  }
+
+  if (theme === 'light') {
+    return { src: icon, filter: isDark ? 'none' : 'invert(1)' };
+  }
+
+  // neutral
+  return { src: icon, filter: 'none' };
+}
+
+/* ── Pill component ────────────────────────────────────── */
+function TechPill({ name, icon, theme, isDark }) {
+  const { src, filter } = resolveIcon({ icon, theme }, isDark);
+
+  return (
+    <span
+      className="ticker-pill inline-flex items-center flex-shrink-0 rounded-full border transition-colors duration-200 cursor-default"
+      style={{
+        backgroundColor: 'var(--color-surface)',
+        borderColor: 'var(--color-border)',
+        padding: '10px 20px',
+        gap: '10px',
+      }}
+    >
+      <img
+        src={src}
+        alt=""
+        aria-hidden="true"
+        width="20"
+        height="20"
+        className="w-5 h-5 object-contain flex-shrink-0"
+        style={{ filter }}
+        loading="lazy"
+        decoding="async"
+      />
+      <span
+        className="font-sans font-medium whitespace-nowrap"
+        style={{ fontSize: '14px', color: 'var(--color-text)' }}
+      >
+        {name}
+      </span>
+    </span>
+  );
+}
+
+/* ── Ticker row ────────────────────────────────────────── */
+function TickerRow({ items, reverse = false, speed, label, isDark }) {
+  const doubled = [...items, ...items];
+
+  return (
+    <div>
+      {/* Row label */}
+      <div
+        className="container mx-auto px-4 max-w-6xl mb-2"
+        style={{
+          fontFamily: 'var(--font-mono)',
+          fontSize: '11px',
+          color: 'var(--color-text-muted)',
+          textTransform: 'uppercase',
+          letterSpacing: '0.1em',
+        }}
+      >
+        {label}
+      </div>
+
+      {/* Ticker */}
+      <div
+        className="ticker-row relative overflow-hidden"
+        style={{
+          maskImage:
+            'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+          WebkitMaskImage:
+            'linear-gradient(to right, transparent, black 10%, black 90%, transparent)',
+        }}
+      >
+        <div
+          className={`ticker-track inline-flex gap-4 ${reverse ? 'ticker-reverse' : 'ticker-forward'}`}
+          style={{
+            '--ticker-speed': `${speed}s`,
+            '--ticker-speed-mobile': `${Math.round(speed * 0.6)}s`,
+          }}
+          aria-hidden="true"
+        >
+          {doubled.map((tech, i) => (
+            <TechPill key={`${tech.name}-${i}`} {...tech} isDark={isDark} />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+/* ── Main component ────────────────────────────────────── */
 export default function TechStack() {
   const { t } = useTranslation();
   const shouldReduce = useReducedMotion();
+  const isDark = useThemeDetect();
 
   return (
-    <section className="py-16 md:py-24 bg-white dark:bg-gray-950 border-t border-gray-200 dark:border-gray-800 transition-colors duration-300">
-      <div className="container mx-auto px-4">
-        <AnimatedTitle
-          className="font-display text-3xl md:text-4xl font-bold text-center mb-4 text-gray-900 dark:text-white"
+    <section
+      className="py-16 md:py-24 overflow-hidden transition-colors duration-300"
+      style={{ backgroundColor: 'var(--color-bg)' }}
+    >
+      <div className="container mx-auto px-4 max-w-6xl">
+        {/* Title */}
+        <motion.div
+          initial={shouldReduce ? {} : { opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={
+            shouldReduce
+              ? { duration: 0 }
+              : { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+          }
+          className="text-center mb-12 md:mb-16"
         >
-          {t('techStack.title')}
-        </AnimatedTitle>
+          <h2
+            className="font-display font-black"
+            style={{ fontSize: 'clamp(2rem, 4vw, 3rem)', lineHeight: 1.1 }}
+          >
+            <span style={{ color: 'var(--color-text)' }}>
+              {t('techStack.tickerTitle')}{' '}
+            </span>
+            <span style={{ color: 'var(--color-primary)' }}>
+              {t('techStack.tickerAccent')}
+            </span>
+          </h2>
+          <p
+            className="font-sans mt-4 max-w-lg mx-auto"
+            style={{ fontSize: '16px', color: 'var(--color-text-muted)' }}
+          >
+            {t('techStack.tickerSubtitle')}
+          </p>
+        </motion.div>
+      </div>
 
-        <div className="space-y-14 md:space-y-20 mt-12">
-          {techGroups.map((group) => {
-            const Icon = group.icon;
-            return (
-              <div key={group.key}>
-                {/* Category heading */}
-                <div className="flex items-center gap-3 md:gap-4 mb-6 md:mb-8">
-                  <span className="inline-flex items-center justify-center w-10 h-10 md:w-12 md:h-12 rounded-xl bg-gradient-to-br from-indigo-600 via-purple-600 to-pink-600 text-white shadow-lg shadow-indigo-500/30 dark:shadow-indigo-900/50 flex-shrink-0">
-                    <Icon className="w-5 h-5 md:w-6 md:h-6" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-display text-xl sm:text-2xl md:text-3xl font-bold text-gray-900 dark:text-white">
-                    {t(`techStack.groups.${group.key}`)}
-                  </h3>
-                  <span className="flex-1 h-px bg-gradient-to-r from-gray-200 dark:from-gray-800 to-transparent" aria-hidden="true" />
-                </div>
-
-                {/* Tech cards grid */}
-                <motion.div
-                  variants={shouldReduce ? {} : containerVariants}
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={viewportOnce}
-                  className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 md:gap-4"
-                >
-                  {group.items.map((tech) => (
-                    <motion.div
-                      key={tech.name}
-                      variants={shouldReduce ? {} : itemVariants}
-                      style={{ '--tech-color': tech.color }}
-                      className="group relative flex items-start gap-4 p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50 dark:bg-gray-900/60 hover:bg-white dark:hover:bg-gray-900 hover:border-[color:var(--tech-color)] hover:shadow-[0_10px_30px_-12px_var(--tech-color)] hover:-translate-y-0.5 hover:scale-[1.02] transition-all duration-300 cursor-default"
-                    >
-                      {/* Icon tile */}
-                      <div className="flex-shrink-0 w-12 h-12 flex items-center justify-center rounded-lg bg-white dark:bg-gray-800 p-2 ring-1 ring-gray-200 dark:ring-gray-700 group-hover:ring-[color:var(--tech-color)] transition-all duration-300">
-                        <img
-                          src={tech.icon}
-                          alt=""
-                          aria-hidden="true"
-                          width="32"
-                          height="32"
-                          className="w-full h-full object-contain"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-
-                      {/* Text */}
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-sm md:text-base text-gray-900 dark:text-white leading-tight">
-                          {tech.name}
-                        </h4>
-                        <p className="text-xs md:text-sm text-gray-600 dark:text-gray-400 mt-1 leading-snug">
-                          {t(`techStack.ctx.${tech.ctx}`)}
-                        </p>
-                      </div>
-                    </motion.div>
-                  ))}
-                </motion.div>
-              </div>
-            );
-          })}
-        </div>
+      {/* Ticker rows — full-bleed */}
+      <div className="flex flex-col" style={{ gap: '16px' }}>
+        <TickerRow
+          items={frontend}
+          speed={35}
+          label="// frontend"
+          isDark={isDark}
+        />
+        <TickerRow
+          items={backend}
+          reverse
+          speed={30}
+          label="// backend"
+          isDark={isDark}
+        />
+        <TickerRow
+          items={devops}
+          speed={28}
+          label="// devops"
+          isDark={isDark}
+        />
+        <TickerRow
+          items={aiTools}
+          reverse
+          speed={32}
+          label="// ia & tools"
+          isDark={isDark}
+        />
       </div>
     </section>
   );

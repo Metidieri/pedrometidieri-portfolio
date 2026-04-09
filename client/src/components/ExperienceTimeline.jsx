@@ -25,9 +25,8 @@ function TimelineLine({ containerRef, itemCount }) {
         {/* Background track */}
         <line
           x1="1.5" y1="0" x2="1.5" y2={height}
-          stroke="currentColor"
+          stroke="var(--color-border)"
           strokeWidth="3"
-          className="text-gray-200 dark:text-gray-800"
         />
         {/* Animated gradient line */}
         <defs>
@@ -54,9 +53,8 @@ function TimelineLine({ containerRef, itemCount }) {
       >
         <line
           x1="1.5" y1="0" x2="1.5" y2={height}
-          stroke="currentColor"
+          stroke="var(--color-border)"
           strokeWidth="3"
-          className="text-gray-200 dark:text-gray-800"
         />
         <defs>
           <linearGradient id="line-gradient-mobile" x1="0" y1="0" x2="0" y2="1">
@@ -96,11 +94,14 @@ function TimelineDot({ index, isCurrent }) {
           {isCurrent && (
             <span className="absolute inset-0 rounded-full bg-indigo-500 animate-ping opacity-30" />
           )}
-          <span className={`relative block rounded-full border-4 border-white dark:border-gray-950 shadow-lg ${
-            isCurrent
-              ? 'w-5 h-5 bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-500/40'
-              : 'w-4 h-4 bg-gray-400 dark:bg-gray-600'
-          }`} />
+          <span
+            className={`relative block rounded-full shadow-lg ${
+              isCurrent
+                ? 'w-5 h-5 bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-500/40'
+                : 'w-4 h-4'
+            }`}
+            style={{ borderWidth: '4px', borderStyle: 'solid', borderColor: 'var(--color-bg)', ...(!isCurrent ? { backgroundColor: 'var(--color-text-muted)' } : {}) }}
+          />
         </div>
       </motion.div>
 
@@ -115,11 +116,14 @@ function TimelineDot({ index, isCurrent }) {
           {isCurrent && (
             <span className="absolute inset-0 rounded-full bg-indigo-500 animate-ping opacity-30" />
           )}
-          <span className={`relative block rounded-full border-[3px] border-white dark:border-gray-950 shadow-lg ${
-            isCurrent
-              ? 'w-[26px] h-[26px] bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-500/40'
-              : 'w-5 h-5 bg-gray-400 dark:bg-gray-600'
-          }`} />
+          <span
+            className={`relative block rounded-full shadow-lg ${
+              isCurrent
+                ? 'w-[26px] h-[26px] bg-gradient-to-br from-indigo-500 to-purple-600 shadow-indigo-500/40'
+                : 'w-5 h-5'
+            }`}
+            style={{ borderWidth: '3px', borderStyle: 'solid', borderColor: 'var(--color-bg)', ...(!isCurrent ? { backgroundColor: 'var(--color-text-muted)' } : {}) }}
+          />
         </div>
       </motion.div>
     </>
@@ -152,7 +156,8 @@ function ExperienceCard({ job, index, isLeft, isMobile = false }) {
       initial="hidden"
       animate={isInView ? 'visible' : 'hidden'}
       whileHover={{ y: -6, transition: { duration: 0.25 } }}
-      className="group relative bg-white dark:bg-gray-900 rounded-2xl p-6 md:p-7 border border-gray-200 dark:border-gray-800 hover:border-indigo-500/40 dark:hover:border-indigo-500/30 shadow-sm hover:shadow-xl hover:shadow-indigo-500/10 dark:hover:shadow-indigo-500/5 transition-[border-color,box-shadow] duration-300"
+      className="group relative rounded-2xl p-6 md:p-7 border shadow-sm hover:shadow-xl transition-[border-color,box-shadow] duration-300"
+      style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
     >
       {/* Gradient glow on hover */}
       <div className="absolute -inset-px rounded-2xl bg-gradient-to-r from-indigo-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-indigo-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all duration-500 -z-10 blur-xl" aria-hidden="true" />
@@ -166,15 +171,16 @@ function ExperienceCard({ job, index, isLeft, isMobile = false }) {
           className={`flex-shrink-0 w-12 h-12 rounded-xl flex items-center justify-center ${
             job.current
               ? 'bg-gradient-to-br from-indigo-500 to-purple-600 shadow-lg shadow-indigo-500/25'
-              : 'bg-gray-100 dark:bg-gray-800 border border-gray-200 dark:border-gray-700'
+              : 'border'
           }`}
+          style={job.current ? {} : { backgroundColor: 'var(--color-surface-2)', borderColor: 'var(--color-border)' }}
         >
-          <Icon className={`w-5 h-5 ${job.current ? 'text-white' : 'text-gray-600 dark:text-gray-400'}`} />
+          <Icon className="w-5 h-5" style={{ color: job.current ? '#FFFFFF' : 'var(--color-text-muted)' }} />
         </motion.div>
 
         <div className="flex-1 min-w-0">
           <div className="flex flex-wrap items-center gap-2 mb-1">
-            <span className="text-sm font-semibold text-indigo-600 dark:text-indigo-400">
+            <span className="text-sm font-semibold" style={{ color: 'var(--color-primary)' }}>
               {t(`about.experience.${job.jobKey}.period`)}
             </span>
             {job.current && (
@@ -184,10 +190,10 @@ function ExperienceCard({ job, index, isLeft, isMobile = false }) {
               </span>
             )}
           </div>
-          <h3 className="text-lg md:text-xl font-bold text-gray-900 dark:text-white leading-tight">
+          <h3 className="text-lg md:text-xl font-bold leading-tight" style={{ color: 'var(--color-text)' }}>
             {t(`about.experience.${job.jobKey}.title`)}
           </h3>
-          <p className="text-sm font-medium text-indigo-600/80 dark:text-indigo-400/80 mt-0.5">
+          <p className="text-sm font-medium mt-0.5" style={{ color: 'var(--color-primary)', opacity: 0.8 }}>
             {t(`about.experience.${job.jobKey}.company`)}
           </p>
         </div>
@@ -201,7 +207,8 @@ function ExperienceCard({ job, index, isLeft, isMobile = false }) {
             initial={{ opacity: 0, x: -12 }}
             animate={isInView ? { opacity: 1, x: 0 } : { opacity: 0, x: -12 }}
             transition={{ duration: 0.4, delay: index * 0.15 + 0.4 + i * 0.08 }}
-            className="flex items-start gap-2.5 text-gray-600 dark:text-gray-400 text-sm leading-relaxed"
+            className="flex items-start gap-2.5 text-sm leading-relaxed"
+            style={{ color: 'var(--color-text-muted)' }}
           >
             <svg className="w-4 h-4 mt-0.5 flex-shrink-0 text-indigo-500/70" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true">
               <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
@@ -223,7 +230,8 @@ function ExperienceCard({ job, index, isLeft, isMobile = false }) {
               delay: index * 0.15 + 0.6 + techIdx * 0.06,
               ease: [0.34, 1.56, 0.64, 1],
             }}
-            className="text-xs px-3 py-1.5 rounded-full font-medium bg-indigo-50 dark:bg-indigo-950/40 text-indigo-600 dark:text-indigo-400 border border-indigo-200/70 dark:border-indigo-800/50 hover:bg-indigo-100 dark:hover:bg-indigo-950/60 hover:border-indigo-300 dark:hover:border-indigo-700/60 transition-colors duration-200 cursor-default"
+            className="text-xs px-3 py-1.5 rounded-full font-medium border transition-colors duration-200 cursor-default"
+            style={{ backgroundColor: 'rgba(99,102,241,0.08)', color: 'var(--color-primary)', borderColor: 'rgba(99,102,241,0.2)' }}
           >
             {tech}
           </motion.span>
@@ -242,7 +250,8 @@ export default function ExperienceTimeline() {
   return (
     <section
       id="experiencia"
-      className="relative py-20 md:py-28 bg-gray-50 dark:bg-gray-950 overflow-hidden transition-colors duration-300"
+      className="relative py-20 md:py-28 overflow-hidden transition-colors duration-300"
+      style={{ backgroundColor: 'var(--color-bg)' }}
     >
       {/* Decorative background blobs */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
@@ -258,7 +267,8 @@ export default function ExperienceTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={shouldReduce ? { duration: 0 } : { duration: 0.4 }}
-            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-indigo-50 dark:bg-indigo-950/50 border border-indigo-200 dark:border-indigo-800/50 text-indigo-600 dark:text-indigo-400 text-sm font-medium mb-6"
+            className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full border text-sm font-medium mb-6"
+            style={{ backgroundColor: 'rgba(99,102,241,0.08)', borderColor: 'rgba(99,102,241,0.2)', color: 'var(--color-primary)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-indigo-500" aria-hidden="true" />
             {t('experience.badge')}
@@ -269,7 +279,8 @@ export default function ExperienceTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.1 }}
-            className="font-display text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4"
+            className="font-display text-4xl md:text-5xl font-bold mb-4"
+            style={{ color: 'var(--color-text)' }}
           >
             {t('experience.title')}
           </motion.h2>
@@ -279,7 +290,8 @@ export default function ExperienceTimeline() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
-            className="text-lg text-gray-600 dark:text-gray-400 max-w-2xl mx-auto"
+            className="text-lg max-w-2xl mx-auto"
+            style={{ color: 'var(--color-text-muted)' }}
           >
             {t('experience.subtitle')}
           </motion.p>

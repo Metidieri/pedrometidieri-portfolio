@@ -42,7 +42,9 @@
       "Bash(ls:*)",
       "Bash(curl:*)",
       "Bash(python3 -c ':*)",
-      "WebFetch(domain:pedrometidieri.com)"
+      "WebFetch(domain:pedrometidieri.com)",
+      "Bash(python3 \"C:\\\\Users\\\\pedro\\\\.claude\\\\skills\\\\ui-ux-pro-max\\\\scripts\\\\search.py\" \"portfolio developer tech stack dark mode icons\" --design-system -p \"Pedro Metidieri Portfolio\")",
+      "Bash(py --version)"
     ]
   }
 }

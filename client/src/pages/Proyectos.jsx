@@ -55,9 +55,9 @@ export default function Proyectos() {
               className="font-display font-black tracking-tight"
               style={{ fontSize: 'clamp(2.5rem, 5vw, 4rem)', lineHeight: 1.1 }}
             >
-              <span style={{ color: 'var(--color-text-muted)' }}>Mis</span>
+              <span style={{ color: 'var(--color-text-muted)' }}>{t('projects.hero.titleLine1')}</span>
               <br />
-              <span style={{ color: '#FFFFFF' }}>Proyectos</span>
+              <span style={{ color: 'var(--color-text)' }}>{t('projects.hero.titleLine2')}</span>
             </h1>
 
             {/* Animated decorative line */}
@@ -204,13 +204,13 @@ export default function Proyectos() {
                                 color: 'var(--color-primary)',
                               }}
                             >
-                              Proyecto destacado
+                              {t('projects.featuredBadge')}
                             </span>
                           )}
 
                           <h2
                             className="font-display font-semibold mb-3"
-                            style={{ fontSize: '22px', color: '#FFFFFF', lineHeight: 1.3 }}
+                            style={{ fontSize: '22px', color: 'var(--color-text)', lineHeight: 1.3 }}
                           >
                             {title}
                           </h2>
@@ -243,7 +243,7 @@ export default function Proyectos() {
                                   color: 'var(--color-text-muted)',
                                 }}
                               >
-                                +{remaining} m&aacute;s
+                                {t('projects.moreTech', { count: remaining })}
                               </span>
                             )}
                           </div>
@@ -352,7 +352,7 @@ export default function Proyectos() {
                         <div className="p-6">
                           <h3
                             className="font-display font-semibold mb-2 line-clamp-1"
-                            style={{ fontSize: '20px', color: '#FFFFFF' }}
+                            style={{ fontSize: '20px', color: 'var(--color-text)' }}
                           >
                             {title}
                           </h3>
@@ -400,7 +400,7 @@ export default function Proyectos() {
       <section
         className="py-24 text-center"
         style={{
-          background: 'linear-gradient(to bottom, var(--color-bg), #000000)',
+          background: 'linear-gradient(to bottom, var(--color-bg), var(--color-surface))',
         }}
       >
         <div className="container mx-auto px-4">
@@ -412,7 +412,7 @@ export default function Proyectos() {
           >
             <h2
               className="font-display font-bold mb-6"
-              style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: '#FFFFFF' }}
+              style={{ fontSize: 'clamp(1.8rem, 4vw, 3rem)', color: 'var(--color-text)' }}
             >
               {t('projects.cta.title')}
             </h2>
