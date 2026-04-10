@@ -59,7 +59,7 @@ const backend = [
   { name: 'Claude API', icon: '/tech/claude.svg', theme: 'neutral' },
 ];
 
-const devops = [
+const devopsandai = [
   { name: 'Vercel', icon: '/tech/vercel', theme: 'themed' },
   { name: 'Railway', icon: '/tech/railway.svg', theme: 'dark' },
   { name: 'Docker', icon: '/tech/docker.svg', theme: 'neutral' },
@@ -68,9 +68,6 @@ const devops = [
   { name: 'Hostinger', icon: '/tech/hostinger.svg', theme: 'neutral' },
   { name: 'CI/CD', icon: '/tech/cicd.svg', theme: 'dark' },
   { name: 'Serverless', icon: '/tech/serverless.svg', theme: 'neutral' },
-];
-
-const aiTools = [
   { name: 'OpenAI', icon: '/tech/openai.svg', theme: 'dark' },
   { name: 'Grok', icon: '/tech/grok.svg', theme: 'dark' },
   { name: 'LangChain', icon: '/tech/langchain.svg', theme: 'neutral' },
@@ -240,16 +237,9 @@ export default function TechStack() {
           isDark={isDark}
         />
         <TickerRow
-          items={devops}
+          items={devopsandai}
           speed={28}
-          label="// devops"
-          isDark={isDark}
-        />
-        <TickerRow
-          items={aiTools}
-          reverse
-          speed={32}
-          label="// ia & tools"
+          label="// devops & AI"
           isDark={isDark}
         />
       </div>

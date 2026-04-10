@@ -147,6 +147,74 @@
     "title": "Sobre mí",
     "subtitle": "Mi historia y cómo puedo ayudarte",
     "photoAlt": "Foto de Pedro Metidieri",
+    "label": "// sobre mí",
+    "greeting": "Hola, soy",
+    "name": "Pedro.",
+    "lead": "Desarrollador Full Stack con base en Extremadura, España, y fundador de MTDR Servicios Digitales. Construyo productos web reales: desde la arquitectura hasta el deploy en producción, pasando por la relación directa con el cliente.",
+    "stats": {
+      "projects": "proyectos",
+      "years": "años",
+      "satisfaction": "satisfacción"
+    },
+    "ctas": {
+      "viewProjects": "Ver proyectos",
+      "downloadCv": "Descargar CV"
+    },
+    "card": {
+      "name": "Pedro Metidieri",
+      "role": "Full Stack Developer",
+      "location": "Extremadura, España",
+      "available": "Disponible para trabajo",
+      "education": "ASIR + FP en curso",
+      "languages": "ES / EN",
+      "stack": "React · Flask · PostgreSQL",
+      "openToWork": "Open to work"
+    },
+    "story": {
+      "titleMain": "Mi",
+      "titleAccent": "trayectoria",
+      "items": {
+        "y2020": {
+          "year": "2020",
+          "title": "Primeros pasos en web",
+          "text": "Empecé con HTML, CSS y JavaScript. Primeros proyectos freelance para negocios locales en Extremadura."
+        },
+        "y2022": {
+          "year": "2022",
+          "title": "Formación técnica ASIR",
+          "text": "Especialización en sistemas y redes. Aprendí arquitectura de servidores, bases de datos y seguridad de aplicaciones."
+        },
+        "y2023": {
+          "year": "2023",
+          "title": "React, Flask y proyectos reales",
+          "text": "Adopté React 19, Flask y PostgreSQL como stack principal. Entregué cartas digitales QR, landings y aplicaciones web para clientes reales."
+        },
+        "y2024": {
+          "year": "2024-25",
+          "title": "MTDR y primer SaaS propio",
+          "text": "Fundé MTDR Servicios Digitales y desarrollé una plataforma SaaS multi-tenant completa con backend Flask, autenticación JWT, 62 tests y deploy en Railway + Vercel."
+        }
+      }
+    },
+    "values": {
+      "titleMain": "Cómo",
+      "titleAccent": "trabajo",
+      "subtitle": "Tres principios que guían cada proyecto que entrego.",
+      "cards": {
+        "code": {
+          "title": "Código limpio y testado",
+          "text": "Escribo código mantenible con tests. Cada proyecto incluye documentación y estructura que cualquier dev puede entender."
+        },
+        "comm": {
+          "title": "Comunicación directa",
+          "text": "Sin intermediarios. Trabajo directamente con el cliente o el equipo técnico, con updates regulares y sin sorpresas."
+        },
+        "delivery": {
+          "title": "Entrego, no prometo",
+          "text": "Todos mis proyectos están en producción con dominio propio. El portfolio es evidencia, no decoración."
+        }
+      }
+    },
     "bio": {
       "p1": "Soy Pedro Metidieri, desarrollador Full Stack con base en Extremadura, España, y fundador de MTDR Servicios Digitales. Construyo productos web reales: desde la arquitectura hasta el deploy en producción, pasando por la relación directa con el cliente.",
       "p2": "Mi stack principal es React 19, Flask/Python y Tailwind CSS, desplegado en Vercel con CI/CD desde GitHub. He entregado proyectos para negocios locales reales —cartas digitales QR, landings de conversión— y mantengo este portfolio como ejemplo vivo de lo que hago.",
@@ -191,9 +259,11 @@
       }
     },
     "final": {
-      "title": "¿Quieres trabajar juntos?",
-      "subtitle": "Estoy disponible para nuevos proyectos y colaboraciones.",
-      "button": "Hablemos"
+      "title": "¿Trabajamos juntos?",
+      "subtitle": "Cuéntame tu proyecto. Respondo en menos de 24h.",
+      "button": "Hablemos",
+      "buttonContact": "Contactar ahora",
+      "buttonProjects": "Ver proyectos"
     }
   },
   "services": {
@@ -201,35 +271,79 @@
       "title": "Servicios - Pedro Metidieri | Full Stack Developer",
       "description": "Desarrollo web, apps móviles, integración de IA, optimización y consultoría técnica. Proyectos personalizados y de alta calidad."
     },
+    "label": "// servicios",
     "hero": {
       "title": "Servicios que ofrezco",
-      "subtitle": "Soluciones digitales completas y personalizadas para hacer crecer tu negocio"
+      "titleMain": "Servicios",
+      "titleAccent": "que ofrezco",
+      "subtitle": "Soluciones digitales completas para hacer crecer tu negocio. Trabajo directamente contigo, sin intermediarios."
     },
+    "badges": {
+      "popular": "Más solicitado",
+      "new": "Nuevo"
+    },
+    "priceCta": "Solicitar presupuesto",
     "includes": "Qué incluye",
     "from": "Desde",
     "process": {
       "title": "Cómo trabajo contigo",
+      "titleMain": "Mi proceso",
+      "titleAccent": "de trabajo",
+      "subtitle": "Claro, directo y orientado a resultados.",
       "step1": {
         "title": "1. Descubrimiento",
+        "shortTitle": "Descubrimiento",
+        "shortText": "Entendemos tus objetivos, audiencia y requisitos técnicos.",
         "description": "Hablamos en detalle sobre tu proyecto, objetivos, público objetivo y requisitos técnicos."
       },
       "step2": {
         "title": "2. Propuesta y planificación",
+        "shortTitle": "Diseño y arquitectura",
+        "shortText": "Definimos la estructura, tecnologías y flujos de usuario.",
         "description": "Te presento un plan detallado, timeline, presupuesto y diseño inicial."
       },
       "step3": {
         "title": "3. Desarrollo e iteraciones",
+        "shortTitle": "Desarrollo iterativo",
+        "shortText": "Entregas parciales cada semana para que veas el progreso.",
         "description": "Desarrollo el proyecto con revisiones periódicas para que siempre estés al tanto del avance."
       },
       "step4": {
         "title": "4. Entrega y soporte",
+        "shortTitle": "Deploy y soporte",
+        "shortText": "Lanzamos en producción y doy soporte post-lanzamiento.",
         "description": "Lanzamos el proyecto y te ofrezco soporte post-lanzamiento y mantenimiento."
       }
     },
+    "faq": {
+      "titleMain": "Preguntas",
+      "titleAccent": "frecuentes",
+      "q1": {
+        "question": "¿Cuánto tiempo tarda un proyecto web?",
+        "answer": "Depende de la complejidad. Una landing page: 1-2 semanas. Una aplicación web completa: 4-8 semanas. Siempre fijamos plazos claros antes de empezar."
+      },
+      "q2": {
+        "question": "¿Trabajas con clientes fuera de España?",
+        "answer": "Sí, trabajo con clientes de cualquier país. La comunicación es principalmente por videollamada y email, en español o inglés."
+      },
+      "q3": {
+        "question": "¿Qué incluye el soporte post-lanzamiento?",
+        "answer": "1 mes de soporte incluido en todos los proyectos. Corrección de bugs, ajustes menores y resolución de dudas técnicas."
+      },
+      "q4": {
+        "question": "¿Puedo ver ejemplos de tu trabajo?",
+        "answer": "Claro, visita la sección de proyectos donde encontrarás case studies detallados con el problema, las decisiones técnicas y el resultado de cada proyecto."
+      },
+      "q5": {
+        "question": "¿Cómo es el proceso de pago?",
+        "answer": "50% al inicio del proyecto y 50% al entregar. Para proyectos grandes podemos acordar pagos por hitos."
+      }
+    },
     "final": {
-      "title": "¿Listo para dar el siguiente paso?",
-      "subtitle": "Hablemos de tu proyecto y te doy un presupuesto sin compromiso en menos de 24h.",
-      "button": "Solicitar presupuesto"
+      "title": "¿Tienes un proyecto en mente?",
+      "subtitle": "Cuéntame tu idea. Primera consulta gratuita.",
+      "button": "Hablemos ahora",
+      "buttonProjects": "Ver proyectos"
     },
     "web": {
       "title": "Desarrollo Web",
@@ -258,7 +372,7 @@
         "Chatbots y asistentes virtuales",
         "Análisis predictivo de datos",
         "Automatizaciones inteligentes",
-        "Integración con APIs de IA (OpenAI, Grok...)"
+        "Integración con APIs de IA (OpenAI, Claude...)"
       ]
     },
     "cloud": {

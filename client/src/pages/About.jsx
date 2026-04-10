@@ -1,25 +1,101 @@
 // src/pages/About.jsx
+import { useEffect, useRef, useState } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import { useTranslation } from 'react-i18next';
-import SEO from '../components/SEO';
-import RevealOnScroll from '../components/RevealOnScroll';
-import AnimatedTitle from '../components/AnimatedTitle';
-import SectionDivider from '../components/SectionDivider';
-import { ArrowRight, Download, Briefcase } from 'lucide-react';
-import logo from '../assets/logo.png';
-import { experience } from '../data/experience';
 import {
-  staggerContainer,
-  fadeInUp,
-  hoverScale,
-  viewportOnce,
-} from '../lib/motion';
+  ArrowRight,
+  Download,
+  MapPin,
+  Briefcase,
+  GraduationCap,
+  Globe,
+  Code,
+  Code2,
+  BookOpen,
+  Layers,
+  Rocket,
+  Shield,
+  MessageSquare,
+  CheckCircle,
+} from 'lucide-react';
+import SEO from '../components/SEO';
+import logo from '../assets/logo.png';
 
-const stagger = staggerContainer(0.1);
+const EASE_OUT_EXPO = [0.16, 1, 0.3, 1];
+
+/* ---------- Animated counter (Intersection Observer) ---------- */
+function CountUp({ end, suffix = '', duration = 1500 }) {
+  const shouldReduce = useReducedMotion();
+  const [value, setValue] = useState(shouldReduce ? end : 0);
+  const ref = useRef(null);
+  const startedRef = useRef(false);
+
+  useEffect(() => {
+    if (shouldReduce) return;
+    const node = ref.current;
+    if (!node) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting && !startedRef.current) {
+            startedRef.current = true;
+            const startTime = performance.now();
+            const tick = (now) => {
+              const elapsed = now - startTime;
+              const progress = Math.min(elapsed / duration, 1);
+              const eased = 1 - Math.pow(1 - progress, 3);
+              setValue(Math.round(end * eased));
+              if (progress < 1) requestAnimationFrame(tick);
+            };
+            requestAnimationFrame(tick);
+          }
+        });
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [end, duration, shouldReduce]);
+
+  return (
+    <span ref={ref}>
+      {value}
+      {suffix}
+    </span>
+  );
+}
+
+/* ---------- Story timeline data ---------- */
+const STORY_ITEMS = [
+  { key: 'y2020', icon: Code2 },
+  { key: 'y2022', icon: BookOpen },
+  { key: 'y2023', icon: Layers },
+  { key: 'y2024', icon: Rocket },
+];
+
+/* ---------- Values data ---------- */
+const VALUE_CARDS = [
+  { key: 'code', icon: Shield },
+  { key: 'comm', icon: MessageSquare },
+  { key: 'delivery', icon: CheckCircle },
+];
 
 export default function About() {
   const { t } = useTranslation();
   const shouldReduce = useReducedMotion();
+
+  const fadeFromLeft = shouldReduce
+    ? { initial: {}, animate: {} }
+    : {
+        initial: { opacity: 0, x: -40 },
+        animate: { opacity: 1, x: 0 },
+      };
+  const fadeFromRight = shouldReduce
+    ? { initial: {}, animate: {} }
+    : {
+        initial: { opacity: 0, x: 40 },
+        animate: { opacity: 1, x: 0 },
+      };
 
   return (
     <>
@@ -30,218 +106,633 @@ export default function About() {
         url="https://pedrometidieri.com/about"
       />
 
-      {/* Hero */}
-      <section className="pt-20 pb-16 md:pt-28 md:pb-24 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
+      {/* ============ SECTION 1: Hero personal ============ */}
+      <section
+        className="transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--color-bg)',
+          padding: '100px 0 60px',
+        }}
+      >
         <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto text-center">
+          <div className="grid lg:grid-cols-12 gap-12 lg:gap-16 items-center max-w-6xl mx-auto">
+            {/* Left column 55% */}
             <motion.div
-              initial={shouldReduce ? {} : { opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
+              {...fadeFromLeft}
+              transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+              className="lg:col-span-7"
             >
-              <h1 className="font-display text-5xl md:text-6xl font-bold mb-6" style={{ color: 'var(--color-text)' }}>
-                {t('about.title')}
+              <span
+                className="inline-block font-mono uppercase mb-5"
+                style={{
+                  color: 'var(--color-primary)',
+                  fontSize: '12px',
+                  letterSpacing: '0.1em',
+                }}
+              >
+                {t('about.label')}
+              </span>
+
+              <h1
+                className="font-display font-black mb-6 leading-[1.05]"
+                style={{
+                  color: 'var(--color-text)',
+                  fontSize: 'clamp(36px, 6vw, 52px)',
+                  fontWeight: 900,
+                }}
+              >
+                {t('about.greeting')}
+                <br />
+                <span
+                  style={{
+                    background: 'linear-gradient(135deg, #6366F1, #A855F7)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    backgroundClip: 'text',
+                    color: 'transparent',
+                  }}
+                >
+                  {t('about.name')}
+                </span>
               </h1>
+
+              <p
+                className="font-sans mb-10"
+                style={{
+                  color: 'var(--color-text-muted)',
+                  fontSize: '17px',
+                  lineHeight: 1.8,
+                  maxWidth: '500px',
+                }}
+              >
+                {t('about.lead')}
+              </p>
+
+              {/* Stats row */}
+              <div
+                className="flex items-center gap-6 sm:gap-10 mb-10"
+                role="list"
+                aria-label="Key stats"
+              >
+                <div role="listitem" className="flex flex-col">
+                  <span
+                    className="font-display font-black"
+                    style={{
+                      color: 'var(--color-primary)',
+                      fontSize: '36px',
+                      fontWeight: 900,
+                      lineHeight: 1,
+                    }}
+                  >
+                    <CountUp end={5} suffix="+" />
+                  </span>
+                  <span
+                    className="mt-2"
+                    style={{ color: 'var(--color-text-muted)', fontSize: '13px' }}
+                  >
+                    {t('about.stats.projects')}
+                  </span>
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  style={{
+                    width: '1px',
+                    height: '48px',
+                    backgroundColor: 'var(--color-border)',
+                  }}
+                />
+
+                <div role="listitem" className="flex flex-col">
+                  <span
+                    className="font-display font-black"
+                    style={{
+                      color: 'var(--color-primary)',
+                      fontSize: '36px',
+                      fontWeight: 900,
+                      lineHeight: 1,
+                    }}
+                  >
+                    <CountUp end={3} suffix="+" />
+                  </span>
+                  <span
+                    className="mt-2"
+                    style={{ color: 'var(--color-text-muted)', fontSize: '13px' }}
+                  >
+                    {t('about.stats.years')}
+                  </span>
+                </div>
+
+                <div
+                  aria-hidden="true"
+                  style={{
+                    width: '1px',
+                    height: '48px',
+                    backgroundColor: 'var(--color-border)',
+                  }}
+                />
+
+                <div role="listitem" className="flex flex-col">
+                  <span
+                    className="font-display font-black"
+                    style={{
+                      color: 'var(--color-primary)',
+                      fontSize: '36px',
+                      fontWeight: 900,
+                      lineHeight: 1,
+                    }}
+                  >
+                    <CountUp end={100} suffix="%" />
+                  </span>
+                  <span
+                    className="mt-2"
+                    style={{ color: 'var(--color-text-muted)', fontSize: '13px' }}
+                  >
+                    {t('about.stats.satisfaction')}
+                  </span>
+                </div>
+              </div>
+
+              {/* Buttons */}
+              <div className="flex flex-col sm:flex-row gap-4">
+                <motion.a
+                  href="/proyectos"
+                  whileHover={shouldReduce ? {} : { y: -2 }}
+                  whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full px-7 py-3.5 font-medium text-white shadow-lg cursor-pointer transition-shadow duration-300"
+                  style={{
+                    backgroundColor: 'var(--color-primary)',
+                    fontSize: '15px',
+                  }}
+                >
+                  {t('about.ctas.viewProjects')}
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </motion.a>
+                <motion.a
+                  href="/docs/cv-pedro-metidieri.pdf"
+                  download
+                  whileHover={shouldReduce ? {} : { y: -2 }}
+                  whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                  className="inline-flex items-center justify-center gap-2 rounded-full border-2 px-7 py-3.5 font-medium cursor-pointer transition-colors duration-300"
+                  style={{
+                    borderColor: 'var(--color-border)',
+                    color: 'var(--color-text)',
+                    backgroundColor: 'transparent',
+                    fontSize: '15px',
+                  }}
+                >
+                  <Download className="w-4 h-4" aria-hidden="true" />
+                  {t('about.ctas.downloadCv')}
+                </motion.a>
+              </div>
             </motion.div>
-            <motion.p
-              initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.15, ease: [0.4, 0, 0.2, 1] }}
-              className="text-2xl max-w-2xl mx-auto"
-              style={{ color: 'var(--color-text-muted)' }}
-            >
-              {t('about.subtitle')}
-            </motion.p>
-            {/* Animated underline */}
+
+            {/* Right column 45% — identity card */}
             <motion.div
-              initial={shouldReduce ? {} : { scaleX: 0 }}
-              animate={{ scaleX: 1 }}
-              transition={shouldReduce ? { duration: 0 } : { duration: 0.6, delay: 0.4, ease: [0.4, 0, 0.2, 1] }}
-              className="mt-4 mx-auto h-1 w-16 rounded-full bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 origin-center"
-              aria-hidden="true"
-            />
+              {...fadeFromRight}
+              transition={{ duration: 0.6, ease: EASE_OUT_EXPO, delay: 0.1 }}
+              className="lg:col-span-5"
+            >
+              <div
+                style={{
+                  backgroundColor: 'var(--color-surface)',
+                  border: '1px solid var(--color-border)',
+                  borderRadius: '20px',
+                  padding: '32px',
+                  boxShadow: '0 10px 40px rgba(0, 0, 0, 0.06)',
+                }}
+              >
+                {/* Avatar */}
+                <div
+                  className="flex items-center justify-center mb-5"
+                  style={{
+                    width: '80px',
+                    height: '80px',
+                    borderRadius: '20px',
+                    background: 'linear-gradient(135deg, #6366F1, #A855F7)',
+                  }}
+                  aria-hidden="true"
+                >
+                  <span
+                    className="font-display text-white"
+                    style={{ fontSize: '28px', fontWeight: 700 }}
+                  >
+                    PM
+                  </span>
+                </div>
+
+                {/* Name + role */}
+                <h2
+                  className="font-display mb-1"
+                  style={{
+                    color: 'var(--color-text)',
+                    fontSize: '20px',
+                    fontWeight: 600,
+                  }}
+                >
+                  {t('about.card.name')}
+                </h2>
+                <p
+                  className="font-mono mb-5"
+                  style={{
+                    color: 'var(--color-primary)',
+                    fontSize: '14px',
+                  }}
+                >
+                  {t('about.card.role')}
+                </p>
+
+                <hr
+                  className="my-5"
+                  style={{ borderColor: 'var(--color-border)', borderTopWidth: '1px' }}
+                />
+
+                {/* Data list */}
+                <ul className="flex flex-col gap-3.5">
+                  {[
+                    [MapPin, t('about.card.location')],
+                    [Briefcase, t('about.card.available')],
+                    [GraduationCap, t('about.card.education')],
+                    [Globe, t('about.card.languages')],
+                    [Code, t('about.card.stack')],
+                  ].map((entry, i) => {
+                    const RowIcon = entry[0];
+                    const label = entry[1];
+                    return (
+                      <li
+                        key={i}
+                        className="flex items-center"
+                        style={{ gap: '10px' }}
+                      >
+                        <RowIcon
+                          className="flex-shrink-0"
+                          style={{
+                            width: '16px',
+                            height: '16px',
+                            color: 'var(--color-primary)',
+                          }}
+                          aria-hidden="true"
+                        />
+                        <span
+                          style={{
+                            color: 'var(--color-text-muted)',
+                            fontSize: '14px',
+                          }}
+                        >
+                          {label}
+                        </span>
+                      </li>
+                    );
+                  })}
+                </ul>
+
+                <hr
+                  className="my-5"
+                  style={{ borderColor: 'var(--color-border)', borderTopWidth: '1px' }}
+                />
+
+                {/* Open to work badge */}
+                <div
+                  className="inline-flex items-center gap-2"
+                  style={{
+                    backgroundColor: 'rgba(34, 197, 94, 0.1)',
+                    color: '#16A34A',
+                    borderRadius: '999px',
+                    padding: '6px 14px',
+                    fontSize: '13px',
+                    fontWeight: 600,
+                  }}
+                >
+                  <span
+                    className="hero-pulse-dot"
+                    aria-hidden="true"
+                    style={{
+                      width: '8px',
+                      height: '8px',
+                      borderRadius: '999px',
+                      backgroundColor: '#22C55E',
+                      display: 'inline-block',
+                    }}
+                  />
+                  {t('about.card.openToWork')}
+                </div>
+              </div>
+            </motion.div>
           </div>
         </div>
       </section>
 
-      <SectionDivider variant="dots" />
-
-      {/* Foto + Bio */}
-      <section className="py-16 transition-colors duration-300" style={{ backgroundColor: 'var(--color-surface)' }}>
+      {/* ============ SECTION 2: Mi historia (timeline) ============ */}
+      <section
+        className="transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          padding: '80px 0',
+        }}
+      >
         <div className="container mx-auto px-4">
-          <div className="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-            <RevealOnScroll direction="left">
-              <div className="flex justify-center">
-                <div className="relative group">
-                  {/* Glow behind photo */}
-                  <div className="absolute -inset-3 rounded-2xl bg-gradient-to-br from-indigo-500/20 via-purple-500/20 to-pink-500/20 opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-500" aria-hidden="true" />
-                  <div className="relative w-80 h-80 md:w-96 md:h-96 rounded-2xl overflow-hidden shadow-2xl border-8" style={{ borderColor: 'var(--color-surface)' }}>
-                    <img
-                      src={logo}
-                      alt={t('about.photoAlt')}
-                      width="375"
-                      height="375"
-                      className="w-full h-full object-cover"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </div>
-                </div>
-              </div>
-            </RevealOnScroll>
-
-            <RevealOnScroll direction="right" delay={100}>
-              <div className="space-y-6 text-lg">
-                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-                  {t('about.bio.p1')}
-                </p>
-                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-                  {t('about.bio.p2')}
-                </p>
-                <p className="leading-relaxed" style={{ color: 'var(--color-text-muted)' }}>
-                  {t('about.bio.p3')}
-                </p>
-
-                <div className="pt-6 flex flex-col sm:flex-row gap-4">
-                  <motion.a
-                    href="/contacto"
-                    {...hoverScale}
-                    className="inline-flex items-center gap-3 rounded-full bg-indigo-600 px-8 py-4 text-lg font-medium text-white hover:bg-indigo-700 shadow-lg hover:shadow-xl hover:shadow-indigo-500/25 transition-colors duration-200 will-change-transform"
-                  >
-                    {t('about.cta')}
-                    <ArrowRight className="h-6 w-6" aria-hidden="true" />
-                  </motion.a>
-                  <motion.a
-                    href="/docs/cv-pedro-metidieri.pdf"
-                    download
-                    {...hoverScale}
-                    className="inline-flex items-center gap-3 rounded-full border-2 px-8 py-4 text-lg font-medium transition-colors duration-200 will-change-transform"
-                    style={{ borderColor: 'var(--color-border)', color: 'var(--color-text-muted)' }}
-                  >
-                    <Download className="h-5 w-5" aria-hidden="true" />
-                    {t('common.downloadCv')}
-                  </motion.a>
-                </div>
-              </div>
-            </RevealOnScroll>
-          </div>
-        </div>
-      </section>
-
-      <SectionDivider variant="wave" />
-
-      {/* Experiencia - resumen con link */}
-      <section className="py-20 transition-colors duration-300" style={{ backgroundColor: 'var(--color-bg)' }}>
-        <div className="container mx-auto px-4">
-          <AnimatedTitle
-            className="font-display text-3xl md:text-4xl font-bold text-center mb-4"
-            style={{ color: 'var(--color-text)' }}
+          <motion.h2
+            initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+            className="font-display text-center mb-16"
+            style={{
+              fontSize: 'clamp(30px, 5vw, 40px)',
+              fontWeight: 900,
+            }}
           >
-            {t('about.experience.title')}
-          </AnimatedTitle>
+            <span style={{ color: 'var(--color-text)' }}>
+              {t('about.story.titleMain')}
+            </span>{' '}
+            <span style={{ color: 'var(--color-primary)' }}>
+              {t('about.story.titleAccent')}
+            </span>
+          </motion.h2>
+
+          <div className="relative max-w-4xl mx-auto">
+            {/* Vertical line — desktop centered, mobile left */}
+            <div
+              aria-hidden="true"
+              className="absolute top-0 bottom-0 left-6 md:left-1/2 md:-translate-x-1/2"
+              style={{
+                width: '2px',
+                backgroundColor: 'var(--color-border)',
+              }}
+            />
+
+            <ul className="flex flex-col gap-12 md:gap-16">
+              {STORY_ITEMS.map((item, idx) => {
+                const Icon = item.icon;
+                const isLeft = idx % 2 === 0;
+                const fromX = shouldReduce ? 0 : isLeft ? -50 : 50;
+                return (
+                  <motion.li
+                    key={item.key}
+                    initial={shouldReduce ? {} : { opacity: 0, x: fromX }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: '-100px' }}
+                    transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+                    className={`relative md:grid md:grid-cols-2 md:gap-12 ${
+                      isLeft ? '' : 'md:[&>div:first-child]:order-2'
+                    }`}
+                  >
+                    {/* Content */}
+                    <div
+                      className={`pl-20 md:pl-0 ${
+                        isLeft ? 'md:pr-12 md:text-right' : 'md:pl-12 md:text-left'
+                      }`}
+                    >
+                      <p
+                        className="font-mono mb-2"
+                        style={{
+                          color: 'var(--color-primary)',
+                          fontSize: '12px',
+                        }}
+                      >
+                        {t(`about.story.items.${item.key}.year`)}
+                      </p>
+                      <h3
+                        className="font-display mb-2"
+                        style={{
+                          color: 'var(--color-text)',
+                          fontSize: '18px',
+                          fontWeight: 600,
+                        }}
+                      >
+                        {t(`about.story.items.${item.key}.title`)}
+                      </h3>
+                      <p
+                        style={{
+                          color: 'var(--color-text-muted)',
+                          fontSize: '15px',
+                          lineHeight: 1.7,
+                        }}
+                      >
+                        {t(`about.story.items.${item.key}.text`)}
+                      </p>
+                    </div>
+
+                    {/* Icon node — absolute positioned over the line */}
+                    <div
+                      className="absolute top-0 left-6 md:left-1/2 md:-translate-x-1/2 flex items-center justify-center"
+                      style={{
+                        width: '44px',
+                        height: '44px',
+                        borderRadius: '999px',
+                        backgroundColor: 'rgba(99, 102, 241, 0.15)',
+                        border: '2px solid var(--color-surface)',
+                        transform: 'translateX(-50%)',
+                      }}
+                    >
+                      <Icon
+                        style={{
+                          width: '20px',
+                          height: '20px',
+                          color: 'var(--color-primary)',
+                        }}
+                        aria-hidden="true"
+                      />
+                    </div>
+
+                    {/* Spacer for alternating column on desktop */}
+                    <div className="hidden md:block" />
+                  </motion.li>
+                );
+              })}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      {/* ============ SECTION 3: Valores ============ */}
+      <section
+        className="transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--color-bg)',
+          padding: '80px 0',
+        }}
+      >
+        <div className="container mx-auto px-4">
+          <motion.h2
+            initial={shouldReduce ? {} : { opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO }}
+            className="font-display text-center mb-4"
+            style={{
+              fontSize: 'clamp(30px, 5vw, 40px)',
+              fontWeight: 900,
+            }}
+          >
+            <span style={{ color: 'var(--color-text)' }}>
+              {t('about.values.titleMain')}
+            </span>{' '}
+            <span style={{ color: 'var(--color-primary)' }}>
+              {t('about.values.titleAccent')}
+            </span>
+          </motion.h2>
           <motion.p
             initial={shouldReduce ? {} : { opacity: 0, y: 12 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={viewportOnce}
-            transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.2 }}
-            className="text-center mb-12 max-w-xl mx-auto"
-            style={{ color: 'var(--color-text-muted)' }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.5, ease: EASE_OUT_EXPO, delay: 0.1 }}
+            className="text-center max-w-xl mx-auto mb-16"
+            style={{ color: 'var(--color-text-muted)', fontSize: '16px' }}
           >
-            {t('experience.subtitle')}
+            {t('about.values.subtitle')}
           </motion.p>
 
-          <motion.div
-            variants={stagger}
-            initial="hidden"
-            whileInView="visible"
-            viewport={viewportOnce}
-            className="max-w-3xl mx-auto space-y-6"
-          >
-            {experience.map((job) => {
-              const Icon = job.icon;
+          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {VALUE_CARDS.map((card, idx) => {
+              const Icon = card.icon;
               return (
                 <motion.div
-                  key={job.id}
-                  variants={fadeInUp}
-                  whileHover={{
-                    y: -4,
-                    boxShadow: '0 12px 30px rgba(99, 102, 241, 0.12)',
-                    transition: { type: 'spring', stiffness: 300, damping: 20 },
+                  key={card.key}
+                  initial={shouldReduce ? {} : { opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: '-80px' }}
+                  transition={{
+                    duration: 0.5,
+                    ease: EASE_OUT_EXPO,
+                    delay: shouldReduce ? 0 : idx * 0.15,
                   }}
-                  className="flex items-center gap-4 p-5 rounded-xl border transition-colors duration-200 will-change-transform cursor-default"
-                  style={{ backgroundColor: 'var(--color-surface)', borderColor: 'var(--color-border)' }}
+                  whileHover={
+                    shouldReduce
+                      ? {}
+                      : {
+                          y: -6,
+                          boxShadow: '0 20px 40px rgba(99, 102, 241, 0.15)',
+                          borderColor: 'var(--color-primary)',
+                        }
+                  }
+                  style={{
+                    backgroundColor: 'var(--color-surface)',
+                    border: '1px solid var(--color-border)',
+                    borderRadius: '16px',
+                    padding: '28px',
+                    transition: 'all 300ms ease',
+                  }}
                 >
                   <div
-                    className={`flex-shrink-0 w-11 h-11 rounded-lg flex items-center justify-center ${
-                      job.current ? 'bg-gradient-to-br from-indigo-500 to-purple-600' : ''
-                    }`}
-                    style={job.current ? {} : { backgroundColor: 'var(--color-surface-2)' }}
+                    className="flex items-center justify-center mb-5"
+                    style={{
+                      width: '48px',
+                      height: '48px',
+                      borderRadius: '12px',
+                      backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                    }}
                   >
-                    <Icon className="w-5 h-5" style={{ color: job.current ? '#FFFFFF' : 'var(--color-text-muted)' }} />
+                    <Icon
+                      style={{
+                        width: '24px',
+                        height: '24px',
+                        color: 'var(--color-primary)',
+                      }}
+                      aria-hidden="true"
+                    />
                   </div>
-                  <div className="flex-1 min-w-0">
-                    <h3 className="font-semibold text-sm md:text-base" style={{ color: 'var(--color-text)' }}>
-                      {t(`about.experience.${job.jobKey}.title`)}
-                    </h3>
-                    <p className="text-sm" style={{ color: 'var(--color-text-muted)' }}>
-                      {t(`about.experience.${job.jobKey}.company`)} · {t(`about.experience.${job.jobKey}.period`)}
-                    </p>
-                  </div>
-                  {job.current && (
-                    <span className="hidden sm:inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold bg-emerald-50 dark:bg-emerald-950/50 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800/60 uppercase tracking-wider">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" aria-hidden="true" />
-                      {t('about.experience.current')}
-                    </span>
-                  )}
+                  <h3
+                    className="font-display mb-3"
+                    style={{
+                      color: 'var(--color-text)',
+                      fontSize: '19px',
+                      fontWeight: 600,
+                    }}
+                  >
+                    {t(`about.values.cards.${card.key}.title`)}
+                  </h3>
+                  <p
+                    style={{
+                      color: 'var(--color-text-muted)',
+                      fontSize: '15px',
+                      lineHeight: 1.7,
+                    }}
+                  >
+                    {t(`about.values.cards.${card.key}.text`)}
+                  </p>
                 </motion.div>
               );
             })}
-          </motion.div>
-
-          <motion.div
-            initial={shouldReduce ? {} : { opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={viewportOnce}
-            transition={shouldReduce ? { duration: 0 } : { duration: 0.5, delay: 0.4 }}
-            className="text-center mt-10"
-          >
-            <motion.a
-              href="/experiencia"
-              {...hoverScale}
-              className="inline-flex items-center gap-2 font-medium transition-colors duration-200"
-              style={{ color: 'var(--color-primary)' }}
-            >
-              <Briefcase className="w-4 h-4" />
-              {t('experience.seeAll')}
-              <ArrowRight className="h-4 w-4" />
-            </motion.a>
-          </motion.div>
+          </div>
         </div>
       </section>
 
-      {/* CTA final */}
-      <RevealOnScroll direction="fade">
-        <section className="py-20 text-center" style={{ background: 'linear-gradient(to bottom, var(--color-bg), var(--color-surface))' }}>
-          <div className="container mx-auto px-4">
-            <AnimatedTitle
-              className="font-display text-3xl font-bold mb-6"
-              style={{ color: 'var(--color-text)' }}
+      {/* ============ SECTION 4: CTA final ============ */}
+      <section
+        className="relative overflow-hidden transition-colors duration-300"
+        style={{
+          backgroundColor: 'var(--color-surface)',
+          padding: '80px 0',
+        }}
+      >
+        {/* Subtle grid pattern overlay */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 hero-grid-bg opacity-40"
+          style={{ pointerEvents: 'none' }}
+        />
+
+        <div className="container mx-auto px-4 relative">
+          <motion.div
+            initial={shouldReduce ? {} : { opacity: 0, scale: 0.95 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6, ease: EASE_OUT_EXPO }}
+            className="text-center max-w-2xl mx-auto"
+          >
+            <h2
+              className="font-display mb-5"
+              style={{
+                color: 'var(--color-text)',
+                fontSize: 'clamp(30px, 5vw, 40px)',
+                fontWeight: 900,
+              }}
             >
               {t('about.final.title')}
-            </AnimatedTitle>
-            <p className="text-xl max-w-2xl mx-auto mb-10" style={{ color: 'var(--color-text-muted)' }}>
+            </h2>
+            <p
+              className="mb-10"
+              style={{
+                color: 'var(--color-text-muted)',
+                fontSize: '17px',
+                lineHeight: 1.7,
+              }}
+            >
               {t('about.final.subtitle')}
             </p>
-            <motion.a
-              href="/contacto"
-              {...hoverScale}
-              className="inline-block rounded-full bg-indigo-600 px-10 py-5 text-xl font-medium text-white hover:bg-indigo-700 shadow-xl hover:shadow-xl hover:shadow-indigo-500/25 transition-colors duration-200 will-change-transform"
-            >
-              {t('about.final.button')}
-            </motion.a>
-          </div>
-        </section>
-      </RevealOnScroll>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <motion.a
+                href="/contacto"
+                whileHover={shouldReduce ? {} : { y: -2 }}
+                whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full px-9 py-4 font-medium text-white shadow-xl cursor-pointer transition-shadow duration-300"
+                style={{
+                  backgroundColor: 'var(--color-primary)',
+                  fontSize: '16px',
+                }}
+              >
+                {t('about.final.buttonContact')}
+                <ArrowRight className="w-5 h-5" aria-hidden="true" />
+              </motion.a>
+              <motion.a
+                href="/proyectos"
+                whileHover={shouldReduce ? {} : { y: -2 }}
+                whileTap={shouldReduce ? {} : { scale: 0.97 }}
+                className="inline-flex items-center justify-center gap-2 rounded-full border-2 px-9 py-4 font-medium cursor-pointer transition-colors duration-300"
+                style={{
+                  borderColor: 'var(--color-border)',
+                  color: 'var(--color-text)',
+                  backgroundColor: 'transparent',
+                  fontSize: '16px',
+                }}
+              >
+                {t('about.final.buttonProjects')}
+              </motion.a>
+            </div>
+          </motion.div>
+        </div>
+      </section>
     </>
   );
 }

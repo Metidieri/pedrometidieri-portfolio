@@ -147,6 +147,74 @@
     "title": "About me",
     "subtitle": "My story and how I can help you",
     "photoAlt": "Photo of Pedro Metidieri",
+    "label": "// about me",
+    "greeting": "Hi, I'm",
+    "name": "Pedro.",
+    "lead": "Full Stack Developer based in Extremadura, Spain, and founder of MTDR Digital Services. I build real web products: from architecture to production deployment, including direct client relationships.",
+    "stats": {
+      "projects": "projects",
+      "years": "years",
+      "satisfaction": "satisfaction"
+    },
+    "ctas": {
+      "viewProjects": "View projects",
+      "downloadCv": "Download CV"
+    },
+    "card": {
+      "name": "Pedro Metidieri",
+      "role": "Full Stack Developer",
+      "location": "Extremadura, Spain",
+      "available": "Available for work",
+      "education": "ASIR + ongoing studies",
+      "languages": "ES / EN",
+      "stack": "React · Flask · PostgreSQL",
+      "openToWork": "Open to work"
+    },
+    "story": {
+      "titleMain": "My",
+      "titleAccent": "journey",
+      "items": {
+        "y2020": {
+          "year": "2020",
+          "title": "First steps in web",
+          "text": "I started with HTML, CSS and JavaScript. First freelance projects for local businesses in Extremadura."
+        },
+        "y2022": {
+          "year": "2022",
+          "title": "ASIR technical training",
+          "text": "Specialization in systems and networks. I learned server architecture, databases and application security."
+        },
+        "y2023": {
+          "year": "2023",
+          "title": "React, Flask and real projects",
+          "text": "I adopted React 19, Flask and PostgreSQL as my main stack. Delivered QR digital menus, landing pages and web apps for real clients."
+        },
+        "y2024": {
+          "year": "2024-25",
+          "title": "MTDR and my first SaaS",
+          "text": "Founded MTDR Digital Services and built a complete multi-tenant SaaS platform with Flask backend, JWT auth, 62 tests and deployment on Railway + Vercel."
+        }
+      }
+    },
+    "values": {
+      "titleMain": "How I",
+      "titleAccent": "work",
+      "subtitle": "Three principles that guide every project I deliver.",
+      "cards": {
+        "code": {
+          "title": "Clean, tested code",
+          "text": "I write maintainable code with tests. Every project ships with documentation and a structure any dev can pick up."
+        },
+        "comm": {
+          "title": "Direct communication",
+          "text": "No middlemen. I work directly with the client or technical team, with regular updates and no surprises."
+        },
+        "delivery": {
+          "title": "I deliver, I don't promise",
+          "text": "All my projects are live in production with their own domain. The portfolio is evidence, not decoration."
+        }
+      }
+    },
     "bio": {
       "p1": "I'm Pedro Metidieri, a Full Stack Developer based in Extremadura, Spain, and founder of MTDR Digital Services. I build real web products: from architecture to production deployment, including direct client relationships.",
       "p2": "My main stack is React 19, Flask/Python, and Tailwind CSS, deployed on Vercel with CI/CD from GitHub. I've delivered projects for real local businesses —QR digital menus, conversion landing pages— and maintain this portfolio as a live example of what I do.",
@@ -191,9 +259,11 @@
       }
     },
     "final": {
-      "title": "Want to work together?",
-      "subtitle": "I'm available for new projects and collaborations.",
-      "button": "Let's talk"
+      "title": "Shall we work together?",
+      "subtitle": "Tell me about your project. I respond in under 24h.",
+      "button": "Let's talk",
+      "buttonContact": "Contact me",
+      "buttonProjects": "View projects"
     }
   },
   "services": {
@@ -201,35 +271,79 @@
       "title": "Services - Pedro Metidieri | Full Stack Developer",
       "description": "Web development, mobile apps, AI integration, optimization and technical consulting. Custom high-quality projects."
     },
+    "label": "// services",
     "hero": {
       "title": "Services I Offer",
-      "subtitle": "Complete and personalized digital solutions to grow your business"
+      "titleMain": "Services",
+      "titleAccent": "I offer",
+      "subtitle": "Complete digital solutions to grow your business. I work directly with you, no middlemen."
     },
+    "badges": {
+      "popular": "Most requested",
+      "new": "New"
+    },
+    "priceCta": "Request a quote",
     "includes": "What's included",
     "from": "From",
     "process": {
       "title": "How I work with you",
+      "titleMain": "My work",
+      "titleAccent": "process",
+      "subtitle": "Clear, direct and results-oriented.",
       "step1": {
         "title": "1. Discovery",
+        "shortTitle": "Discovery",
+        "shortText": "We understand your goals, audience and technical requirements.",
         "description": "We talk in detail about your project, goals, target audience and technical requirements."
       },
       "step2": {
         "title": "2. Proposal & Planning",
+        "shortTitle": "Design & architecture",
+        "shortText": "We define the structure, technologies and user flows.",
         "description": "I present you a detailed plan, timeline, budget and initial design."
       },
       "step3": {
         "title": "3. Development & Iterations",
+        "shortTitle": "Iterative development",
+        "shortText": "Weekly partial deliveries so you can see the progress.",
         "description": "I develop the project with regular reviews so you're always up to date with progress."
       },
       "step4": {
         "title": "4. Delivery & Support",
+        "shortTitle": "Deploy & support",
+        "shortText": "We launch in production and I provide post-launch support.",
         "description": "We launch the project and I offer post-launch support and maintenance."
       }
     },
+    "faq": {
+      "titleMain": "Frequently asked",
+      "titleAccent": "questions",
+      "q1": {
+        "question": "How long does a web project take?",
+        "answer": "It depends on the complexity. A landing page: 1-2 weeks. A full web application: 4-8 weeks. We always set clear deadlines before starting."
+      },
+      "q2": {
+        "question": "Do you work with clients outside Spain?",
+        "answer": "Yes, I work with clients from any country. Communication is mainly via video call and email, in Spanish or English."
+      },
+      "q3": {
+        "question": "What does post-launch support include?",
+        "answer": "1 month of support included in all projects. Bug fixes, minor adjustments and answers to technical questions."
+      },
+      "q4": {
+        "question": "Can I see examples of your work?",
+        "answer": "Sure, visit the projects section where you'll find detailed case studies with the problem, technical decisions and result of each project."
+      },
+      "q5": {
+        "question": "How does payment work?",
+        "answer": "50% at the start of the project and 50% on delivery. For larger projects we can agree on milestone-based payments."
+      }
+    },
     "final": {
-      "title": "Ready to take the next step?",
-      "subtitle": "Let's talk about your project and I'll give you a no-commitment quote within 24 hours.",
-      "button": "Request a quote"
+      "title": "Have a project in mind?",
+      "subtitle": "Tell me your idea. First consultation is free.",
+      "button": "Let's talk now",
+      "buttonProjects": "View projects"
     },
     "web": {
       "title": "Web Development",
@@ -258,7 +372,7 @@
         "Chatbots and virtual assistants",
         "Predictive data analysis",
         "Intelligent automations",
-        "Integration with AI APIs (OpenAI, Grok...)"
+        "Integration with AI APIs (OpenAI, Claude...)"
       ]
     },
     "cloud": {
