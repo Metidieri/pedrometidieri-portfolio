@@ -19,7 +19,8 @@ const Blog            = lazy(() => import('./pages/Blog'));
 const BlogPost        = lazy(() => import('./pages/BlogPost'));
 const Servicios       = lazy(() => import('./pages/Servicios'));
 const Contacto        = lazy(() => import('./pages/Contacto'));
-const NotFound        = lazy(() => import('./pages/NotFound'));
+const NotFound           = lazy(() => import('./pages/NotFound'));
+const ClaseCiberseguridad = lazy(() => import('./pages/ClaseCiberseguridad'));
 
 function AnimatedRoutes() {
   const location = useLocation();
@@ -36,7 +37,8 @@ function AnimatedRoutes() {
           <Route path="/blog"            element={<Blog />} />
           <Route path="/blog/:slug"     element={<BlogPost />} />
           <Route path="/servicios"       element={<Servicios />} />
-          <Route path="/contacto"        element={<Contacto />} />
+          <Route path="/contacto"            element={<Contacto />} />
+          <Route path="/clase-ciberseguridad" element={<ClaseCiberseguridad />} />
           <Route path="*"               element={<NotFound />} />
         </Routes>
       </PageTransition>
